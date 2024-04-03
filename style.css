@@ -24,16 +24,18 @@ body {
   .logo {
 	width: 4.5em;
 	height: 4em;
-	margin-bottom: 3em;
+	margin-top: 1em;
+	margin-bottom: 4em;
+	margin-left:1em;
   }
   
   .page-name {
-	margin-left: 1em;
-	margin-bottom: 4em;
+	margin-bottom: 3em;
+	font-size: 1em;
   }
   
   .login-container {
-	max-width: 15em;
+	max-width: 18em;
 	margin: 2em auto;
 	padding: 1em;
 	background-color: #B99E9E;
@@ -42,8 +44,8 @@ body {
 	text-align: center;
   }
   
-  .login-container h3 {
-	margin-top: 0;
+  .login-container h2{
+	margin-top: 0em;
   }
   
   .login-container input[type="text"],
@@ -67,11 +69,12 @@ body {
   }
   
   .login-container button:hover {
-	background-color: #171717;
+	background-color: #252525;
   }
 
   .login-container #forgot{
 	background-color: #877373;
+	padding: 0.5em;
   }
 
   .login-container #forgot:hover {
@@ -104,9 +107,5 @@ body {
 	  width: 80%;
 	}
 
-	.login-container input[type="text"],
-	.login-container input[type="password"] {
-
-	}
   }
   
