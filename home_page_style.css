@@ -1,0 +1,40 @@
+/* Home Page stuff */
+.content-wrapper {
+    min-height: calc(100vh - 4.5em); 
+    position: relative; 
+}
+
+.side-image {
+    position: relative;
+    top: -11.55em;
+    left: 0;
+    right: 0;
+    max-width: calc(100% - 19.58em); 
+    width: 100%;
+    margin-left: 18.5em;
+    border-radius: 0.5em;
+    height: auto;
+}
+
+@media screen and (max-width: 800px) {
+    .pages-container {
+        padding: 1em;
+        margin-right: 10em;
+        max-width: 100%;
+        width: calc(100% - 3.08em);
+    }
+
+    .pages-content {
+        margin-top: 0;
+        margin-bottom: 10em;
+    }
+
+    .side-image {
+        left: 1em;
+        position: relative;
+        margin: 0 auto; 
+        max-width: calc(100% - 2.2em);
+        width: 100%;
+        top: -9.2em;
+    }
+}

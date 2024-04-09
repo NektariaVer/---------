@@ -6,8 +6,10 @@ body {
     background-color: #EBE4E4;
     margin: 0;
     padding: 0;
+    height: 100%;
 }
 
+/* Header - Tabs */
 header {
     background-color: #B99E9E;
     color: black;
@@ -21,48 +23,6 @@ header img {
     height: 4.5em;
     margin-right: 1em;
 }
-
-footer {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background-color: #DACECE;
-    color: black;
-    padding: 1em;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-footer div {
-    display: flex;
-    align-items: center;
-}
-
-footer a {
-    color: black;
-    text-decoration: none;
-    margin-right: 1em;
-}
-
-footer table {
-    border-collapse: collapse;
-    width: 100%;
-    margin-right: 2em;
-    font-size: small;
-}
-
-footer th, footer td {
-    border: 1px solid #DACECE;
-    padding: 8px;
-    text-align: left;
-}
-
-footer th {
-    background-color: #DACECE;
-}
-
 
 .search-container {
     margin-left: auto;
@@ -142,18 +102,62 @@ body p {
     font-size: 0.6em; 
 }
 
+/* Footer */
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #DACECE;
+    color: black;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+footer div {
+    display: flex;
+    align-items: center;
+}
+
+footer a {
+    color: black;
+    text-decoration: none;
+    margin-right: 1em;
+}
+
+footer table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-right: 2em;
+    font-size: small;
+}
+
+footer th, footer td {
+    border: 1px solid #DACECE;
+    padding: 8px;
+    text-align: left;
+}
+
+footer th {
+    background-color: #DACECE;
+}
+
+/* Pages-Menu */
 .pages-container {
     padding: 1em;
-    width: 15em;
+    max-width: 15em;
+    width: 100%;
 }
 
 .pages-content {
-    display: flex;
     align-items: top;
     background-color: white;
     padding: 0.5em;
     border-radius: 0.5em;
-    height: calc(100vh - 25.2em);
+    /*height: calc(100vh - 25.2em);*/
+    width: 100%;
+    overflow-y: auto;
 }
 
 .pages-content ul {
@@ -168,10 +172,10 @@ body p {
     cursor: pointer;
     padding: 0.4em 0.5em;
     display: block;
-    text-align: left;
     border-radius: 0.5em;
     margin-bottom: 0.3em;
-    width: 16.8em; 
+    width: 100%; 
+    max-width: 100%;
     text-align: center;
 }
 
@@ -182,3 +186,5 @@ body p {
 .pages-button:hover {
     background-color: #DACECE;
 }
+
+

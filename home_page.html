@@ -5,11 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home Page</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="pages_template_style.css">
+    <link rel="stylesheet" href="home_page_style.css">
 </head>
 <body>
-    <div id="content"></div>
+    <div id="header"></div>
+    <div id="menu"></div>
+      
+    <div class="content-wrapper">
+        <img src="patron.jpg" alt="Image" class="side-image">
+    </div>
 
-    <!-- Script to load the template HTML -->
+    <div id="footer"></div>
+    
     <script src="include_template.js"></script>
+    <footer>
+        <script>
+            function includeHTML(file, elementId) {
+                fetch(file)
+                    .then(response => response.text())
+                    .then(html => {
+                        document.getElementById(elementId).innerHTML = html;
+                    })
+                    .catch(error => console.error('Error fetching HTML:', error));
+            }
+
+            includeHTML('footer.html', 'footer');
+        </script>
+    </footer>
 </body>
 </html>

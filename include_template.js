@@ -1,10 +1,11 @@
-function includeHTML(file) {
+function includeHTML(file, elementId) {
     fetch(file)
         .then(response => response.text())
         .then(html => {
-            document.getElementById('content').innerHTML = html;
+            document.getElementById(elementId).innerHTML = html;
         })
         .catch(error => console.error('Error fetching HTML:', error));
 }
 
-includeHTML('pages_template.html');
+includeHTML('header.html', 'header');
+includeHTML('menu.html', 'menu');
