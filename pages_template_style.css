@@ -187,4 +187,16 @@ footer th {
     background-color: #DACECE;
 }
 
+@media screen and (max-width: 800px) {
+    .pages-container {
+        padding: 1em;
+        margin-right: 10em;
+        max-width: 100%;
+        width: calc(100% - 3.08em);
+    }
 
+    .pages-content {
+        margin-top: 0;
+        margin-bottom: 10em;
+    }
+}
