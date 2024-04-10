@@ -1,10 +1,4 @@
 /* Home Page stuff */
-/*.content-wrapper {
-    min-height: calc(100vh - 4.5em); 
-    position: relative; 
-    padding-bottom: 2em;
-}*/
-
 body {
     display: flex;
     flex-direction: column;
@@ -31,6 +25,7 @@ body {
     margin-left: 18.5em;
     border-radius: 0.5em;
     height: auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 @media screen and (max-width: 800px) {
