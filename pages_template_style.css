@@ -104,8 +104,6 @@ body p {
 
 /* Footer */
 footer {
-    position: fixed;
-    bottom: 0;
     left: 0;
     width: 100%;
     background-color: #DACECE;
@@ -113,6 +111,7 @@ footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: absolute;
 }
 
 footer div {
@@ -200,3 +199,4 @@ footer th {
         margin-bottom: 10em;
     }
 }
+

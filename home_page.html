@@ -11,13 +11,15 @@
 <body>
     <div id="header"></div>
     <div id="menu"></div>
-      
-    <div class="content-wrapper">
-        <img src="patron.jpg" alt="Image" class="side-image">
-    </div>
 
-    <div id="footer"></div>
+    <div class="flex-container">
+        <div class="content-wrapper">
+            <img id="side-image" src="patron.jpg" alt="Image" class="side-image">
+        </div>
+    </div>
     
+    <div id="footer"></div>
+        
     <script src="include_template.js"></script>
     <footer>
         <script>
@@ -33,5 +35,7 @@
             includeHTML('footer.html', 'footer');
         </script>
     </footer>
+
+    <script src="home_page_script.js"></script>
 </body>
 </html>

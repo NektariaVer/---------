@@ -1,7 +1,24 @@
 /* Home Page stuff */
-.content-wrapper {
+/*.content-wrapper {
     min-height: calc(100vh - 4.5em); 
     position: relative; 
+    padding-bottom: 2em;
+}*/
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.flex-container {
+    flex: 1;
+    display: flex;
+}
+
+.content-wrapper {
+    flex: 1;
+    position: relative;
 }
 
 .side-image {

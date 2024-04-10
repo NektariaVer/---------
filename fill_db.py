@@ -5,7 +5,7 @@ cur = conn.cursor()
 
 
 def upload_data():
-    conn.execute('''INSERT INTO user (firstname, lastname, academic_id, email, phone, birthday, gender, father, address, postcode, id) VALUES
+    conn.execute('''INSERT INTO user (firstname, lastname, academic_id, email, phone, birthday, gender, father, address, postcode, id_num) VALUES
                     ('Νίκος', 'Παπαδόπουλος', 'S10800', 'nikos.papadopoulos@gmail.com', '6931234567', '2005-04-23', 'Άνδρας', 'Γιάννης', 'Οδός Ερμού 45, Πάτρα', '26100', 'Α00001'),
                     ('Ελένη', 'Καραγιάννη', 'S10801', 'eleni.karagianni@gmail.com', '6972345678', '2002-06-12', 'Γυναίκα', 'Νικόλαος', 'Λεωφόρος Κηφισίας 78, Πάτρα', '26100', 'Α00002'),
                     ('Δημήτρης', 'Γεωργίου', 'S10802', 'dimitris.georgiou@gmail.com', '6993456789', '1999-08-18', 'Άνδρας', 'Κωνσταντίνος', 'Εθνικής Αντίστασης 22, Πάτρα', '26100', 'Α00003'),
@@ -183,6 +183,18 @@ def upload_data():
                     ('ECE_ΑΚ901', 'ΕΡΓΑΣΤΗΡΙΟ ΕΠΙΚΟΙΝΩΝΙΩΝ ΙΙ', 5, 2.0, '001', 9),
                     ('ECE_ΑΚ902', 'ΡΑΔΙΟΣΥΧΝΟΤΗΤΕΣ ΚΑΙ ΦΩΤΟΝΙΚΕΣ ΤΕΧΝΟΛΟΓΙΕΣ', 5, 2.0, '001', 9);
                  ''')
+
+ 
+ 
+    conn.execute('''INSERT INTO course_cycle (semester, id, courseID, academic_year) VALUES
+                        (1, 'Y00_011', 'CS101', 2023),
+                        (2, 'Y00_012', 'ME102', 2023),
+                        (3, 'Y00_013', 'CS201', 2023),
+                        (2, 'Y00_014', 'ME202', 2023),
+                        (2, 'Y00_015', 'EE202', 2023)
+                    ''')
+ 
+
 
 def fill_database():
     upload_data()
