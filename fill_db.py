@@ -106,6 +106,11 @@ def upload_data():
                     ('ΝΙΚΟΛΑΟΣ', 'ΑΒΟΥΡΗΣ', 'P00048', 'n.aboyrhs2@gmail.com', '6983992406', '',  'Άνδρας', '', '', '', 'Α00098'),
                     ('ΙΩΑΝΝΗΣ', 'ΚΟΥΡΕΤΑΣ', 'P00049', 'i.koyretas6@hotmail.com', '6987721552',  '', 'Άνδρας', '', '', '', 'Α00099');
                  ''')
+    
+    conn.execute('''INSERT INTO student VALUES
+                 ('S10800', 2, '000','15-09-2023'),
+                 ('S10801', 8, '005','10-09-2020');
+                 ''')
 
     conn.execute('''INSERT INTO field VALUES
                  ('Κορμός', '000'),
@@ -194,6 +199,7 @@ def upload_data():
                         (2, 'Y00_015', 'EE202', 2023)
                     ''')
  
+
 
 
 def fill_database():
