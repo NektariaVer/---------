@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit User Information</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="pages_template_style.css">
+    <link rel="stylesheet" href="edit_user_info_style.css">
+</head>
+<body>
+    <div id="header"></div>
+    <div id="menu"></div>
+
+    <div class="flex-container">
+        <div class="content-wrapper">
+            <div class="form-container">
+                <div class="title-container">
+                    <h2>Στοιχεία Φοιτητή - Επεξεργασία</h2>
+                    <button class="save-button">Αποθήκευση</button>
+                </div>
+                
+                <hr>
+            </div>
+        </div>
+    </div>
+                
+    
+    <div id="footer"></div>
+        
+    <script src="include_template.js"></script>
+    <footer>
+        <script>
+            function includeHTML(file, elementId) {
+                fetch(file)
+                    .then(response => response.text())
+                    .then(html => {
+                        document.getElementById(elementId).innerHTML = html;
+                    })
+                    .catch(error => console.error('Error fetching HTML:', error));
+            }
+
+            includeHTML('footer.html', 'footer');
+        </script>
+    </footer>
+
+    <script src="home_page_script.js"></script>
+</body>
+</html>
