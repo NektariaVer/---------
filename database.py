@@ -1,6 +1,5 @@
 import sqlite3
 
-
 class StudentServicesDatabase:
     def __init__(self, db_name='student_services.db'):
         self.db_name = db_name
@@ -49,7 +48,7 @@ class StudentServicesDatabase:
                 "father"	varchar(15) DEFAULT '',
                 "address"	varchar(25) DEFAULT '',
                 "postcode"	INTEGER DEFAULT '',
-                "id"	varchar(6) DEFAULT '',
+                "id_num"	varchar(6) DEFAULT '',
                 "hashedpassword"	INTEGER DEFAULT 0,
                 PRIMARY KEY("academic_id")
             );
@@ -108,7 +107,7 @@ class StudentServicesDatabase:
                 "semester"	INTEGER NOT NULL DEFAULT 0,
                 "id"	varchar(7) NOT NULL DEFAULT 'Y00_000',
                 "courseID"	varchar(3) NOT NULL DEFAULT 000,
-                "academic year"	INTEGER DEFAULT 0000,
+                "academic_year"	INTEGER DEFAULT 0000,
                 FOREIGN KEY("courseID") REFERENCES "course"("id") ON DELETE CASCADE ON UPDATE CASCADE,
                 CONSTRAINT "cycle_PK" PRIMARY KEY("id")
             );

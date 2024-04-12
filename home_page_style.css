@@ -1,7 +1,18 @@
 /* Home Page stuff */
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.flex-container {
+    flex: 1;
+    display: flex;
+}
+
 .content-wrapper {
-    min-height: calc(100vh - 4.5em); 
-    position: relative; 
+    flex: 1;
+    position: relative;
 }
 
 .side-image {
@@ -10,6 +21,7 @@
     margin-top: -15em;
     border-radius: 0.5em;
     height: auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 @media screen and (max-width: 800px) {

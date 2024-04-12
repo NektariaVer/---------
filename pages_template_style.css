@@ -16,6 +16,7 @@ header {
     padding: 1em;
     display: flex;
     align-items: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 header img {
@@ -31,6 +32,7 @@ header img {
     background-color: white;
     padding: 0.3em;
     border-radius: 0.5em;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .search-container input {
@@ -70,6 +72,7 @@ header img {
     background-color: #F5F5F5;
     padding: 0.5em;
     border-radius: 0.5em;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .tabs-content ul {
@@ -104,8 +107,6 @@ body p {
 
 /* Footer */
 footer {
-    position: fixed;
-    bottom: 0;
     left: 0;
     width: 100%;
     background-color: #DACECE;
@@ -113,6 +114,8 @@ footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: absolute;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 footer div {
@@ -149,6 +152,7 @@ footer th {
     padding: 1em;
     max-width: 15em;
     width: 100%;
+    
 }
 
 .pages-content {
@@ -160,6 +164,7 @@ footer th {
     /*
     width: 100%;
     overflow-y: auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .pages-content ul {
@@ -240,4 +245,3 @@ nav ul li:hover {
         font-size: 0.8em;
     }
 }
-    
