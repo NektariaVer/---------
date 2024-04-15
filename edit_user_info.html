@@ -17,10 +17,40 @@
             <div class="form-container">
                 <div class="title-container">
                     <h2>Στοιχεία Φοιτητή - Επεξεργασία</h2>
-                    <button class="save-button">Αποθήκευση</button>
+                    <input class="save-button" type="submit" value="Αποθήκευση">
                 </div>
                 
-                <hr>
+                <form method="get">
+                    <div class="gap"></div>
+                    <fieldset>
+                        <label for="street">ΟΔΟΣ:</label>
+                        <input type="text" id="street" name="street" placeholder="ΟΔΟΣ"><br>
+                        <hr>
+                        <label for="number">ΑΡΙΘΜΟΣ:</label>
+                        <input type="text" id="number" name="number" placeholder="00"><br>
+                        <hr>
+                        <label for="postcode">ΤΑΧΥΔΡΟΜΙΚΟΣ ΚΩΔΙΚΑΣ:</label>
+                        <input type="text" id="postcode" name="postcode" placeholder="00000"><br>
+                        <hr>
+                        <label for="city">ΠΟΛΗ:</label>
+                        <input type="text" id="city" name="city" placeholder="ΠΑΤΡΑ"><br>
+                        <hr>
+                        <label for="area">ΝΟΜΟΣ:</label>
+                        <input type="text" id="area" name="area" placeholder="ΑΧΑΪΑΣ"><br>
+                        <hr>
+                    </fieldset>
+                        
+                    <div class="gap"></div>
+
+                    <fieldset>
+                        <label for="phone">ΤΗΛΕΦΩΝΟ:</label>
+                        <input type="text" id="phone" name="phone" placeholder="0000000000"><br>
+                        <hr>
+                        <label for="email">EMAIL:</label>
+                        <input type="text" id="email" name="email" placeholder="abcd@gmail.com"><br>
+                        <hr>  
+                    </fieldset>    
+                </form>
             </div>
         </div>
     </div>

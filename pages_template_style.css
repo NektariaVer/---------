@@ -20,9 +20,11 @@ header {
 }
 
 header img {
-    width: 5em;
-    height: 4.5em;
+    width: 15em;
+    height: 6.5em;
     margin-right: 1em;
+    margin-left: 0.1em;
+    border-radius: 0.5em;
 }
 
 .search-container {
@@ -58,7 +60,7 @@ header img {
 }
 
 .search-button:hover {
-    background-color: #B99E9E;
+    background-color: #88a2a2;
     border-radius: 0.5em;
 }
 
@@ -116,6 +118,7 @@ footer {
     align-items: center;
     position: absolute;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 2em;
 }
 
 footer div {
@@ -208,6 +211,7 @@ nav ul {
     border-radius: 0.5em;
     width: 100%;
     overflow-y: auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 nav ul li { 
@@ -225,11 +229,11 @@ nav ul li a {
     color: rgb(35, 35, 35);
     text-decoration: none;
     font-size: 0.9em;
-    font-weight: bolder;
+    font-weight: bold;
 }
 
 nav ul li:hover {
-    background-color: #ccacac;
+    background-color: #88a2a2;
 }
 
 

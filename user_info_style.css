@@ -23,7 +23,7 @@ body {
     padding: 1em;
     border-radius: 5px;
     position: relative;
-    top: -11.55em;
+    top: -14.2em;
     max-width: calc(100% - 21.6em); 
     width: 100%;
     margin-left: 18.5em;
@@ -56,6 +56,8 @@ body {
     border-radius: 0.5em;
     margin-bottom: 1em;
     text-align: center;
+    font-weight: bold;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 .edit-button i {
@@ -63,7 +65,7 @@ body {
 }
 
 .edit-button:hover {
-    background-color: #DACECE;
+    background-color: #88a2a2;
 }
 
 .table-container hr {
@@ -104,7 +106,7 @@ body {
         margin: 0 auto; 
         max-width: calc(100% - 4em);
         width: 100%;
-        top: -9.2em;
+        top: 0em;
     }
 }
 
