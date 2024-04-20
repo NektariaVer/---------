@@ -1,4 +1,30 @@
-document.getElementById("login-form").addEventListener("submit", function(event){
-    event.preventDefault();
-    // Add your login logic here
-  });
+// This file contains optional client-side JavaScript
+// For example, handling form submissions
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.querySelector('form');
+
+    form.addEventListener('submit', async function(event) {
+        event.preventDefault();
+
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+
+        try {
+            const response = await fetch('/login.html', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ username, password })
+            });
+
+            if (response.ok) {
+                window.location.href = '/home_page.html';
+            } else {
+                console.error('Login failed:', response.statusText);
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    });
+});

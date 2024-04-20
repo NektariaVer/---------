@@ -49,7 +49,7 @@ class StudentServicesDatabase:
                 "address"	varchar(25) DEFAULT '',
                 "postcode"	INTEGER DEFAULT '',
                 "id_num"	varchar(6) DEFAULT '',
-                "hashedpassword"	INTEGER DEFAULT 0,
+                "hashedpassword"	varchar(50) DEFAULT 0,
                 PRIMARY KEY("academic_id")
             );
             ''')
