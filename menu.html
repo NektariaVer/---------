@@ -1,21 +1,29 @@
-<p class="user_name">
-    &nbsp &nbsp &nbsp Χρήστης: ΜΑΡΙΑ ΠΑΠΑΔΟΠΟΥΛΟΥ - Φοιτητής
-</p>
-
-<div class="tabs-container">
-    <div class="tabs-content">
-        <ul>
-            <button class="current tab-button" onclick="window.location.href='home_page.html'">Αρχική</button>
-        </ul>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Tab Addition</title>
+    <link rel="stylesheet" href="pages_template_style.css">
+</head>
+<body>
+    <div class="tabs-container">
+        <div class="tabs-content">
+            <ul>
+                <button class="tab-button" onclick="window.location.href='home_page.html'">Αρχική</button>
+            </ul>
+        </div>
     </div>
-</div>
+    <nav>
+        <ul>
+            <li><a href="user_info.html" onclick="addTab('user_info.html', 'Προσωπικά Στοιχεία')">Προσωπικά Στοιχεία</a></li>
+            <li><a href="semester.html" onclick="addTab('semester.html', 'Εγγραφή σε Εξάμηνο')">Εγγραφή σε Εξάμηνο</a></li>
+            <li><a href="#tab5.html" onclick="addTab('Δήλωση Μαθημάτων')">Δήλωση Μαθημάτων</a></li>
+            <li><a href="#tab5.html" onclick="addTab('Ακαδημαϊκή Πρόοδος')">Ακαδημαϊκή Πρόοδος</a></li>
+            <li><a href="#tab5.html" onclick="addTab('Αίτηση Πιστοποιητικών')">Αίτηση Πιστοποιητικών</a></li>
+        </ul>
+    </nav>
 
-<nav>
-    <ul>
-        <li><a href="user_info.html">Προσωπικά Στοιχεία</a></li>
-        <li><a href="semester.html">Εγγραφή σε Εξάμηνο</a></li>
-        <li><a href="#tab5.html">Δήλωση Μαθημάτων</a></li>
-        <li><a href="#tab5.html">Ακαδημαϊκή Πρόοδος</a></li>
-        <li><a href="#tab5.html">Αίτηση Πιστοποιητικών</a></li>
-    </ul>
-</nav>
+    <script src="tab-history.js"></script>
+</body>
+</html>
