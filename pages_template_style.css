@@ -83,20 +83,17 @@ header img {
     margin: 0;
 }
 
-.tabs-content ul button {
-    display: inline-block;
-    padding: 0.3em;
-    border-radius: 0.3em;
-    background-color: #f2f2f2;
-    margin-right: 0.5em;
-    border: none;
-    outline: none;
-}
-
-.tabs-content ul button.current {
-    background-color: white;
+.tabs-content ul button{
+    background-color: rgb(255, 255, 255);
     color: black;
     padding: 0.5em 0.8em;
+    border-radius: 0.4em;
+    margin-right: 1em;
+}
+
+.tabs-content ul button:hover {
+    background-color: #88a2a2;
+    
 }
 
 header h1 {
