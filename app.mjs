@@ -8,7 +8,7 @@ const PORT = 3000;
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
-//  Read users from users.json
+// Read users from users.json
 let users;
 try {
     const usersData = fs.readFileSync('users.json');
