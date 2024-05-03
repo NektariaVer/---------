@@ -49,6 +49,7 @@ body {
 
 .edit-button {
     background-color: #B99E9E;
+    color: black;
     border: none;
     cursor: pointer;
     padding: 0.4em 0.5em;
@@ -57,11 +58,7 @@ body {
     margin-bottom: 1em;
     text-align: center;
     font-weight: bold;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-.edit-button i {
-    color: black;
+    box-shadow: 0 0 1em rgba(0, 0, 0, 0.1);
 }
 
 .edit-button:hover {
@@ -99,6 +96,38 @@ body {
     margin-bottom: 20px;
 }
 
+.popup {
+    display: flex;
+    align-items: center;
+    width: 20em;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    background: #88a2a2;
+    border-radius: 0.6em;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) scale(0.1);
+    text-align: center;
+    color: #020202;
+    transition: transform 0.4s, top 0.4s;
+    font-size: 1.5em;
+    visibility: hidden;
+}
+
+img{
+    width: 2em;
+    height: 2em;
+    margin-left: 1em;
+    margin-right: 3em;
+}
+
+.open-popup{
+    visibility: visible;
+    top: 50%;
+    transform: translate(-50%, -50%) scale(1);
+}
+
 @media screen and (max-width: 800px) {
     .table-container {
         padding: 1em;
@@ -107,6 +136,23 @@ body {
         max-width: calc(100% - 4em);
         width: 100%;
         top: 0em;
+    }
+
+    img{
+        width: 2em;
+        height: 2em;
+        margin-left: 0.5em;
+        margin-right: 0.2em;
+    }
+
+    .popup {
+        position: relative;
+        margin: auto auto; 
+        max-width: calc(100% - 4em);
+        width: 100%;
+        left: 40%;
+        top: -8em;
+        padding-right: 0.5em;
     }
 }
 
