@@ -156,3 +156,77 @@ img{
     }
 }
 
+/*---------------------------------------*/
+.progress .fail {
+    color: red;
+}
+
+.progress th {
+    color: gray;
+}
+
+.progress td {
+    text-align: center;
+}
+
+.progress td:last-child, .progress td:first-child {
+    text-align: center;
+    font-weight: normal;
+}
+
+.progress .module {
+    width: 1em;
+}
+
+.progress .sub_id {
+    width: 2em;
+}
+
+.progress .grade {
+    width: 4em;
+}
+
+.progress .year {
+    width: 4em;
+}
+
+.progress .weight {
+    width: 2em;
+}
+
+.progress .ects {
+    width: 2em;
+}
+
+.progress .credits {
+    width: 2em;
+}
+
+.progress .subject {
+    max-width: calc(100vw - 100em);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+} 
+
+.progress .semester {
+    max-width: calc(100vw - 100em);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+} 
+
+.progress .status {
+    max-width: calc(100vw - 100em);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+} 
+
+.progress .average th {
+    text-align: left;
+}
+
+.progress .average td {
+    text-align: right;
+}

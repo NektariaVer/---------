@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="pages_template_style.css">
     <link rel="stylesheet" href="edit_user_info_style.css">
+    <link rel="stylesheet" href="user_info_style.css">
 </head>
 <body>
     <div id="header"></div>
@@ -17,7 +18,7 @@
             <div class="form-container">
                 <div class="title-container">
                     <h2>Στοιχεία Φοιτητή - Επεξεργασία</h2>
-                    <input class="save-button" type="submit" value="Αποθήκευση">
+                    <input class="save-button" type="submit" value="Αποθήκευση" onclick="openPopup()">
                 </div>
                 
                 <form method="get">
@@ -55,7 +56,11 @@
         </div>
     </div>
                 
-    
+    <div class="popup" id="popup">
+        <img src="file.png">
+        <p>Επιτυχής επεξεργασία στοιχείων!</p>
+    </div>
+
     <div id="footer"></div>
         
     <script src="include_template.js"></script>
@@ -64,5 +69,15 @@
             includeHTML('footer.html', 'footer');
         </script>
     </footer>
+
+    <script>
+        let popup = document.getElementById("popup");
+        function openPopup(){
+            popup.classList.add("open-popup");
+            setTimeout(function(){
+                popup.classList.remove("open-popup");
+                }, 3000);
+        }
+    </script>
 </body>
 </html>
