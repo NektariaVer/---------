@@ -261,6 +261,24 @@ img{
     font-size: 1em;
 }
 
-#certificate-form fieldset {
-    margin-bottom: 1em;
+#certificate-form fieldset{
+    margin-bottom: 2em;
+    border-radius: 0.5em;
+    box-shadow: 0 0 10px rgba(128, 110, 110, 0.2);
+    border: white;
+}
+
+#certificate-form fieldset label {
+    font-size: small;
+    float: inline-start;
+    width: 13em;
+    margin-right: 2em;
+    vertical-align: bottom;
+}
+
+#certificate-form fieldset select {
+    border-radius: 0.4em;
+    vertical-align: middle;
+    text-align: left;
+    width: calc(100% - 15em);
 }

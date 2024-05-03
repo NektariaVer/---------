@@ -30,12 +30,12 @@
                         </tr>
                         <tr>
                             <td><a href="path_to_download_file" download>Βεβαίωση Φοιτητικής Κατάστασης</a></td>
-                            <td>24/04/2024</td>
+                            <td>24/4/2024</td>
                             <td>Ολοκληρωμένο</td>
                         </tr>
                         <tr>
                             <td><a href="path_to_download_file" download>Βεβαίωση Ενεργού Φοιτητή</a></td>
-                            <td>01/02/2024</td>
+                            <td>1/2/2024</td>
                             <td>Ολοκληρωμένο</td>
                         </tr>
                     </tbody>
@@ -46,24 +46,24 @@
                 <form id="certificate-form" style="display: none;">
                     <fieldset>
                     <h2>Νέα αίτηση:</h2>
-
-                    <label for="certificate-type">Τύπος Βεβαίωσης:</label>
+                    <br>
+                    <label for="certificate-type">Τύπος Πιστοποιητικού:</label>
                     <select id="certificate-type" name="certificate-type">
                         <option value="Βεβαίωση Ενεργού Φοιτητή">Βεβαίωση Ενεργού Φοιτητή</option>
                         <option value="Βεβαίωση Φοιτητικής Κατάστασης">Βεβαίωση Φοιτητικής Κατάστασης</option>
                         <option value="Βεβαίωση Ειδίκευσης/Κατεύθυνσης">Βεβαίωση Ειδίκευσης/Κατεύθυνσης</option>
-                        <option value="Βεβαίωση Πτυχιακής/Διπλωματικής Εργασίας">Πτυχιακής/Διπλωματικής Εργασίας</option>
+                        <option value="Βεβαίωση Πτυχιακής/Διπλωματικής Εργασίας">Βεβαίωση Πτυχιακής/Διπλωματικής Εργασίας</option>
                     </select><br><br>
 
                     <input type="checkbox" id="detailed" name="detailed">
-                    <label for="detailed">Με αναλυτική</label><br><br>
+                    <label for="detailed">Με Αναλυτική:</label><br><br>
 
                     <div id="detailed-options">
                         <label for="attempt">Προσπάθειες:</label>
                         <select id="attempt" name="attempt" disabled>
-                            <option value="Ολες οι προσπαθειες">Ολες οι προσπαθειες</option>
-                            <option value="Τελευταία προσπάθεια">Επιτυχημενες προσπαθειες</option>
-                            <option value="Επιτυχημενες προσπαθειες">Επιτυχημενες προσπαθειες</option>
+                            <option value="Όλες οι προσπάθειες">Ολες οι προσπαθειες</option>
+                            <option value="Τελευταία προσπάθεια">Τελευταία προσπάθεια</option>
+                            <option value="Επιτυχημένες προσπάθειες">Επιτυχημενες προσπαθειες</option>
                         </select><br><br>
                     </div>
 
@@ -75,6 +75,11 @@
         </div>
     </div>
        
+    <div class="popup" id="popup">
+        <img src="file.png">
+        <p>Επιτυχής υποβολή αίτησης!</p>
+    </div>
+
     <div id="footer"></div>
         
     <script src="include_template.js"></script>
@@ -104,8 +109,10 @@
             const button = document.querySelector('.edit-button');
             if (form.style.display === 'none') {
                 form.style.display = 'block';
-                button.textContent = 'Save';
+                button.textContent = 'Υποβολή';
             } else {
+                saveCertificate();
+                openPopup();
                 form.style.display = 'none';
                 button.textContent = 'Νέα αίτηση';
             }
@@ -125,6 +132,30 @@
             });
         });
         
+        function saveCertificate() {
+            const certificateType = document.getElementById('certificate-type').value;
+            const today = new Date().toLocaleDateString('el-GR');
+            const status = 'Σε αναμονή';
+
+            const table = document.querySelector('.certificates tbody');
+            const newRow = table.insertRow(-1);
+            const typeCell = newRow.insertCell(0);
+            const dateCell = newRow.insertCell(1);
+            const statusCell = newRow.insertCell(2);
+
+            typeCell.textContent = certificateType;
+            dateCell.textContent = today;
+            statusCell.textContent = status;
+        }
+
+        let popup = document.getElementById("popup");
+        function openPopup(){
+            popup.classList.add("open-popup");
+            setTimeout(function(){
+                popup.classList.remove("open-popup");
+                }, 3000);
+        }
+
     </script>
 
 </body>
