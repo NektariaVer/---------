@@ -156,7 +156,7 @@ img{
     }
 }
 
-/*---------------------------------------*/
+/* Academic Progress Page */
 .progress .fail {
     color: red;
 }
@@ -229,4 +229,38 @@ img{
 
 .progress .average td {
     text-align: right;
+}
+
+
+
+
+/* Certificates page */
+.certificates th {
+    text-align: left;
+    font-size: 1.2em;
+}
+
+.certificates td:first-child {
+    text-align: left;
+    font-weight: normal;
+}
+
+.certificates td {
+    text-align: right;
+}
+
+.certificates a {
+    color: #806e6e;
+}
+
+.certificates a:hover {
+    color: #88a2a2;
+}
+
+#certificate-form h2 {
+    font-size: 1em;
+}
+
+#certificate-form fieldset {
+    margin-bottom: 1em;
 }

@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificate Request</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="pages_template_style.css">
+    <link rel="stylesheet" href="user_info_style.css">
+</head>
+<body>
+    <div id="header"></div>
+    <div id="menu"></div>
+
+    <div class="flex-container">
+        <div class="content-wrapper">
+            <div class="table-container">
+                <div class="title-container">
+                    <h2>Αίτηση Πιστοποιητικών</h2>
+                </div>
+
+                <hr>
+
+                <table class="certificates">
+                    <tbody>
+                        <tr>
+                            <th>Ιστορικό Αιτήσεων:</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                        <tr>
+                            <td><a href="path_to_download_file" download>Βεβαίωση Φοιτητικής Κατάστασης</a></td>
+                            <td>24/04/2024</td>
+                            <td>Ολοκληρωμένο</td>
+                        </tr>
+                        <tr>
+                            <td><a href="path_to_download_file" download>Βεβαίωση Ενεργού Φοιτητή</a></td>
+                            <td>01/02/2024</td>
+                            <td>Ολοκληρωμένο</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <hr>
+                
+                <form id="certificate-form" style="display: none;">
+                    <fieldset>
+                    <h2>Νέα αίτηση:</h2>
+
+                    <label for="certificate-type">Τύπος Βεβαίωσης:</label>
+                    <select id="certificate-type" name="certificate-type">
+                        <option value="Βεβαίωση Ενεργού Φοιτητή">Βεβαίωση Ενεργού Φοιτητή</option>
+                        <option value="Βεβαίωση Φοιτητικής Κατάστασης">Βεβαίωση Φοιτητικής Κατάστασης</option>
+                        <option value="Βεβαίωση Ειδίκευσης/Κατεύθυνσης">Βεβαίωση Ειδίκευσης/Κατεύθυνσης</option>
+                        <option value="Βεβαίωση Πτυχιακής/Διπλωματικής Εργασίας">Πτυχιακής/Διπλωματικής Εργασίας</option>
+                    </select><br><br>
+
+                    <input type="checkbox" id="detailed" name="detailed">
+                    <label for="detailed">Με αναλυτική</label><br><br>
+
+                    <div id="detailed-options">
+                        <label for="attempt">Προσπάθειες:</label>
+                        <select id="attempt" name="attempt" disabled>
+                            <option value="Ολες οι προσπαθειες">Ολες οι προσπαθειες</option>
+                            <option value="Τελευταία προσπάθεια">Επιτυχημενες προσπαθειες</option>
+                            <option value="Επιτυχημενες προσπαθειες">Επιτυχημενες προσπαθειες</option>
+                        </select><br><br>
+                    </div>
+
+                    </fieldset>
+                </form>
+                
+                <button class="edit-button" onclick="toggleForm()">Νέα αίτηση</button>        
+            </div>
+        </div>
+    </div>
+       
+    <div id="footer"></div>
+        
+    <script src="include_template.js"></script>
+    <footer>
+        <script>
+            includeHTML('footer.html', 'footer');
+        </script>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const table = document.querySelector(".certificates");
+            const rows = table.querySelectorAll("tbody tr");
+    
+            if (rows.length === 1) {
+                const noCertificatesRow = document.createElement("tr");
+                const cell = document.createElement("td");
+                cell.setAttribute("colspan", "3");
+                cell.textContent = "Δεν υπάρχει ιστορικό αιτήσεων";
+                noCertificatesRow.appendChild(cell);
+                table.querySelector("tbody").appendChild(noCertificatesRow);
+            }
+        });
+
+        function toggleForm() {
+            const form = document.getElementById('certificate-form');
+            const button = document.querySelector('.edit-button');
+            if (form.style.display === 'none') {
+                form.style.display = 'block';
+                button.textContent = 'Save';
+            } else {
+                form.style.display = 'none';
+                button.textContent = 'Νέα αίτηση';
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const detailedCheckbox = document.getElementById('detailed');
+            const detailedOptions = document.getElementById('detailed-options');
+            const attemptSelect = document.getElementById('attempt');
+        
+            detailedCheckbox.addEventListener('change', function() {
+                if (detailedCheckbox.checked) {
+                    attemptSelect.disabled = false;
+                } else {
+                    attemptSelect.disabled = true;
+                }
+            });
+        });
+        
+    </script>
+
+</body>
+</html>
