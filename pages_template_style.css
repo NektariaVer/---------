@@ -46,7 +46,7 @@ header img {
     margin-left: 0.5em;
 }
 
-.search-button, #home-button {
+.search-button{
     background-color: transparent;
     border: none;
     cursor: pointer;
@@ -61,7 +61,17 @@ header img {
     border-radius: 0.5em;
 }
 
-.tabs-container {
+.breadcrumbs img{
+    width: 1.5em;
+    height: 1.5em;
+    vertical-align: middle;
+}
+
+.breadcrumbs li:first-child img{
+    margin: 0em;
+}
+
+.breadcrumbs{
     display: flex;
     align-items: center;
     background-color: #F5F5F5;
@@ -69,22 +79,34 @@ header img {
     border-radius: 0.5em;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
-.tabs-container ul {
+.breadcrumbs ul {
     list-style-type: none;
     padding: 0.5em;
     margin: 0; 
 }
 
-#home-button{
-    background-color: rgb(255, 255, 255);
+.breadcrumbs li{
+    display: inline-block;
+    margin-right: 0em;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+.breadcrumbs a{
+    background-color: rgb(223, 222, 222);
     color: black;
+    font-size: 1em;
     padding: 0.5em 0.8em;
     border-radius: 0.4em;
     margin-right: 1em;
     text-decoration: none;
 }
 
-#home-button:hover {
+.breadcrumbs .active{
+    background-color: rgb(255, 255, 255);
+}
+
+.breadcrumbs a:hover {
     background-color: #88a2a2;
     
 }
@@ -180,6 +202,11 @@ footer th {
 
 
 @media screen and (max-width: 800px) {
+    .breadcrumbs a{
+        font-size: 0.9em;
+        margin-right: 0em;
+    }
+
     .menu-container {
         padding: 1em;
         margin-right: 10em;

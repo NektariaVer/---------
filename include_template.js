@@ -9,4 +9,3 @@ function includeHTML(file, elementId) {
 
 includeHTML('header.html', 'header');
 includeHTML('menu.html', 'menu');
-
