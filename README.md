@@ -7,7 +7,7 @@
 
 - [Installation](#installation)
 - [Database](#database)
-- [Application](#run)
+- [Application](#application)
 
 ## Installation
 
