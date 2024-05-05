@@ -205,6 +205,17 @@ footer th {
 
 
 @media screen and (max-width: 800px) {
+    header img{
+        width: 11em;
+        height: 5em;
+        margin-bottom: 1em;
+    }
+    
+    footer{
+        flex-direction: column;
+        padding-left: 1.0em;
+    }
+
     .breadcrumbs a{
         font-size: 0.9em;
         margin-right: 0em;
@@ -228,14 +239,5 @@ footer th {
 
     .tabs li a {
         font-size: 0.8em;
-    }
-
-    footer{
-        flex-direction: column;
-    }
-
-    header img{
-        width: 11em;
-        height: 5em;
     }
 }
