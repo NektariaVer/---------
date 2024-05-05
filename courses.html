@@ -25,26 +25,6 @@
                     <h2>Δήλωση Μαθημάτων</h2>
                 </div>
                 <hr>
-            
-                <table>
-                    <tbody>
-                        <tr>
-                            <td>Ακαδημαϊκό έτος</td>
-                            <td id="academic_year"></td>
-                        </tr>
-                        <tr>
-                            <td>Περίοδος εξαμήνου</td>
-                            <td id="semester"></td>
-                        </tr>
-                        <tr>
-                            <td>Ημερομηνία τελευταίας εγγραφής</td>
-                            <td id="current_date"></td>
-                        </tr>
-                    </tbody>
-                </table>
-                <hr>
-                
-                <button class="edit-button" type="submit" onclick="openPopup()">Αίτηση επανεγγραφής σε εξάμηνο</button>        
             </div>
         </div>
     </div>
@@ -62,37 +42,6 @@
             includeHTML('footer.html', 'footer');
         </script>
     </footer>
-
-
-    <script>
-        document.getElementById('current_date').textContent = new Date().toLocaleDateString('el-GR');
-                
-        let currentDate = new Date();
-            let currentYear = currentDate.getFullYear();
-            let currentMonth = currentDate.getMonth() + 1; 
-            let academicYear = currentYear;
-            let semester = "Χειμερινό";
-            
-            if (currentMonth < 9) {
-                academicYear = currentYear - 1;
-            }
-            
-            if (currentMonth >= 2 && currentMonth <= 8) {
-                semester = "Εαρινό";
-            }
-            
-            document.getElementById('academic_year').textContent = `${academicYear}-${academicYear + 1}`;
-            document.getElementById('semester').textContent = semester;
-            document.getElementById('current_date').textContent = currentDate.toLocaleDateString('el-GR');
-        
-        let popup = document.getElementById("popup");
-        function openPopup(){
-            popup.classList.add("open-popup");
-            setTimeout(function(){
-                popup.classList.remove("open-popup");
-                }, 3000);
-        }
-    </script>
 
 </body>
 </html>
