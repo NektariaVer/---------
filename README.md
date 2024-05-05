@@ -1,7 +1,7 @@
 # ECE-Students - Εφαρμογή Υπηρεσιών Φοιτητή
 # ECE-Students - Students Services Application 
 
---
+Project for the ECE course: "Προγραμματισμός Διαδικτύου - 2023-24"
 
 ## Table of Contents
 
@@ -11,7 +11,7 @@
 
 ## Installation
 
-To run this project, you need to have Node.js installed on your machine. You can download and install it from nodejs.org.
+To run this project, you need to have Node.js installed on your machine. You can download and install it from [nodejs.org](https://nodejs.org/).
 
 After installing Node.js, follow these steps:
 
@@ -19,7 +19,7 @@ After installing Node.js, follow these steps:
     ```bash
     npm install nodemon -g 
     ```
-2. Install the required dependencies, by running the following command in the project directory:
+2. Install the required dependencies, by running the following command in the _project directory_:
     ```bash
     npm install
     ```
