@@ -22,6 +22,7 @@ try {
 // Serve login.html for the root URL
 app.get('/', (req, res) => {
     res.sendFile(new URL('./login.html', import.meta.url).pathname);
+    //res.sendFile(__dirname + '/views/login.html');
 });
 
 // Handle form submission for login
