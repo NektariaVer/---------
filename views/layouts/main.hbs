@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ pageTitle }}</title>
+    <link rel="stylesheet" href="../public/css/pages_template_style.css">
+    <link rel="stylesheet" href="../public/css/home_page_style.css">
+    <!-- Include any other CSS files if needed -->
+</head>
+<body>
+    <div id="header">
+        <!-- Include the header content -->
+        {{> header}}
+    </div>
+
+    <nav class="breadcrumbs">
+        <!-- Include the navigation menu -->
+        {{> nav}}
+    </nav>
+
+    <div id="menu">
+        <!-- Include the menu content -->
+        {{> menu}}
+    </div>
+
+    <div class="flex-container">
+        <div class="content-wrapper">
+            <!-- This is where the unique content of each page will be inserted -->
+            {{{ body }}}
+        </div>
+    </div>
+    
+    <div id="footer">
+        <!-- Include the footer content -->
+        {{> footer}}
+    </div>
+    
+    <script src="../public/js/include_template.js"></script>
+    <footer>
+        <script>
+            includeHTML('footer.html', 'footer');
+        </script>
+    </footer>
+
+    <script src="../public/js/pages_template_script.js"></script>
+</body>
+</html>

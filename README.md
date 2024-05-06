@@ -1,5 +1,5 @@
 # ECE-Students - Εφαρμογή Υπηρεσιών Φοιτητή
-# ECE-Students - Students Services Application 
+# ECE-Students - Student Services Application 
 
 Project for the ECE course: "Προγραμματισμός Διαδικτύου - 2023-24"
 
@@ -44,8 +44,8 @@ Finally, you can run the project:
 
 1. Start the server:
     ```bash
-    node server.js
+    npm start
     ```
 
-2. Visit `http://localhost:3000` in your web browser to access the application.
+2. Visit `http://localhost:8080` in your web browser to access the application.
 
