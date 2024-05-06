@@ -47,5 +47,5 @@ Finally, you can run the project:
     npm start
     ```
 
-2. Visit `http://localhost:8080` in your web browser to access the application.
+2. Visit `http://localhost:3000` in your web browser to access the application.
 
