@@ -5,45 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ pageTitle }}</title>
     <link rel="stylesheet" href="/css/pages_template_style.css">
-    <link rel="stylesheet" href="/css/home_page_style.css">
-    <!-- Include any other CSS files if needed -->
 </head>
 <body>
-    <div id="header">
-        <!-- Include the header content -->
-        {{> header}}
-    </div>
-
-    <nav class="breadcrumbs">
-        {{> nav}}
-    </nav>
-   
-    <div id="menu">
-        <!-- Include the menu content -->
-        {{> menu}}
-    </div>
-
-    <div class="flex-container">
-        <div class="content-wrapper">
-            <!-- This is where the unique content of each page will be inserted -->
-            {{{ body }}}
-        </div>
-    </div>
     
+    {{{ body }}}
+
     <div id="footer">
-        <!-- Include the footer content -->
         {{> footer}}
     </div>
-    
-    <!--<script src="/js/include_template.js"></script>-->
-    <footer>
-        <!--<script>
-            includeHTML('footer.html', 'footer');
-        </script>-->
-    </footer>
 
     <script src="/js/pages_template_script.js"></script>
-    <script src="/js/fetch_home_page.js"></script>
-
+    <footer>
+        <script>
+            includeHTML('footer.html', 'footer');
+        </script>
+    </footer>
 </body>
 </html>

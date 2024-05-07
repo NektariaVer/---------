@@ -71,8 +71,47 @@ app.set('view engine', '.hbs');
 
 // Define a route to handle requests to the root URL and render the homepage view
 app.get('/', (req, res) => {
-    res.render('home_page.hbs');
+    res.render('home_page.hbs', {
+        pageTitle: 'ECE_students'
+    });
 });
+
+app.get('/user_info', (req, res) => {
+    res.render('user_info.hbs', {
+        pageTitle: 'User Information'
+    });
+});
+
+app.get('/edit_user_info', (req, res) => {
+    res.render('edit_user_info.hbs', {
+        pageTitle: "Edit Information"
+    });
+});
+
+app.get('/semester', (req, res) => {
+    res.render('semester.hbs', {
+        pageTitle: 'Semester'
+    });
+});
+
+app.get('/courses', (req, res) => {
+    res.render('courses.hbs', {
+        pageTitle: 'Courses'
+    });
+});
+
+app.get('/student_progress', (req, res) => {
+    res.render('student_progress.hbs', {
+        pageTitle: "Academic progress"
+    });
+});
+
+app.get('/certificates', (req, res) => {
+    res.render('certificates.hbs', {
+        pageTitle: "Certificates"
+    });
+});
+
 
 // specifying the routes that the user can access
 // Use the routes from the menu

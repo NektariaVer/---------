@@ -1,16 +1,20 @@
-{{!-- Extend the main layout --}}
-{{#extend 'main'}}
+<link rel="stylesheet" href="/css/home_page_style.css">
+<body>{{> header}}
 
-    {{!-- Set the page title --}}
-    {{#content 'pageTitle'}}Home Page{{/content}}
+    <nav class="breadcrumbs">
+        <ul>
+            <li><a href="/" class="active"><img src="/images/home.png"></a></li>
+        </ul>
+    </nav>
+    {{> menu}}
 
-    {{#content 'nav'}}<li><a href="home_page.hbs" class="active"><img src="/images/home.png"></a></li>{{/content}}
+    <div class="flex-container">
+        <div class="content-wrapper">
+            <img id="side-image" src="/images/patron.jpg" alt="Image" class="side-image">
+        </div>
+    </div>
 
-    {{!-- Content for the body of the page --}}
-    {{#content 'body'}}
-        <!-- This is where the unique content of the home page goes -->
-        <!-- Include any specific content for the home page here -->
-        <img id="side-image" src="/images/patron.jpg" alt="Image" class="side-image">
-    {{/content}}
+    <script src="/js/pages_template_script.js"></script>
+    <script src="/js/fetch_home_page.js"></script>
 
-{{/extend}}
+</body>

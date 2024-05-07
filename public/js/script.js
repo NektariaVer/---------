@@ -1,28 +1,26 @@
-document.addEventListener('DOMContentLoaded', function() {
-    const form = document.querySelector('#login-form');
-    
-    form.addEventListener('submit', async function(event) {
-        event.preventDefault();
-        const username = document.getElementById('username').value;
-        const password = document.getElementById('password').value;
+const form = document.querySelector('#login-form');
 
-        try {
-            const response = await fetch('/login.html', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ username, password })
-            });
+form.addEventListener('submit', async function(event) {
+    event.preventDefault();
+    const username = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
 
-            if (response.ok) {
-                window.location.href = '/home_page.html';
-            } else {
-                console.error('Login failed:', response.statusText);
-            }
-        } catch (error) {
-            console.error('Error:', error);
+    try {
+        const response = await fetch('/login.html', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ username, password })
+        });
+
+        if (response.ok) {
+            window.location.href = '/home_page.html';
+        } else {
+            console.error('Login failed:', response.statusText);
         }
-    });
+    } catch (error) {
+        console.error('Error:', error);
+    }
 });
 
