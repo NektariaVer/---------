@@ -1,0 +1,16 @@
+{{!-- Extend the main layout --}}
+{{#extend 'main'}}
+
+    {{!-- Set the page title --}}
+    {{#content 'pageTitle'}}Home Page{{/content}}
+
+    {{#content 'nav'}}<li><a href="home_page.hbs" class="active"><img src="/images/home.png"></a></li>{{/content}}
+
+    {{!-- Content for the body of the page --}}
+    {{#content 'body'}}
+        <!-- This is where the unique content of the home page goes -->
+        <!-- Include any specific content for the home page here -->
+        <img id="side-image" src="/images/patron.jpg" alt="Image" class="side-image">
+    {{/content}}
+
+{{/extend}}

@@ -1,12 +1,29 @@
 {
-  "name": "app",
+  "name": "ece-students",
   "version": "1.0.0",
-  "main": "createUsersJson.js",
+  "description": "student services application",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "nodemon server.js",
+    "startWebsite": "node server.js",
+    "run": "node server.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "verikokkou, papadopoulou",
   "license": "ISC",
-  "description": ""
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "better-sqlite3": "^8.3.0",
+    "connect-sqlite3": "^0.9.13",
+    "cookie-parser": "^1.4.6",
+    "express": "^4.18.2",
+    "express-handlebars": "^7.1.2",
+    "express-session": "^1.18.0",
+    "nodemon": "^3.1.0",
+    "ol": "^7.3.0",
+    "passport": "^0.6.0"
+  },
+  "devDependencies": {
+    "demon": "^0.0.1"
+  }
 }

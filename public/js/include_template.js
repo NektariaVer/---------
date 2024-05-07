@@ -7,5 +7,5 @@ function includeHTML(file, elementId) {
         .catch(error => console.error('Error fetching HTML:', error));
 }
 
-includeHTML('header.html', 'header');
-includeHTML('menu.html', 'menu');
+includeHTML('../../views/header.html', 'header');
+includeHTML('../../views/menu.html', 'menu');
