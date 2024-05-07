@@ -1,11 +1,8 @@
-// This file contains optional client-side JavaScript
-// For example, handling form submissions
 document.addEventListener('DOMContentLoaded', function() {
-    const form = document.querySelector('form');
-
+    const form = document.querySelector('#login-form');
+    
     form.addEventListener('submit', async function(event) {
         event.preventDefault();
-
         const username = document.getElementById('username').value;
         const password = document.getElementById('password').value;
 
@@ -28,3 +25,4 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 });
+
