@@ -72,7 +72,7 @@ app.set('view engine', '.hbs');
 // Define a route to handle requests to the root URL and render the homepage view
 app.get('/', (req, res) => {
     res.render('home_page.hbs', {
-        pageTitle: 'ECE_students'
+        pageTitle: 'ECE students'
     });
 });
 
