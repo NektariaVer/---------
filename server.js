@@ -51,6 +51,12 @@ app.get('/', (req, res) => {
     });
 });
 
+app.get('/login', (req, res) => {
+    res.render('login.hbs', {
+        pageTitle: 'ECE students - login'
+    });
+});
+
 app.get('/user_info', (req, res) => {
     res.render('user_info.hbs', {
         pageTitle: 'User Information'
