@@ -80,6 +80,7 @@ header img {
     border-radius: 0.5em;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+
 .breadcrumbs ul {
     list-style-type: none;
     padding: 0.5em;
@@ -91,6 +92,7 @@ header img {
     margin-right: 0em;
     margin-top: 0.5em;
     margin-bottom: 0.5em;
+    transition: margin-left 0.3s ease;
 }
 
 .breadcrumbs a{
@@ -110,6 +112,10 @@ header img {
 .breadcrumbs a:hover {
     background-color: #88a2a2;
     
+}
+
+.breadcrumbs li:hover {
+    margin-left: 0.5em;
 }
 
 header h1 {
@@ -186,7 +192,7 @@ footer th {
     background-color: #B99E9E;
     border: none;
     cursor: pointer;
-    padding: 0.4em 0.5em;
+    padding: 0.4em;
     display: block;
     border-radius: 0.5em;
     margin-bottom: 0.3em;
@@ -197,6 +203,10 @@ footer th {
     color: rgb(0, 0, 0);
     text-decoration: none;
     font-size: 0.9em;
+}
+
+.tabs a.clicked {
+    font-size: 0.85em;
 }
 
 .tabs li:hover {
@@ -239,5 +249,9 @@ footer th {
 
     .tabs li a {
         font-size: 0.8em;
+    }
+
+    .tabs a.clicked {
+        font-size: 0.75em;
     }
 }

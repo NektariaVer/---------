@@ -7,3 +7,13 @@
         <li><a href="/certificates">Αίτηση Πιστοποιητικών</a></li>
     </ul>
 </nav>
+<script>
+    const menuButtons = document.querySelectorAll('.tabs a');
+
+    menuButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            menuButtons.forEach(btn => btn.classList.remove('clicked'));
+            this.classList.add('clicked');
+        });
+    });
+</script>
