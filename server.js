@@ -93,6 +93,20 @@ app.get('/certificates', (req, res) => {
     });
 });
 
+app.get('/user_info', (req, res) => {
+    try {
+        const studentInfo = getStudentById('S10800');
+
+        res.render('user_info.hbs', {
+            pageTitle: 'User Information',
+            studentInfo: studentInfo
+        });
+    } catch (error) {
+        console.error('Error fetching student information:', error.message);
+        res.status(500).send('Something went wrong!');
+    }
+});
+
 // Error handling middleware
 app.use((err, req, res, next) => {
     console.error(err.stack);
