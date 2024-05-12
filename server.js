@@ -29,7 +29,7 @@ app.use(session({
         sameSite: true,
         maxAge: 2 * 60 * 60 * 1000
     },
-    store: new sqliteStore({ db: 'student_services.db', dir: './database' })
+    //store: new sqliteStore({ db: 'student_services.db', dir: './database' })
 }));
 
 // helpers

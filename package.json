@@ -22,7 +22,8 @@
     "nodemon": "^3.1.0",
     "ol": "^7.3.0",
     "passport": "^0.6.0",
-    "pg": "^8.11.5"
+    "pg": "^8.11.5",
+    "sqlite3": "^5.1.7"
   },
   "devDependencies": {
     "demon": "^0.0.1"

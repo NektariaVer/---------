@@ -23,23 +23,23 @@
                     <tbody>
                         <tr>
                             <td>ΑΡΙΘΜΟΣ ΜΗΤΡΩΟΥ</td>
-                            <td>0000000</td>
+                            <td>{{ studentInfo.student_id }}</td>
                         </tr>
                         <tr>
                             <td>ΟΝΟΜΑΤΕΠΩΝΥΜΟ</td>
-                            <td>ΜΑΡΙΑ ΠΑΠΑΔΟΠΟΥΛΟΥ ΓΕΩΡΓΙΟΥ</td>
+                            <td>{{ studentInfo.firstname }} {{ studentInfo.lastname }} {{ studentInfo.father }}</td>
                         </tr>
                         <tr>
                             <td>ΑΡΙΘΜΟΣ ΤΑΥΤΟΤΗΤΑΣ</td>
-                            <td>ΑΑ 00000</td>
+                            <td>{{ studentInfo.id_num }}</td>
                         </tr>
                         <tr>
                             <td>ΗΜΕΡΟΜΗΝΙΑ ΓΕΝΝΗΣΗΣ</td>
-                            <td>00/00/0000</td>
+                            <td>{{ studentInfo.birthday }}</td>
                         </tr>
                         <tr>
                             <td>ΦΥΛΟ</td>
-                            <td>ΘΗΛΥ</td>
+                            <td>{{ studentInfo.gender }}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -54,11 +54,11 @@
                         </tr>
                         <tr>
                             <td>ΕΤΟΣ ΕΙΣΑΓΩΓΗΣ</td>
-                            <td>2023</td>
+                            <td>{{ studentInfo.registration }}</td>
                         </tr>
                         <tr>
                             <td>ΤΡΕΧΟΝ ΕΞΑΜΗΝΟ</td>
-                            <td>2</td>
+                            <td>{{studentInfo.semester }}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -69,15 +69,15 @@
                     <tbody>
                         <tr>
                             <td>ΔΙΕΥΘΥΝΣΗ</td>
-                            <td>ΟΔΟΣ 00 - ΠΑΤΡΑ - ΑΧΑΪΑΣ - 00000</td>
+                            <td>{{ studentInfo.address }}</td>
                         </tr>
                         <tr>
                             <td>ΤΗΛΕΦΩΝΟ</td>
-                            <td>0000000000</td>
+                            <td>{{ studentInfo.phone }}</td>
                         </tr>
                         <tr>
                             <td>EMAIL</td>
-                            <td>abcd@gmail.com</td>
+                            <td>{{ studentInfo.email }}</td>
                         </tr>
                     </tbody>
                 </table>
