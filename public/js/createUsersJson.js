@@ -1,5 +1,5 @@
-import bcrypt from 'bcrypt';
-import fs from 'fs';
+const bcrypt = require('bcrypt');
+const fs = require('fs');
 
 // Sample user data with plain-text passwords
 const users = [
@@ -21,6 +21,11 @@ const hashedUsers = users.map(user => ({
 }));
 
 // Write the hashed users to users.json
-fs.writeFileSync('users.json', JSON.stringify(hashedUsers, null, 2));
-
+fs.writeFileSync('users.json', JSON.stringify(hashedUsers, null, 2), (err) => {
+    if (err) {
+        console.error('Error writing users.json:', err);
+    } else {
+        console.log('users.json created with hashed passwords:', hashedUsers);
+    }
+});
 console.log('users.json created with hashed passwords:', hashedUsers);

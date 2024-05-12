@@ -6,7 +6,7 @@ form.addEventListener('submit', async function(event) {
     const password = document.getElementById('password').value;
 
     try {
-        const response = await fetch('/login.html', {
+        const response = await fetch('/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -15,7 +15,7 @@ form.addEventListener('submit', async function(event) {
         });
 
         if (response.ok) {
-            window.location.href = '/home_page.html';
+            window.location.href = '/home_page.hbs';
         } else {
             console.error('Login failed:', response.statusText);
         }
