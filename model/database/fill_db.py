@@ -4,17 +4,17 @@ conn = sqlite3.connect("student_services.db")
 cur = conn.cursor()
 
 def upload_data():
-    conn.execute('''INSERT INTO user VALUES
+    conn.execute('''INSERT INTO "user" VALUES
                     ('Νίκος', 'Παπαδόπουλος', 'S10800', 'nikos.papadopoulos@gmail.com', '6931234567', '2005-04-23', 'Άνδρας', 'Γιάννης', 'Οδός Ερμού 45, Πάτρα', '26100', 'Α00001','$2b$10$uFLnL9jUJxHOCnsuJSdtPO1IQKFGY5z3QVfk6jUgEL82FbHIOKdpG'),
                     ('Ελένη', 'Καραγιάννη', 'S10801', 'eleni.karagianni@gmail.com', '6972345678', '2002-06-12', 'Γυναίκα', 'Νικόλαος', 'Λεωφόρος Κηφισίας 78, Πάτρα', '26100', 'Α00002','$2b$10$HdYsV/HSGvVXdNcdA1/5QOb9Ft/SQOghGGLdVoX2vFq1fDcoie4KK');
                  ''')
     
-    conn.execute('''INSERT INTO student VALUES
+    conn.execute('''INSERT INTO "student" VALUES
                  ('S10800', 2, '000','15-09-2023'),
                  ('S10801', 8, '005','10-09-2020');
                  ''')
 
-    conn.execute('''INSERT INTO field VALUES
+    conn.execute('''INSERT INTO "field" VALUES
                  ('Κορμός', '000'),
                  ('Επικοινωνίες', '001'),
                  ('Τεχνολογία της πληροφορίας','002'),
@@ -26,7 +26,7 @@ def upload_data():
                  ('Κυβερνοφυσικά συστήματα','008');
                  ''')
     
-    conn.execute('''INSERT INTO course VALUES
+    conn.execute('''INSERT INTO "course" VALUES
                     ('ECE_ΞΓ210', 'ΑΓΓΛΙΚΑ', 3, 1.5, '000', 1),
                     ('ECE_Υ101', 'ΛΟΓΙΣΜΟΣ ΣΥΝΑΡΤΗΣΕΩΝ ΜΙΑΣ ΜΕΤΑΒΛΗΤΗΣ', 6, 2.0, '000', 1),
                     ('ECE_Υ104', 'ΓΡΑΜΜΙΚΗ ΑΛΓΕΒΡΑ', 3, 1.5, '000', 1),
@@ -93,7 +93,7 @@ def upload_data():
 
  
  
-    conn.execute('''INSERT INTO course_cycle (semester, id, courseID, academic_year) VALUES
+    conn.execute('''INSERT INTO "course_cycle" (semester, id, courseID, academic_year) VALUES
                         (1, 'Y00_011', 'CS101', 2023),
                         (2, 'Y00_012', 'ME102', 2023),
                         (3, 'Y00_013', 'CS201', 2023),
