@@ -1,19 +1,22 @@
-const express = require('express');
-const app = express();
-const session = require('express-session');
+import express from "express";
+import session from "express-session";
+import expbs from "express-handlebars";
+import path from "path";
+//const cookieParser = require('cookie-parser');
+//const sqliteStore = require('connect-sqlite3')(session); //store for session
 
-const expbs = require('express-handlebars');
-const path = require('path');
-const cookieParser = require('cookie-parser');
-const sqliteStore = require('connect-sqlite3')(session); //store for session
-
+import { fileURLToPath } from 'url';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+import * as model from './model/student_services_model.mjs';
 // Either use the port number from the environment or use 3000
 const port = process.env.PORT || 8000;
 
+const app = express();
 // handle urls
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-app.use(cookieParser());
+//app.use(cookieParser());
 
 // using css, javascript, images, and other public files
 app.use(express.static(path.join(__dirname, 'public')));
@@ -57,10 +60,25 @@ app.get('/login', (req, res) => {
     });
 });
 
-app.get('/user_info', (req, res) => {
-    res.render('user_info.hbs', {
-        pageTitle: 'User Information'
-    });
+app.get('/user_info', async(req, res) => {
+    let userID = "S10800";
+    try {
+        const userInfo = await model.getUserInfo(userID);
+        if (userInfo.length > 0) {
+            res.render('user_info.hbs', {
+                pageTitle: 'User Information',
+                ID: userInfo[0].academic_id
+            });
+        } else
+            res.render('user_info.hbs', {
+                pageTitle: 'User Information',
+                ID: 'User not found' 
+            });
+    }
+    catch (err) {
+        console.error(err.message);
+        res.status(500).send('Error retrieving user information');
+    }
 });
 
 app.get('/edit_user_info', (req, res) => {
@@ -91,20 +109,6 @@ app.get('/certificates', (req, res) => {
     res.render('certificates.hbs', {
         pageTitle: "Certificates"
     });
-});
-
-app.get('/user_info', (req, res) => {
-    try {
-        const studentInfo = getStudentById('S10800');
-
-        res.render('user_info.hbs', {
-            pageTitle: 'User Information',
-            studentInfo: studentInfo
-        });
-    } catch (error) {
-        console.error('Error fetching student information:', error.message);
-        res.status(500).send('Something went wrong!');
-    }
 });
 
 // Error handling middleware
