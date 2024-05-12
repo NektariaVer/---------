@@ -9,7 +9,12 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 import * as model from './model/student_services_model.mjs';
-// Either use the port number from the environment or use 3000
+
+import fs from 'fs';
+import bcrypt from 'bcrypt';
+const users = JSON.parse(fs.readFileSync('public/js/users.json', 'utf-8'));
+
+// Either use the port number from the environment or use 8000
 const port = process.env.PORT || 8000;
 
 const app = express();
@@ -58,6 +63,18 @@ app.get('/login', (req, res) => {
     res.render('login.hbs', {
         pageTitle: 'ECE students - login'
     });
+});
+
+app.post('/login', (req, res) => {
+    const { username, password } = req.body;
+    const user = users.find(user => user.username === username);
+    if (!user || !bcrypt.compareSync(password, user.password)) {
+        res.status(401).send('Invalid username or password');
+    } 
+    else {
+        req.session.user = user;
+        res.redirect('/home_page.hbs');
+    }
 });
 
 app.get('/user_info', async(req, res) => {

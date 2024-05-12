@@ -15,7 +15,7 @@ form.addEventListener('submit', async function(event) {
         });
 
         if (response.ok) {
-            window.location.href = '/home_page.hbs';
+            window.location.href = '/home_page';
         } else {
             console.error('Login failed:', response.statusText);
         }
