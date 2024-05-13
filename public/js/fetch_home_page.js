@@ -1,5 +1,5 @@
 // Make a GET request to the server to fetch the home page
-fetch('http://localhost:8000/')
+fetch('/')
   .then(response => {
     if (!response.ok) {
       throw new Error('Network response was not ok');

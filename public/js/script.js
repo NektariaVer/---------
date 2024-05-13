@@ -24,3 +24,11 @@ form.addEventListener('submit', async function(event) {
     }
 });
 
+let popup = document.getElementById("popup");
+
+function openPopup(){
+    popup.classList.add("open-popup");
+    setTimeout(function(){
+        popup.classList.remove("open-popup");
+        }, 3000);
+}

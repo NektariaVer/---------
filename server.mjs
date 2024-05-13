@@ -146,5 +146,5 @@ app.use((err, req, res, next) => {
 
 // final command to have the server running
 app.listen(port, '0.0.0.0', () => {
-    console.log('Server listening on port ' + port + '  visit: ' + `http://127.0.0.1:${port}`);
+    console.log('Server listening on port ' + port + ',  visit: ' + `http://127.0.0.1:${port}`);
 });
