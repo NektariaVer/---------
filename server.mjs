@@ -70,7 +70,7 @@ app.post('/login', (req, res) => {
     const { username, password } = req.body;
     const user = users.find(user => user.username === username);
     if (!user || !bcrypt.compareSync(password, user.password)) {
-        res.status(401).send('Invalid username or password');
+        return res.status(401).json({ message: 'Invalid username or password' });
     } 
     else {
         req.session.user = user;
