@@ -1,5 +1,6 @@
 import sqlite3
 
+
 class StudentServicesDatabase:
     def __init__(self, db_name='student_services.db'):
         self.db_name = db_name
@@ -41,16 +42,25 @@ class StudentServicesDatabase:
                 "firstname"	varchar(15) NOT NULL DEFAULT '',
                 "lastname"	varchar(15) NOT NULL DEFAULT '',
                 "academic_id"	varchar(7) NOT NULL DEFAULT NULL,
-                "email"	varchar(20) DEFAULT '',
-                "phone"	INTEGER DEFAULT '',
-                "birthday"	date DEFAULT '00-00-0000',
+                "email"	varchar(30) DEFAULT '',
+                "phone"	varchar(10) DEFAULT '',
+                "birthday"	date DEFAULT '01-01-0001',
                 "gender"	varchar(7) DEFAULT '',
                 "father"	varchar(15) DEFAULT '',
-                "address"	varchar(25) DEFAULT '',
+                "address"	varchar(30) DEFAULT '',
                 "postcode"	INTEGER DEFAULT '',
                 "id_num"	varchar(6) DEFAULT '',
-                "hashedpassword"	varchar(50) DEFAULT 0,
+                "hashedpassword"	varchar(80) DEFAULT 0,
                 PRIMARY KEY("academic_id")
+            );
+            ''')
+
+            # Create field table
+            self.execute_query('''
+            CREATE TABLE "field" (
+                "name"	varchar(20),
+                "id"	varchar(3) NOT NULL,
+                CONSTRAINT "field_PK" PRIMARY KEY("id")
             );
             ''')
 
@@ -74,16 +84,6 @@ class StudentServicesDatabase:
                 "id"	varchar(7) NOT NULL DEFAULT '',
                 FOREIGN KEY("id") REFERENCES "user"("academic_id") ON DELETE CASCADE ON UPDATE CASCADE,
                 CONSTRAINT "proffID_PK" PRIMARY KEY("id")
-            );
-            ''')
-
-            # Create professor_teaches table
-            self.execute_query('''
-            CREATE TABLE "professor_teaches" (
-                "prof_id"	varchar(7) NOT NULL DEFAULT '',
-                "cycle_id"	varchar(7) NOT NULL DEFAULT '',
-                FOREIGN KEY("prof_id") REFERENCES "professor"("id") ON DELETE CASCADE ON UPDATE CASCADE,
-                FOREIGN KEY("cycle_id") REFERENCES "course_cycle"("id") ON DELETE CASCADE ON UPDATE CASCADE
             );
             ''')
 
@@ -112,6 +112,15 @@ class StudentServicesDatabase:
                 CONSTRAINT "cycle_PK" PRIMARY KEY("id")
             );
             ''')
+            # Create professor_teaches table
+            self.execute_query('''
+            CREATE TABLE "professor_teaches" (
+                "prof_id"	varchar(7) NOT NULL DEFAULT '',
+                "cycle_id"	varchar(7) NOT NULL DEFAULT '',
+                FOREIGN KEY("prof_id") REFERENCES "professor"("id") ON DELETE CASCADE ON UPDATE CASCADE,
+                FOREIGN KEY("cycle_id") REFERENCES "course_cycle"("id") ON DELETE CASCADE ON UPDATE CASCADE
+            );
+            ''')
 
             # Create student_takes_courses table
             self.execute_query('''
@@ -137,14 +146,6 @@ class StudentServicesDatabase:
             );
             ''')
 
-            # Create field table
-            self.execute_query('''
-            CREATE TABLE "field" (
-                "name"	varchar(20),
-                "id"	varchar(3) NOT NULL,
-                CONSTRAINT "field_PK" PRIMARY KEY("id")
-            );
-            ''')
 
             # Create certificate table
             self.execute_query('''

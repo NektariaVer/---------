@@ -17,10 +17,10 @@
 //};
 
 import pg from "pg";
-//import dotenv from "dotenv";
+import dotenv from "dotenv";
 
-//dotenv.config();
-//console.log('database..', process.env.DATABASE_URL)
+dotenv.config();
+console.log('database..', process.env.DATABASE_URL)
 
 const pool = new pg.Pool({
     user: 'postgres',
@@ -28,6 +28,7 @@ const pool = new pg.Pool({
     host: 'localhost',
     database: 'postgres',
     port: 8080,
+    ssl: { rejectUnauthorized: false }
 })
 
 async function connect() {
