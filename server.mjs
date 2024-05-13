@@ -85,7 +85,15 @@ app.get('/user_info', async(req, res) => {
         if (userInfo.length > 0) {
             res.render('user_info.hbs', {
                 pageTitle: 'User Information',
-                ID: userInfo[0].academic_id
+                ID: userInfo[0].academic_id,
+                name: userInfo[0].firstname,
+                surname: userInfo[0].lastname,
+                birthday: userInfo[0].birthday,
+                gender: userInfo[0].gender,
+                ID_num: userInfo[0].id_num,
+                address: userInfo[0].address,
+                email: userInfo[0].email,
+                phone: userInfo[0].phone
             });
         } else
             res.render('user_info.hbs', {

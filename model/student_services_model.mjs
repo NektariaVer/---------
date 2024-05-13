@@ -27,8 +27,7 @@ const pool = new pg.Pool({
     password: 'password',
     host: 'localhost',
     database: 'postgres',
-    port: 8080,
-    ssl: { rejectUnauthorized: false }
+    port: 8080
 })
 
 async function connect() {
