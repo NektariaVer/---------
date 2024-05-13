@@ -46,7 +46,7 @@ body {
   }
   
   .login-container input[type="text"],
-  .login-container input[type="password"] {
+  .login-container input[type="password"]{
 	width: 85%;
 	margin-bottom: 1.5em;
 	padding: 1em;
@@ -70,12 +70,12 @@ body {
 	background-color: #5b7575;
   }
 
-  .login-container #forgot{
+  .login-container #forgot-password{
 	background-color: #877373;
 	padding: 0.5em;
   }
 
-  .login-container #forgot:hover {
+  .login-container #forgot-password:hover {
 	background-color: #88a2a2;
   }
 
@@ -104,4 +104,70 @@ body {
 	  }
 
   }
+  
+/* Popup container */
+.popup {
+	display: none;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+	z-index: 9999;
+}
+  
+/* Popup content */
+.popup-content {
+	background-color: #88a2a2;
+	margin: 20% auto;
+	padding: 20px;
+	text-align: center;
+    color: #020202;
+	font-size: 1.5em;
+	width: 300px;
+	border-radius: 0.6em;
+}
+
+.popup-content h2 {
+	font-size: medium;
+}
+
+.popup-content button {
+	width: 96%;
+	padding: 0.5em;
+	background-color: #000000;
+	color: #fff;
+	border: none;
+	border-radius: 0.5em;
+	cursor: pointer;
+}
+
+.popup-content button:hover {
+	background-color: #877373;
+}
+
+.popup-content input[type="email"]{
+	width: 85%;
+	margin-bottom: 1.5em;
+	padding: 1em;
+	border: 0.2em solid #6c8181;
+	border-radius: 0.5em;
+	box-shadow: 0.5em 0.5em 1em rgba(0, 0, 0, 0.1);
+  }
+
+
+.close {
+	color: black;
+	float: right;
+	font-size: 28px;
+	font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+	color: #877373;
+	text-decoration: none;
+	cursor: pointer;
+}
   
