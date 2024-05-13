@@ -6,7 +6,7 @@ form.addEventListener('submit', async function(event) {
     const password = document.getElementById('password').value;
 
     try {
-        const response = await fetch('/login', {
+        const response = await fetch('/Login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -15,7 +15,7 @@ form.addEventListener('submit', async function(event) {
         });
 
         if (response.ok) {
-            window.location.href = '/home_page';
+            window.location.href = '/';
         } else {
             console.error('Login failed:', response.statusText);
         }
@@ -24,3 +24,11 @@ form.addEventListener('submit', async function(event) {
     }
 });
 
+let popup = document.getElementById("popup");
+
+function openPopup(){
+    popup.classList.add("open-popup");
+    setTimeout(function(){
+        popup.classList.remove("open-popup");
+        }, 3000);
+}

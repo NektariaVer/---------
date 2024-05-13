@@ -14,13 +14,17 @@
     </div>
     
     <div class="login-container">
-      <form id="login-form" action="/login" method="post">
+      <form id="login-form" action="/Login" method="post">
         <h1 class="bold-text">Είσοδος Χρήστη</h1>
         <input class="italic-text" type="text" id="username" placeholder="Όνομα χρήστη" required>
         <input class="italic-text" type="password" id="password" placeholder="Κωδικός χρήστη" required>
         <button id="login" type="submit">Σύνδεση</button>
         <button id="forgot" type="submit">Ξέχασες τον κωδικό σου;</button>
       </form>
+    </div>
+
+    <div class="popup" id="popup">
+        <p>Λάθος όνομα χρήστη ή κωδικός!</p>
     </div>
 
     <div class="footer">

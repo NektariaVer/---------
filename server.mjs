@@ -27,7 +27,8 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
 // app use model
-//app.use('/model', express.static(`${__dirname}/model/`));
+app.use('/model', express.static(`${__dirname}/model/`));
+app.use('/controller', express.static(`${__dirname}/controller/`));
 
 app.use(session({
     secret: process.env.secret || "secret",
@@ -73,7 +74,7 @@ app.post('/login', (req, res) => {
     } 
     else {
         req.session.user = user;
-        res.redirect('/home_page.hbs');
+        res.redirect('/');
     }
 });
 
@@ -153,5 +154,5 @@ app.use((err, req, res, next) => {
 
 // final command to have the server running
 app.listen(port, '0.0.0.0', () => {
-    console.log('Server listening on port ' + port + '  visit: ' + `http://127.0.0.1:${port}`);
+    console.log('Server listening on port ' + port + ',  visit: ' + `http://127.0.0.1:${port}`);
 });
