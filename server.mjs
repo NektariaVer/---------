@@ -14,6 +14,8 @@ import fs from 'fs';
 import bcrypt from 'bcrypt';
 const users = JSON.parse(fs.readFileSync('public/js/users.json', 'utf-8'));
 
+import PDFDocument from "pdfkit";
+
 // Either use the port number from the environment or use 8000
 const port = process.env.PORT || 8000;
 
@@ -70,7 +72,7 @@ app.post('/login', (req, res) => {
     const { username, password } = req.body;
     const user = users.find(user => user.username === username);
     if (!user || !bcrypt.compareSync(password, user.password)) {
-        res.status(401).send('Invalid username or password');
+        return res.status(401).json({ message: 'Invalid username or password' });
     } 
     else {
         req.session.user = user;
@@ -143,6 +145,25 @@ app.get('/certificates', (req, res) => {
 app.use((err, req, res, next) => {
     console.error(err.stack);
     res.status(500).send('Something went wrong!');
+});
+
+app.get('/generate-pdf/:title', (req, res) => {
+    const title = req.params.title;
+    const doc = new PDFDocument();
+
+    res.setHeader('Content-Type', 'application/pdf');
+    res.setHeader('Content-Disposition', `attachment; filename="${title}.pdf"`);
+
+    doc.pipe(res);
+    doc.fontSize(15).text(title, 100, 100);
+
+    doc.end();
+});
+
+app.post('/update-status', (req, res) => {
+    const { certificateType, status } = req.body;
+    // Response indicating success
+    res.sendStatus(200);
 });
 
 

@@ -26,12 +26,12 @@
                             <th></th>
                         </tr>
                         <tr>
-                            <td><a href="path_to_download_file" download>Βεβαίωση Φοιτητικής Κατάστασης</a></td>
+                            <td><a href="/generate-pdf/Student Status Certificate" download>Βεβαίωση Φοιτητικής Κατάστασης</a></td>
                             <td>24/4/2024</td>
                             <td>Ολοκληρωμένο</td>
                         </tr>
                         <tr>
-                            <td><a href="path_to_download_file" download>Βεβαίωση Ενεργού Φοιτητή</a></td>
+                            <td><a href="/generate-pdf/Active Student Certificate" download>Βεβαίωση Ενεργού Φοιτητή</a></td>
                             <td>1/2/2024</td>
                             <td>Ολοκληρωμένο</td>
                         </tr>
@@ -119,9 +119,17 @@
                 }
             });
         });
-        
+
+        const certificateTranslations = {
+            "Βεβαίωση Ενεργού Φοιτητή": "Active Student Certificate",
+            "Βεβαίωση Φοιτητικής Κατάστασης": "Student Status Certificate",
+            "Βεβαίωση Ειδίκευσης/Κατεύθυνσης": "Qualification-Field Certificate",
+            "Βεβαίωση Πτυχιακής/Διπλωματικής Εργασίας": "Thesis Certificate"
+        };
+
         function saveCertificate() {
             const certificateType = document.getElementById('certificate-type').value;
+            const translatedType = certificateTranslations[certificateType];
             const today = new Date().toLocaleDateString('el-GR');
             const status = 'Σε αναμονή';
 
@@ -131,10 +139,36 @@
             const dateCell = newRow.insertCell(1);
             const statusCell = newRow.insertCell(2);
 
-            typeCell.textContent = certificateType;
+            const anchor = document.createElement('a');
+            anchor.href = `/generate-pdf/${translatedType}`;
+            anchor.textContent = certificateType; 
+            anchor.title = translatedType; 
+            anchor.setAttribute('download', `${translatedType}.pdf`);
+
+            typeCell.appendChild(anchor);
+
             dateCell.textContent = today;
             statusCell.textContent = status;
+
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', '/update-status', true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    console.log('Status updated successfully');
+                    statusCell.textContent = 'Ολοκληρωμένο'; 
+                } else {
+                    console.error('Failed to update status');
+                }
+            };
+            xhr.onerror = function() {
+                console.error('Failed to update status');
+            };
+            xhr.send(JSON.stringify({ certificateType: translatedType, status: 'Ολοκληρωμένο' }));
         }
+
+
+
 
         let popup = document.getElementById("popup");
         function openPopup(){
