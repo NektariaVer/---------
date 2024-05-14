@@ -20,10 +20,10 @@
             <div class="form-container">
                 <div class="title-container">
                     <h2>Στοιχεία Φοιτητή - Επεξεργασία</h2>
-                    <input class="save-button" type="submit" value="Αποθήκευση" onclick="openPopup()">
+                    <button class="save-button" type="submit" onclick="openPopup()"> Αποθήκευση </button> 
                 </div>
                 
-                <form method="post">
+                <form id="userForm" method="post" action="/edit_user_info">
                     <div class="gap"></div>
                     <fieldset>
                         <label for="street">ΟΔΟΣ:</label>
@@ -38,11 +38,8 @@
                         <label for="city">ΠΟΛΗ:</label>
                         <input type="text" id="city" name="city" placeholder={{city}}><br>
                         <hr>
-                        <!--<label for="area">ΝΟΜΟΣ:</label>
-                        <input type="text" id="area" name="area" placeholder={{area}}><br>-->
-                        <hr>
                     </fieldset>
-                        
+                    <input type="hidden" name="academic_id" value="{{ID}}">    
                     <div class="gap"></div>
 
                     <fieldset>
@@ -71,6 +68,7 @@
             popup.classList.add("open-popup");
             setTimeout(function(){
                 popup.classList.remove("open-popup");
+                document.getElementById('userForm').submit();
                 }, 3000);
         }
     </script>
