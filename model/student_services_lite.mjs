@@ -35,4 +35,18 @@ const getStudentInfo = (academic_id) => {
     });
 };
 
-export { getUserInfo, getStudentInfo };
+const updateUserInfo = (academic_id) => {
+    const sql = "UPDATE user SET address = ?, phone = ?, email = ?, postcode = ? WHERE academic_id = ?";
+    return new Promise((resolve, reject) => {
+        const db = new sqlite3.Database(db_name);
+        db.all(sql, [academic_id], (err, rows) => {
+            db.close();
+            if (err) {
+                return reject(err);
+            }
+            resolve(rows);
+        });
+    });
+};
+
+export { getUserInfo, getStudentInfo , updateUserInfo};

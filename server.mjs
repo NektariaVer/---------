@@ -113,10 +113,50 @@ app.get('/user_info', async(req, res) => {
     }
 });
 
-app.get('/edit_user_info', (req, res) => {
-    res.render('edit_user_info.hbs', {
-        pageTitle: "Edit Information"
-    });
+app.post('/update_user_info', async (req, res) => {
+    const { academic_id, street, number, postcode, city, phone, email } = req.body;
+    const address = `Οδός ${street} ${number}, ${city}`;
+
+    try {
+        await model.updateUserInfo(academic_id, address, phone, email, postcode);
+        res.redirect('/user_info');
+    } catch (error) {
+        console.error(`Failed to update user information: ${error.message}`);
+        res.status(500).send('Error updating user information');
+    }
+});
+
+app.get('/edit_user_info', async(req, res) => {
+    let userID = "S10800";
+    try {
+        const userInfo = await model.getUserInfo(userID);
+        const studentInfo = await model.getStudentInfo(userID);
+        if (userInfo.length > 0) {
+            const address = userInfo[0].address;
+            const addressParts = address.split(', ');
+            const streetAndNumber = addressParts[0].match(/Οδός\s+(\S+)\s+(\d+)$/);
+            const street = streetAndNumber[1].trim();
+            const number = streetAndNumber[2].trim();
+            const city = addressParts[1].trim();
+            res.render('edit_user_info.hbs', {
+                pageTitle: 'Edit Information',
+                street: street,
+                number: number,
+                city: city,
+                email: userInfo[0].email,
+                tel: userInfo[0].phone,
+                postcode: userInfo[0].postcode
+            });
+        } else
+            res.render('edit_user_info.hbs', {
+                pageTitle: 'Edit Information',
+                ID: 'User not found' 
+            });
+    }
+    catch (err) {
+        console.error(err.message);
+        res.status(500).send('Error editing user information');
+    }
 });
 
 app.get('/semester', (req, res) => {
