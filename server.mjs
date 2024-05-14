@@ -166,6 +166,7 @@ app.get('/semester', (req, res) => {
     });
 });
 */
+
 app.get('/semester', async (req, res) => {
     let userID = "S10800";
     try {

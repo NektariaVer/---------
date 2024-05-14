@@ -49,4 +49,18 @@ const updateUserInfo = (academic_id) => {
     });
 };
 
-export { getUserInfo, getStudentInfo , updateUserInfo};
+const updateSemester = (academic_id) => {
+    const sql = "UPDATE student SET semester_date = ?"
+    return new Promise((resolve, reject) => {
+        const db = new sqlite3.Database(db_name);
+        db.all(sql, [academic_id], (err, rows) => {
+            db.close();
+            if (err) {
+                return reject(err);
+            }
+            resolve(rows);
+        });
+    });
+};
+
+export { getUserInfo, getStudentInfo , updateUserInfo, updateSemester};
