@@ -97,7 +97,8 @@ app.get('/user_info', async(req, res) => {
                 address: userInfo[0].address,
                 email: userInfo[0].email,
                 phone: userInfo[0].phone,
-                semester: studentInfo[0].semester
+                semester: studentInfo[0].semester,
+                registrationDate: studentInfo[0].registration
             });
         } else
             res.render('user_info.hbs', {

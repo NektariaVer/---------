@@ -58,7 +58,7 @@ class StudentServicesDatabase:
             # Create field table
             self.execute_query('''
             CREATE TABLE "field" (
-                "name"	varchar(20),
+                "name"	varchar(40),
                 "id"	varchar(3) NOT NULL,
                 CONSTRAINT "field_PK" PRIMARY KEY("id")
             );
