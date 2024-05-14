@@ -232,7 +232,7 @@ img{
     text-align: right;
 }
 
-.semester{
+.semester-ac{
     font-size: medium;
     margin-top: 0;
     margin-left: 0.5em;
@@ -384,7 +384,7 @@ img{
     padding-right: 0.5em;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1200px) {
     .announcement {
         flex-direction: column; 
         width: 45%; 
