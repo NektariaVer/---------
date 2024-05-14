@@ -53,4 +53,17 @@ async function getUserInfo(academic_id) {
     }
 }
 
-export { getUserInfo };
+async function getStudentInfo(academic_id) {
+    const sql = `SELECT * FROM "student" WHERE "student_id" = '${academic_id}';`;
+    try {
+        const client = await connect();
+        const res = await client.query(sql)
+        await client.release()
+        return res.rows;
+    }
+    catch (error) {
+        console.error(`Failed to connect ${error}`)
+    }
+}
+
+export { getUserInfo, getStudentInfo };

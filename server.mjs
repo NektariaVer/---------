@@ -82,6 +82,7 @@ app.get('/user_info', async(req, res) => {
     let userID = "S10800";
     try {
         const userInfo = await model.getUserInfo(userID);
+        const studentInfo = await model.getStudentInfo(userID);
         if (userInfo.length > 0) {
             res.render('user_info.hbs', {
                 pageTitle: 'User Information',
@@ -93,7 +94,8 @@ app.get('/user_info', async(req, res) => {
                 ID_num: userInfo[0].id_num,
                 address: userInfo[0].address,
                 email: userInfo[0].email,
-                phone: userInfo[0].phone
+                phone: userInfo[0].phone,
+                semester: studentInfo[0].semester
             });
         } else
             res.render('user_info.hbs', {
