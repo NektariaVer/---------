@@ -158,11 +158,36 @@ app.post('/edit_user_info', async (req, res) => {
     }
 });
 
+/*
 app.get('/semester', (req, res) => {
     res.render('semester.hbs', {
         pageTitle: 'Semester'
     });
 });
+*/
+app.get('/semester', async (req, res) => {
+    let userID = "S10800";
+    try {
+        const studentInfo = await model.getStudentInfo(userID);
+        if (studentInfo.length > 0) {
+            const semesterDate = studentInfo[0].semester_date;
+            res.render('semester.hbs', {
+                pageTitle: 'Semester',
+                semesterDate: semesterDate
+            });
+        } else {
+            res.render('semester.hbs', {
+                pageTitle: 'Semester',
+                ID: 'Cannot Retrieve Semester Information' 
+            });
+        }
+    } catch (err) {
+        console.error(err.message);
+        res.status(500).send('Error retrieving semester information');
+    }
+});
+
+
 
 app.get('/courses', (req, res) => {
     res.render('courses.hbs', {

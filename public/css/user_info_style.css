@@ -231,8 +231,13 @@ img{
     text-align: right;
 }
 
-
-
+.semester{
+    font-size: medium;
+    margin-top: 0;
+    margin-left: 0.5em;
+    align-self: center;
+    margin-bottom: 0;
+}
 
 /* Certificates page */
 .certificates th {

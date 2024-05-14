@@ -69,6 +69,7 @@ class StudentServicesDatabase:
             CREATE TABLE "student" (
                 "student_id"	varchar(7) NOT NULL DEFAULT '',
                 "semester"	INTEGER NOT NULL DEFAULT 0,
+                "semester_date" date DEFAULT '00-00-0000',
                 "fieldID"	varchar(3),
                 "registration"	date DEFAULT '00-00-0000',
                 FOREIGN KEY("fieldID") REFERENCES "field"("id") ON DELETE CASCADE ON UPDATE CASCADE,

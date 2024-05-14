@@ -5,7 +5,7 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const db_name = path.join(__dirname, "../database", "student_services.db");
+const db_name = path.join(__dirname, "../model/database", "student_services.db");
 
 const getUserInfo = (academic_id) => {
     const sql = "SELECT * FROM user WHERE academic_id = ?";
