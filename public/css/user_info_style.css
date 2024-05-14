@@ -63,6 +63,7 @@ body {
 
 .edit-button:hover {
     background-color: #88a2a2;
+    transform: scale(0.99); 
 }
 
 .table-container hr {

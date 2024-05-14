@@ -60,6 +60,7 @@ header img {
 .search-button:hover {
     background-color: #88a2a2;
     border-radius: 0.5em;
+    transform: scale(0.99); 
 }
 
 .breadcrumbs img{
@@ -211,6 +212,7 @@ footer th {
 
 .tabs li:hover {
     background-color: #88a2a2;
+    transform: scale(0.99); 
 }
 
 
