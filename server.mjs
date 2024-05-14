@@ -8,7 +8,8 @@ import path from "path";
 import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-import * as model from './model/student_services_model.mjs';
+//import * as model from './model/student_services_model.mjs';
+import * as model from './model/student_services_lite.mjs';
 
 import fs from 'fs';
 import bcrypt from 'bcrypt';
