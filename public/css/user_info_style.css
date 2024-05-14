@@ -282,3 +282,108 @@ img{
     text-align: left;
     width: calc(100% - 15em);
 }
+
+
+/*     */
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2em;
+    max-width: calc(100% - 2em);
+    width: 100%;
+}
+
+.button-container a {
+    max-width: 12%;
+    width: 100%;
+    transition: transform 0.3s ease;
+}
+
+.button-container a:hover {
+    transform: scale(0.95); 
+}
+
+.button-container img {
+    width: 100%;
+    height: 83%;
+    border-radius: 0.5em;
+    box-shadow: 0 0 1em rgba(0, 0, 0, 0.2);
+    margin-bottom: 1em;
+}
+
+
+/* Announcement Carousel */
+.announcements-container {
+    overflow: auto;
+    position: relative;
+    width: 100%;
+    border-radius: 0.5em;
+    margin-bottom: 2em;
+    margin-top: 1em;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.2);
+    scrollbar-width: thin; 
+    scrollbar-color: #888888 #f0f0f0; 
+}
+
+.announcement-container::-webkit-scrollbar {
+    width: 1em;
+}
+
+.announcement-container::-webkit-scrollbar-thumb {
+    background-color: #888888; /* Color of the scrollbar thumb */
+}
+
+.announcement-container::-webkit-scrollbar-track {
+    background-color: #f0f0f0; /* Color of the scrollbar track */
+}
+
+.announcement-carousel {
+    display: flex;
+    transition: transform 0.5s ease;
+}
+
+.announcement {
+    flex: 0 0 auto;
+    margin-right: 1em;
+    background-color: white;
+    width: 40%;
+}
+
+/* Image on the left, text on the right */
+.announcement .announcement-image {
+    float: left;
+    margin-right: 1em; 
+    height: 10em;
+    width: auto;
+    margin-left: 2em;
+    border-radius: 0.5em;
+}
+
+.announcement .announcement-text {
+    flex: 1 1 auto;
+    white-space: normal; 
+    padding-ri: 2em;
+}
+
+/* Previous and Next buttons styling */
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    outline: none;
+    font-size: 24px;
+    color: #333;
+}
+
+.prev {
+    left: 0;
+}
+
+.next {
+    right: 0;
+}
