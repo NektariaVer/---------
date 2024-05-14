@@ -35,11 +35,36 @@ const getStudentInfo = (academic_id) => {
     });
 };
 
-const updateUserInfo = (academic_id, address, phone, email, postcode) => {
+const updateUserInfo = (academic_id, updates) => {
     return new Promise((resolve, reject) => {
-        const sql = `UPDATE user SET address = ?, phone = ?, email = ?, postcode = ? WHERE academic_id = ?`;
+        const { address, phone, email, postcode } = updates;
+        let sql = 'UPDATE user SET ';
+        const params = [];
+
+        if (address) {
+            sql += 'address = ?, ';
+            params.push(address);
+        }
+        if (phone) {
+            sql += 'phone = ?, ';
+            params.push(phone);
+        }
+        if (email) {
+            sql += 'email = ?, ';
+            params.push(email);
+        }
+        if (postcode) {
+            sql += 'postcode = ?, ';
+            params.push(postcode);
+        }
+
+        sql = sql.slice(0, -2);
+
+        sql += ' WHERE academic_id = ?';
+        params.push(academic_id);
+
         const db = new sqlite3.Database(db_name);
-        db.run(sql, [address, phone, email, postcode, academic_id], function (err) {
+        db.run(sql, params, function (err) {
             db.close();
             if (err) {
                 return reject(err);
@@ -48,5 +73,7 @@ const updateUserInfo = (academic_id, address, phone, email, postcode) => {
         });
     });
 };
+
+
 
 export { getUserInfo, getStudentInfo , updateUserInfo};

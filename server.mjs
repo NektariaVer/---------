@@ -96,6 +96,7 @@ app.get('/user_info', async(req, res) => {
                 gender: userInfo[0].gender,
                 ID_num: userInfo[0].id_num,
                 address: userInfo[0].address,
+                postcode: userInfo[0].postcode,
                 email: userInfo[0].email,
                 phone: userInfo[0].phone,
                 semester: studentInfo[0].semester,
@@ -146,12 +147,45 @@ app.get('/edit_user_info', async(req, res) => {
 });
 
 app.post('/edit_user_info', async (req, res) => {
-    const { academic_id, street, number, postcode, city, phone, email } = req.body;
-    const address = `Οδός ${street} ${number}, ${city}`;
-    console.log("Received data:", req.body);
+    let academic_id = "S10800"; // Example academic ID, replace with actual ID as needed
+    const { street, number, postcode, city, phone, email } = req.body;
+
+    // Fetch existing user info to get current address parts
+    let existingUserInfo;
     try {
-        await model.updateUserInfo(academic_id, address, phone, email, postcode);
-        res.redirect('/edit_user_info');
+        existingUserInfo = await model.getUserInfo(academic_id);
+        if (existingUserInfo.length === 0) {
+            return res.status(404).send('User not found');
+        }
+    } catch (err) {
+        console.error(`Failed to retrieve user information: ${err.message}`);
+        return res.status(500).send('Error retrieving user information');
+    }
+
+    const existingAddress = existingUserInfo[0].address;
+    const addressParts = existingAddress.split(', ');
+    const streetAndNumberMatch = addressParts[0].match(/Οδός\s+(\S+)\s+(\d+)$/);
+
+    let currentStreet = streetAndNumberMatch[1].trim();
+    let currentNumber = streetAndNumberMatch[2].trim();
+    let currentCity = addressParts[1].trim();
+
+    // Use provided values or fallback to existing values
+    const newStreet = street || currentStreet;
+    const newNumber = number || currentNumber;
+    const newCity = city || currentCity;
+    const newAddress = `Οδός ${newStreet} ${newNumber}, ${newCity}`;
+
+    // Create the updates object
+    const updates = {};
+    updates.address = newAddress;
+    if (phone) updates.phone = phone;
+    if (email) updates.email = email;
+    if (postcode) updates.postcode = postcode;
+
+    try {
+        await model.updateUserInfo(academic_id, updates);
+        res.redirect('/user_info');
     } catch (error) {
         console.error(`Failed to update user information: ${error.message}`);
         res.status(500).send('Error updating user information');
