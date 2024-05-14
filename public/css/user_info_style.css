@@ -324,20 +324,9 @@ img{
     padding-bottom: 1em;
     box-shadow: 0 0 0.5em rgba(0, 0, 0, 0.2);
     scrollbar-width: thin; 
-    scrollbar-color: #888888 #f0f0f0; 
+    scrollbar-color: #88a2a2 #EBE4E4;; 
 }
 
-.announcement-container::-webkit-scrollbar {
-    width: 1em;
-}
-
-.announcement-container::-webkit-scrollbar-thumb {
-    background-color: #888888; /* Color of the scrollbar thumb */
-}
-
-.announcement-container::-webkit-scrollbar-track {
-    background-color: #f0f0f0; /* Color of the scrollbar track */
-}
 
 .announcement-carousel {
     display: flex;
@@ -346,9 +335,16 @@ img{
 
 .announcement {
     flex: 0 0 auto;
-    margin-right: 1em;
+    margin-right: 0.5em;
+    margin-left: 0.5em;
     background-color: white;
-    width: 40%;
+    width: 35%;
+    border-radius: 0.5em;
+}
+
+.announcement:hover {
+    transform: scale(0.98); 
+    background-color: rgba(136, 162, 162, 0.1);
 }
 
 /* Image on the left, text on the right */
@@ -364,26 +360,38 @@ img{
 .announcement .announcement-text {
     flex: 1 1 auto;
     white-space: normal; 
-    padding-ri: 2em;
 }
 
-/* Previous and Next buttons styling */
-.prev, .next {
-    cursor: pointer;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: none;
-    border: none;
-    outline: none;
-    font-size: 24px;
-    color: #333;
+.announcement a {
+    text-decoration: none; 
+    color: black; 
 }
 
-.prev {
-    left: 0;
+.announcement h3 {
+    font-size: medium;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
 }
 
-.next {
-    right: 0;
+.announcement p {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+}
+
+@media screen and (max-width: 768px) {
+    .announcement {
+        flex-direction: column; 
+        width: 45%; 
+    }
+    
+    .announcement .announcement-image {
+        float: none; 
+        margin: 0 auto 1em;
+        display: block; 
+    }
+
+    .announcement .announcement-text {
+        flex: none; 
+        width: 100%; 
+    }
 }
