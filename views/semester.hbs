@@ -19,7 +19,7 @@
             
                 <table>
                     <tbody>
-                        <h3 class="semester-ac">Τελευταία Αίτηση</h3>
+                        <h3 class="semester-ac">Τελευταία Αίτηση:</h3>
                         <tr>
                             <td>Ακαδημαϊκό έτος</td>
                             <td id="academic_year"></td>
@@ -36,7 +36,9 @@
                 </table>
                 <hr>
                 
-                <button class="edit-button" type="submit" onclick="openPopup()">Αίτηση επανεγγραφής σε εξάμηνο</button>        
+                <form id="update_semester" action="/update_semester" method="post">
+                    <button id="updateSemesterBtn" class="edit-button" type="submit" >Αίτηση επανεγγραφής σε εξάμηνο</button>
+                </form>    
             </div>
         </div>
     </div>
@@ -77,5 +79,7 @@
                 popup.classList.remove("open-popup");
                 }, 3000);
         }
+
+              
     </script>
 </body>

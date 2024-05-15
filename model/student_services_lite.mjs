@@ -74,18 +74,25 @@ const updateUserInfo = (academic_id, updates) => {
     });
 };
 
-
-
 const updateSemester = (academic_id) => {
-    const sql = "UPDATE student SET semester_date = ?"
     return new Promise((resolve, reject) => {
+        const today = new Date();
+        
+        const day = String(today.getDate()).padStart(2, '0');
+        const month = String(today.getMonth() + 1).padStart(2, '0'); 
+        const year = today.getFullYear();
+        
+        const formattedDate = `${day}-${month}-${year}`;
+
+        let sql = "UPDATE student SET semester_date = ? WHERE student_id = ?";
+
         const db = new sqlite3.Database(db_name);
-        db.all(sql, [academic_id], (err, rows) => {
+        db.run(sql, formattedDate, academic_id, function(err) { 
             db.close();
             if (err) {
                 return reject(err);
             }
-            resolve(rows);
+            resolve();
         });
     });
 };

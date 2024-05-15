@@ -233,11 +233,11 @@ img{
 }
 
 .semester-ac{
-    font-size: medium;
+    font-size: 1em;
     margin-top: 0;
-    margin-left: 0.5em;
-    align-self: center;
-    margin-bottom: 0;
+    margin-left: 0.4em;
+    align-self: left;
+    margin-bottom:1em0;
 }
 
 /* Certificates page */
