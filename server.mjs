@@ -96,7 +96,6 @@ app.get('/user_info', async(req, res) => {
                 gender: userInfo[0].gender,
                 ID_num: userInfo[0].id_num,
                 address: userInfo[0].address,
-                postcode: userInfo[0].postcode,
                 email: userInfo[0].email,
                 phone: userInfo[0].phone,
                 semester: studentInfo[0].semester,
@@ -114,10 +113,24 @@ app.get('/user_info', async(req, res) => {
     }
 });
 
+app.post('/update_user_info', async (req, res) => {
+    const { academic_id, street, number, postcode, city, phone, email } = req.body;
+    const address = `Οδός ${street} ${number}, ${city}`;
+
+    try {
+        await model.updateUserInfo(academic_id, address, phone, email, postcode);
+        res.redirect('/user_info');
+    } catch (error) {
+        console.error(`Failed to update user information: ${error.message}`);
+        res.status(500).send('Error updating user information');
+    }
+});
+
 app.get('/edit_user_info', async(req, res) => {
     let userID = "S10800";
     try {
         const userInfo = await model.getUserInfo(userID);
+        const studentInfo = await model.getStudentInfo(userID);
         if (userInfo.length > 0) {
             const address = userInfo[0].address;
             const addressParts = address.split(', ');
@@ -146,52 +159,6 @@ app.get('/edit_user_info', async(req, res) => {
     }
 });
 
-app.post('/edit_user_info', async (req, res) => {
-    let academic_id = "S10800"; // Example academic ID, replace with actual ID as needed
-    const { street, number, postcode, city, phone, email } = req.body;
-
-    // Fetch existing user info to get current address parts
-    let existingUserInfo;
-    try {
-        existingUserInfo = await model.getUserInfo(academic_id);
-        if (existingUserInfo.length === 0) {
-            return res.status(404).send('User not found');
-        }
-    } catch (err) {
-        console.error(`Failed to retrieve user information: ${err.message}`);
-        return res.status(500).send('Error retrieving user information');
-    }
-
-    const existingAddress = existingUserInfo[0].address;
-    const addressParts = existingAddress.split(', ');
-    const streetAndNumberMatch = addressParts[0].match(/Οδός\s+(\S+)\s+(\d+)$/);
-
-    let currentStreet = streetAndNumberMatch[1].trim();
-    let currentNumber = streetAndNumberMatch[2].trim();
-    let currentCity = addressParts[1].trim();
-
-    // Use provided values or fallback to existing values
-    const newStreet = street || currentStreet;
-    const newNumber = number || currentNumber;
-    const newCity = city || currentCity;
-    const newAddress = `Οδός ${newStreet} ${newNumber}, ${newCity}`;
-
-    // Create the updates object
-    const updates = {};
-    updates.address = newAddress;
-    if (phone) updates.phone = phone;
-    if (email) updates.email = email;
-    if (postcode) updates.postcode = postcode;
-
-    try {
-        await model.updateUserInfo(academic_id, updates);
-        res.redirect('/user_info');
-    } catch (error) {
-        console.error(`Failed to update user information: ${error.message}`);
-        res.status(500).send('Error updating user information');
-    }
-});
-
 /*
 app.get('/semester', (req, res) => {
     res.render('semester.hbs', {
@@ -199,7 +166,6 @@ app.get('/semester', (req, res) => {
     });
 });
 */
-
 app.get('/semester', async (req, res) => {
     let userID = "S10800";
     try {
@@ -222,7 +188,17 @@ app.get('/semester', async (req, res) => {
     }
 });
 
-
+app.post('/update_semester', async (req, res) => {
+    //const { academic_id } = req.body;
+    let userID = "S10800";
+    try {
+        await model.updateSemester(userID);
+        res.redirect('/semester');
+    } catch (error) {
+        console.error('Failed to update semester', error);
+        res.status(500).send('Error updating semester');
+    }
+});
 
 app.get('/courses', (req, res) => {
     res.render('courses.hbs', {

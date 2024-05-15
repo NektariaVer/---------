@@ -36,7 +36,9 @@
                 </table>
                 <hr>
                 
-                <button class="edit-button" type="submit" onclick="openPopup()">Αίτηση επανεγγραφής σε εξάμηνο</button>        
+                <form action="/update_semester" method="post">
+                    <button id="updateSemesterBtn" class="edit-button" type="submit" >Αίτηση επανεγγραφής σε εξάμηνο</button>
+                </form>    
             </div>
         </div>
     </div>
@@ -77,5 +79,7 @@
                 popup.classList.remove("open-popup");
                 }, 3000);
         }
+
+              
     </script>
 </body>
