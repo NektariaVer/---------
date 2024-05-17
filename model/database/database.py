@@ -127,9 +127,9 @@ class StudentServicesDatabase:
             self.execute_query('''
             CREATE TABLE "student_takes_courses" (
                 "stud_id"	varchar(7) NOT NULL DEFAULT '',
-                "cycle_ID"	varchar(7) NOT NULL DEFAULT '',
-                "state"	varchar(10) DEFAULT '',
-                FOREIGN KEY("cycle_ID") REFERENCES "course_cycle"("id") ON DELETE CASCADE ON UPDATE CASCADE,
+                "course_ID"	varchar(7) NOT NULL DEFAULT '',
+                "grade" varchar(4) DEFAULT '',
+                FOREIGN KEY("course_ID") REFERENCES "course"("id") ON DELETE CASCADE ON UPDATE CASCADE,
                 FOREIGN KEY("stud_id") REFERENCES "student"("student_id") ON DELETE CASCADE ON UPDATE CASCADE
             );
             ''')

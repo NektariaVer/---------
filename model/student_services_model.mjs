@@ -66,4 +66,5 @@ async function getStudentInfo(academic_id) {
     }
 }
 
+
 export { getUserInfo, getStudentInfo };

@@ -49,7 +49,28 @@ const hbs = expbs.create({
     defaultLayout: 'main',
     layoutsDir: path.join(__dirname, 'views/layouts'),
     partialsDir: path.join(__dirname, 'views/partials'),
-    extname: '.hbs'
+    extname: '.hbs',
+    helpers: {
+        isOddSemester: (semester) => semester % 2 === 1,
+        status: (grade, courseSemester, studentsSemester) => {
+            if (grade >= 5) {
+                return 'Επιτυχία';
+            } else if (grade < 5 || grade === " ") {
+                if (studentsSemester !== courseSemester) {
+                    return 'Αποτυχία';
+                } else {
+                    return '';
+                }
+            }
+        },
+        displayGrade: (grade,courseSemester, studentsSemester) =>{
+            if (grade === "" && (courseSemester < studentsSemester)) {
+                return 'NS';
+            } else {
+                return grade;
+            }
+        }
+    }
 });
 
 // using the engine of handlebars
@@ -191,13 +212,6 @@ app.get('/edit_user_info', async(req, res) => {
     }
 });
 
-/*
-app.get('/semester', (req, res) => {
-    res.render('semester.hbs', {
-        pageTitle: 'Semester'
-    });
-});
-*/
 app.get('/semester', async (req, res) => {
     let userID = "S10800";
     try {
@@ -232,16 +246,41 @@ app.post('/update_semester', async (req, res) => {
     }
 });
 
-app.get('/courses', (req, res) => {
-    res.render('courses.hbs', {
-        pageTitle: 'Courses'
-    });
+app.get('/courses', async (req, res) => {
+    let academic_id = "S10800";
+    try {
+        const studentInfo = await model.getStudentInfo(academic_id);
+        const currentSemester = studentInfo[0].semester;
+
+        const courses = await model.getCoursesBySemester(currentSemester);
+        res.render('courses.hbs', {
+            pageTitle: 'Νέα Δήλωση Μαθημάτων',
+            courses: courses
+        });
+        console.log(courses);
+    } catch (err) {
+        console.error(`Failed to retrieve courses: ${err.message}`);
+        res.status(500).send('Error retrieving courses');
+    }
 });
 
-app.get('/student_progress', (req, res) => {
-    res.render('student_progress.hbs', {
-        pageTitle: "Academic progress"
-    });
+app.get('/student_progress', async(req, res) => {
+    let academic_id = "S10800";
+    await model.getAndUpdateStudentSemester(academic_id);
+    try {
+        const studentCourses = await model.getStudentCourses(academic_id);
+        const studentInfo = await model.getStudentInfo(academic_id);
+
+        res.render('student_progress.hbs', {
+            pageTitle: 'Ακαδημαϊκή Πρόοδος',
+            courses: studentCourses,
+            studentsSemester: studentInfo[0].semester
+        });
+
+    } catch (err) {
+        console.error(`Failed to retrieve student progress: ${err.message}`);
+        res.status(500).send('Error retrieving student progress');
+    }
 });
 
 app.get('/certificates', (req, res) => {

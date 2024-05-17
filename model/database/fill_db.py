@@ -10,8 +10,15 @@ def upload_data():
                  ''')
     
     conn.execute('''INSERT INTO "student" VALUES
-                 ('S10800', 2, '30-09-2023', '000','15-09-2023'),
+                 ('S10800', 2, '30-02-2024', '000','15-09-2023'),
                  ('S10801', 8, '27-09-2023', '005','10-09-2020');
+                 ''')
+    
+    conn.execute('''INSERT INTO "student_takes_courses" VALUES
+                 ('S10800', 'ECE_Υ101', '7'),
+                 ('S10800', 'ECE_Υ106', ''),
+                 ('S10800', 'ECE_Υ104', '3.5'),
+                 ('S10800', 'ECE_Υ211', '');
                  ''')
 
     conn.execute('''INSERT INTO "field" VALUES

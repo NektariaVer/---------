@@ -1,5 +1,5 @@
 <link rel="stylesheet" href="/css/user_info_style.css">
-
+<link rel="stylesheet" href="/css/courses_style.css">
 <body>
     {{> header}}
     <nav class="breadcrumbs">
@@ -16,20 +16,47 @@
                 <div class="title-container">
                     <h2>Δήλωση Μαθημάτων</h2>
                 </div>
-                <hr>
-                <table class="courses">
-                    <tbody>
-                        <tr>
-                            <td>Ημερομηνία τελευταίας δήλωσης:</td>
-                            <td></td>
-                        </tr>
-                    </tbody>
-                </table>
 
                 <hr>
-                <hr>
+                
+                <form id="courseForm" method="post" action="/submit_course_declaration">
+                    <fieldset>
+                        <label for="newDeclaration">Νέα δήλωση μαθημάτων</label>
+                        <input type="checkbox" id="newDeclaration" name="newDeclaration" onchange="toggleCourses()">
+                    </fieldset>
+
+                    <div id="courseDropdown" style="display: none;">
+                        <fieldset>
+                            <label for="courses">Επιλέξτε μαθήματα:</label>
+                            
+                            <div id="courseList">
+                                {{#each courses}}
+                                    <div class="course-item">
+                                        <input type="checkbox" id="course_{{this.id}}" name="courses[]" value="{{this.id}}">
+                                        <label for="course_{{this.id}}">{{this.name}}</label>
+                                    </div>
+                                {{/each}}
+                        </fieldset>
+                    </div>
+
+                    <button class="submit-button" type="submit">Υποβολή</button>
+                </form>
             </div>
         </div>
     </div>
-        
+
+    <div id="footer"></div>
+
+    <script>
+        function toggleCourses() {
+            const checkbox = document.getElementById("newDeclaration");
+            const courseDropdown = document.getElementById("courseDropdown");
+            if (checkbox.checked) {
+                courseDropdown.style.display = "block";
+            } else {
+                courseDropdown.style.display = "none";
+            }
+        }
+    </script>
 </body>
+</html>

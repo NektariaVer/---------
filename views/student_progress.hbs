@@ -20,7 +20,7 @@
                 <hr>
                 
                 <table class="progress">
-                    <tbody>
+                    <thead>
                         <tr>
                             <th>ΕΞ.</th>
                             <th>ΚΩΔ.</th>
@@ -31,80 +31,22 @@
                             <th class="status">ΚΑΤΑΣΤΑΣΗ</th>
                             <th>ΒΑΡ.</th>
                             <th>ECTS</th>
-                            <th>Δ.Μ.</th>
                         </tr>
+                    </thead>
+                    <tbody>
+                        {{#each courses}}
                         <tr>
-                            <td class="module">1</td>
-                            <td class="sub_id">Y101</td>
-                            <td class="subject">ΛΟΓΙΣΜΟΣ ΣΥΝΑΡΤΗΣΕΩΝ ΜΙΑΣ ΜΕΤΑΒΛΗΤΗΣ</td>
-                            <td class="grade">6.0</td>
-                            <td class="year">2023-24</td>
-                            <td class="semester">ΧΕΙΜΕΡΙΝΟ</td>
-                            <td class="status">ΕΠΙΤΥΧΙΑ</td>
-                            <td class="weight">2.0</td>
-                            <td class="ects">6.0</td>
-                            <td class="credits">6.0</td>
+                            <td class="module">{{this.semester}}</td>
+                            <td class="sub_id">{{this.id}}</td>
+                            <td class="subject">{{this.name}}</td>
+                            <td class="grade">{{displayGrade this.grade this.semester ../studentsSemester}}</td>
+                            <td class="year">{{this.year}}</td>
+                            <td class="semester">{{#if (isOddSemester this.semester)}}Χειμερινό{{else}}Εαρινό{{/if}}</td>
+                            <td class="status">{{status this.grade this.semester ../studentsSemester}}</td>
+                            <td class="weight">{{this.weight}}</td>
+                            <td class="credits">{{this.credits}}</td>
                         </tr>
-                        <tr>
-                            <td class="module">1</td>
-                            <td class="sub_id">Y104</td>
-                            <td class="subject">ΓΡΑΜΜΙΚΗ ΑΛΓΕΒΡΑ</td>
-                            <td class="grade">8.5</td>
-                            <td class="year">2023-24</td>
-                            <td class="semester">ΧΕΙΜΕΡΙΝΟ</td>
-                            <td class="status">ΕΠΙΤΥΧΙΑ</td>
-                            <td class="weight">1.5</td>
-                            <td class="ects">3.0</td>
-                            <td class="credits">3.0</td>
-                        </tr>
-                        <tr>
-                            <td class="module">1</td>
-                            <td class="sub_id">Υ106</td>
-                            <td class="subject">ΕΙΣΑΓΩΓΗ ΣΤΟΥΣ ΥΠΟΛΟΓΙΣΤΕΣ</td>
-                            <td class="grade">9.5</td>
-                            <td class="year">2023-24</td>
-                            <td class="semester">ΧΕΙΜΕΡΙΝΟ</td>
-                            <td class="status">ΕΠΙΤΥΧΙΑ</td>
-                            <td class="weight">2.0</td>
-                            <td class="ects">6.0</td>
-                            <td class="credits">6.0</td>
-                        </tr>
-                        <tr>
-                            <td class="module">1</td>
-                            <td class="sub_id">Υ107</td>
-                            <td class="subject">ΣΥΓΧΡΟΝΗ ΦΥΣΙΚΗ</td>
-                            <td class="grade">9.0</td>
-                            <td class="year">2023-24</td>
-                            <td class="semester">ΧΕΙΜΕΡΙΝΟ</td>
-                            <td class="status">ΕΠΙΤΥΧΙΑ</td>
-                            <td class="weight">1.5</td>
-                            <td class="ects">4.0</td>
-                            <td class="credits">4.0</td>
-                        </tr>
-                        <tr>
-                            <td class="module">1</td>
-                            <td class="sub_id">Υ108</td>
-                            <td class="subject">ΕΦΑΡΜΟΣΜΕΝΗ ΦΥΣΙΚΗ</td>
-                            <td class="grade">3.5</td>
-                            <td class="year">2023-24</td>
-                            <td class="semester">ΧΕΙΜΕΡΙΝΟ</td>
-                            <td class="status">ΑΝΕΠΙΤΥΧΙΑ</td>
-                            <td class="weight">1.5</td>
-                            <td class="ects">4.0</td>
-                            <td class="credits">4.0</td>
-                        </tr>
-                        <tr>
-                            <td class="module">1</td>
-                            <td class="sub_id">Υ109</td>
-                            <td class="subject">ΨΗΦΙΑΚΗ ΛΟΓΙΚΗ</td>
-                            <td class="grade">7.5</td>
-                            <td class="year">2023-24</td>
-                            <td class="semester">ΧΕΙΜΕΡΙΝΟ</td>
-                            <td class="status">ΕΠΙΤΥΧΙΑ</td>
-                            <td class="weight">1.5</td>
-                            <td class="ects">4.0</td>
-                            <td class="credits">4.0</td>
-                        </tr>
+                        {{/each}}
                     </tbody>
                 </table>
 
