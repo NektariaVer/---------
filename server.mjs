@@ -84,6 +84,7 @@ app.post('/login', (req, res) => {
 app.get('/user_info', async(req, res) => {
     let userID = "S10800";
     try {
+        await model.getAndUpdateStudentSemester(userID);
         const userInfo = await model.getUserInfo(userID);
         const studentInfo = await model.getStudentInfo(userID);
         if (userInfo.length > 0) {

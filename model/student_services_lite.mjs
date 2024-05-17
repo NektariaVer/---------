@@ -98,4 +98,65 @@ const updateSemester = (academic_id) => {
     });
 };
 
-export { getUserInfo, getStudentInfo , updateUserInfo, updateSemester};
+const parseDate = (dateString) => {
+    const parts = dateString.split('-');
+    const day = parseInt(parts[0], 10);
+    const month = parseInt(parts[1], 10) - 1; // Month is zero-indexed
+    const year = parseInt(parts[2], 10);
+    return new Date(year, month, day);
+};
+
+const calculateSemester = (registrationDate, semesterDate) => {
+    const registration = parseDate(registrationDate);
+    const semester = parseDate(semesterDate);
+
+    const yearsDifference = semester.getFullYear() - registration.getFullYear();
+    const semesterMonth = semester.getMonth(); // 0-11
+
+    let semestersPassed = yearsDifference * 2 ;
+
+    if (semesterMonth >= 8) {
+        semestersPassed += 1;
+    }
+
+    return semestersPassed;
+};
+
+const updateStudentSemester = (academic_id, semester) => {
+    return new Promise((resolve, reject) => {
+        const sql = 'UPDATE student SET semester = ? WHERE student_id = ?';
+        const db = new sqlite3.Database(db_name);
+        db.run(sql, [semester, academic_id], function (err) {
+            db.close();
+            if (err) {
+                return reject(err);
+            }
+            resolve();
+        });
+    });
+};
+
+const getAndUpdateStudentSemester = (academic_id) => {
+    return new Promise((resolve, reject) => {
+        const db = new sqlite3.Database(db_name);
+        db.get('SELECT registration, semester_date FROM student WHERE student_id = ?', [academic_id], async (err, row) => {
+            db.close();
+            if (err) {
+                return reject(err);
+            }
+            if (row) {
+                const currentSemester = calculateSemester(row.registration, row.semester_date);
+                try {
+                    await updateStudentSemester(academic_id, currentSemester);
+                    resolve(currentSemester);
+                } catch (updateError) {
+                    reject(updateError);
+                }
+            } else {
+                reject(new Error("Student not found"));
+            }
+        });
+    });
+};
+
+export { getUserInfo, getStudentInfo , updateUserInfo, updateSemester, getAndUpdateStudentSemester};
