@@ -177,7 +177,8 @@ const getStudentCourses = (studentId) => {
     const sql = `SELECT c.id, c.name, c.credits, c.weight, c.semester, sc.grade
     FROM student_takes_courses sc
     JOIN course c ON sc.course_ID = c.id
-    WHERE sc.stud_id = ?`;
+    WHERE sc.stud_id = ?
+    ORDER BY c.semester DESC`;
 
     return new Promise((resolve, reject) => {
         const db = new sqlite3.Database(db_name);
@@ -191,4 +192,36 @@ const getStudentCourses = (studentId) => {
     });
 };
 
-export { getUserInfo, getStudentInfo , updateUserInfo, updateSemester, getAndUpdateStudentSemester, getCoursesBySemester, getStudentCourses};
+const addStudentCourse = (stud_id, course_ID) => {
+    const sql = "INSERT INTO student_takes_courses (stud_id, course_ID) VALUES (?, ?)";
+    return new Promise((resolve, reject) => {
+        const db = new sqlite3.Database(db_name);
+        db.run(sql, [stud_id, course_ID], (err) => {
+            db.close();
+            if (err) {
+                return reject(err);
+            }
+            resolve();
+        });
+    });
+};
+
+const getDeclaredCourses = (academic_id, semester) => {
+    const sql = `SELECT c.id, c.name 
+        FROM student_takes_courses sc
+        JOIN course c ON sc.course_ID = c.id
+        WHERE sc.stud_id = ? AND c.semester = ?
+    `;
+    return new Promise((resolve, reject) => {
+        const db = new sqlite3.Database(db_name);
+        db.all(sql, [academic_id, semester], (err, rows) => {
+            db.close();
+            if (err) {
+                return reject(err);
+            }
+            resolve(rows);
+        });
+    });
+};
+
+export { getUserInfo, getStudentInfo , updateUserInfo, updateSemester, getAndUpdateStudentSemester, getCoursesBySemester, getStudentCourses, addStudentCourse, getDeclaredCourses};

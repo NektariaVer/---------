@@ -16,9 +16,12 @@ def upload_data():
     
     conn.execute('''INSERT INTO "student_takes_courses" VALUES
                  ('S10800', 'ECE_Υ101', '7'),
-                 ('S10800', 'ECE_Υ106', ''),
-                 ('S10800', 'ECE_Υ104', '3.5'),
-                 ('S10800', 'ECE_Υ211', '');
+                 ('S10800', 'ECE_ΞΓ210', '8.5'),
+                 ('S10800', 'ECE_Υ107', '6.5'),
+                 ('S10800', 'ECE_Υ108', '5'),
+                 ('S10800', 'ECE_Υ109', ''),
+                 ('S10800', 'ECE_Υ106', '10'),
+                 ('S10800', 'ECE_Υ104', '3.5');
                  ''')
 
     conn.execute('''INSERT INTO "field" VALUES

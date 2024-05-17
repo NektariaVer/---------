@@ -63,12 +63,15 @@ const hbs = expbs.create({
                 }
             }
         },
-        displayGrade: (grade,courseSemester, studentsSemester) =>{
+        displayGrade: (grade, courseSemester, studentsSemester) =>{
             if (grade === "" && (courseSemester < studentsSemester)) {
                 return 'NS';
             } else {
                 return grade;
             }
+        },
+        isNS: (grade, courseSemester, studentsSemester) => {
+            return grade === '' && courseSemester < studentsSemester;
         }
     }
 });
@@ -235,7 +238,6 @@ app.get('/semester', async (req, res) => {
 });
 
 app.post('/update_semester', async (req, res) => {
-    //const { academic_id } = req.body;
     let userID = "S10800";
     try {
         await model.updateSemester(userID);
@@ -251,18 +253,38 @@ app.get('/courses', async (req, res) => {
     try {
         const studentInfo = await model.getStudentInfo(academic_id);
         const currentSemester = studentInfo[0].semester;
-
         const courses = await model.getCoursesBySemester(currentSemester);
+        const declaredCourses = await model.getDeclaredCourses(academic_id, currentSemester);
+        const hasDeclaredCourses = declaredCourses.length > 0;
+
         res.render('courses.hbs', {
             pageTitle: 'Νέα Δήλωση Μαθημάτων',
-            courses: courses
+            courses: courses,
+            hasDeclaredCourses: hasDeclaredCourses,
+            currentSemester: currentSemester
         });
-        console.log(courses);
     } catch (err) {
         console.error(`Failed to retrieve courses: ${err.message}`);
         res.status(500).send('Error retrieving courses');
     }
 });
+
+app.post('/submit_course_declaration', async (req, res) => {
+    let academic_id = "S10800";
+    const selectedCourses = req.body['courses[]'];
+    const coursesArray = Array.isArray(selectedCourses) ? selectedCourses : [selectedCourses];
+    
+    try {
+        for (const courseId of coursesArray) {
+            await model.addStudentCourse(academic_id, courseId);
+        }
+        res.redirect('/courses'); 
+    } catch (err) {
+        console.error(`Failed to submit course declaration: ${err.message}`);
+        res.status(500).send('Error submitting course declaration');
+    }
+});
+
 
 app.get('/student_progress', async(req, res) => {
     let academic_id = "S10800";

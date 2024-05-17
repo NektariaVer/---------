@@ -1,4 +1,8 @@
-#courseForm fieldset{
+p{
+    font-size: 5.0em;
+}
+
+fieldset{
     border: white;
     margin-bottom: 1em ;
 }

@@ -67,12 +67,15 @@
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const grades = document.querySelectorAll(".grade");
+            const studentsSemester = document.querySelector(".studentsSemester");
+
             grades.forEach(grade => {
-                if(parseFloat(grade.textContent) < 5) {
+                if (parseFloat(grade.textContent) < 5 || grade.textContent == "NS") {
                     grade.parentElement.classList.add("fail");
                 }
             });
         });
+
 
         document.addEventListener("DOMContentLoaded", function() {
             const rows = document.querySelectorAll(".progress tbody tr");
@@ -81,14 +84,12 @@
     
             for (let i = 1; i < rows.length; i++) {
                 const row = rows[i];
-                if (!row.classList.contains("fail")) {
-                    const gradeElement = row.querySelector(".grade");
-                    if (gradeElement) {
-                        const grade = parseFloat(gradeElement.textContent);
-                        const weight = parseFloat(row.querySelector(".weight").textContent);
-                        totalWeightedGrades += grade * weight;
-                        totalWeight += weight;
-                    }
+                const gradeElement = row.querySelector(".grade");
+                const grade = parseFloat(gradeElement.textContent);
+                if (!row.classList.contains("fail") && grade!=='') {
+                    const weight = parseFloat(row.querySelector(".weight").textContent);
+                    totalWeightedGrades += grade * weight;
+                    totalWeight += weight;
                 }
             }
     

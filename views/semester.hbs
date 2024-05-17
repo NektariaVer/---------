@@ -37,7 +37,7 @@
                 <hr>
                 
                 <form id="update_semester" action="/update_semester" method="post">
-                    <button id="updateSemesterBtn" class="edit-button" type="submit" >Αίτηση επανεγγραφής σε εξάμηνο</button>
+                    <button id="updateSemesterBtn" class="edit-button" type="submit" onclick="openPopup()">Αίτηση επανεγγραφής σε εξάμηνο</button>
                 </form>    
             </div>
         </div>
@@ -48,6 +48,7 @@
         <p>Επιτυχής επανεγγραφή σε εξάμηνο!</p>
     </div>
 
+    <div id="footer"></div>
 
     <script>
         document.getElementById('current_date').textContent = new Date().toLocaleDateString('el-GR');
@@ -77,9 +78,8 @@
             popup.classList.add("open-popup");
             setTimeout(function(){
                 popup.classList.remove("open-popup");
+                document.getElementById('update_semester').submit();
                 }, 3000);
         }
-
-              
     </script>
 </body>
