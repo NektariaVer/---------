@@ -37,27 +37,27 @@ const getStudentInfo = (academic_id) => {
 
 const updateUserInfo = (academic_id, updates) => {
     return new Promise((resolve, reject) => {
-        const { address, phone, email, postcode } = updates;
         let sql = 'UPDATE user SET ';
         const params = [];
 
-        if (address) {
+        if (updates.address) {
             sql += 'address = ?, ';
-            params.push(address);
+            params.push(updates.address);
         }
-        if (phone) {
+        if (updates.phone) {
             sql += 'phone = ?, ';
-            params.push(phone);
+            params.push(updates.phone);
         }
-        if (email) {
+        if (updates.email) {
             sql += 'email = ?, ';
-            params.push(email);
+            params.push(updates.email);
         }
-        if (postcode) {
+        if (updates.postcode) {
             sql += 'postcode = ?, ';
-            params.push(postcode);
+            params.push(updates.postcode);
         }
 
+        // Remove the last comma and space
         sql = sql.slice(0, -2);
 
         sql += ' WHERE academic_id = ?';
@@ -73,6 +73,7 @@ const updateUserInfo = (academic_id, updates) => {
         });
     });
 };
+
 
 const updateSemester = (academic_id) => {
     return new Promise((resolve, reject) => {
