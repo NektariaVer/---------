@@ -216,6 +216,48 @@ footer th {
     transform: scale(0.99); 
 }
 
+#profile{
+    width: 2.5em;
+    height: 2.5em;
+    margin-left: 5em;
+}
+/* Profile container */
+.profile-container {
+    position: relative;
+    display: inline-block;
+}
+
+/* Dropdown content (hidden by default) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: white;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+
+/* Show the dropdown content when the profile button is clicked */
+.profile-container.show .dropdown-content {
+    display: block;
+}
+
+/* Logout button styling */
+#logout-button {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    cursor: pointer;
+    width: 100%;
+}
+
+#logout-button:hover {
+    background-color: #d32f2f;
+}
 
 @media screen and (max-width: 800px) {
     header img{
@@ -256,5 +298,12 @@ footer th {
 
     .tabs a.clicked {
         font-size: 0.75em;
+    }
+
+    #profile{
+        width: 2em;
+        height: 2em;
+        margin-left: 1em;
+        margin-top: 1em;
     }
 }

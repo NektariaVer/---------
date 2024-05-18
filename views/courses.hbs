@@ -20,36 +20,35 @@
                 <hr>
 
                 {{#if hasDeclaredCourses}}
-                    <p>Η δήλωση μαθημάτων έχει ολοκληρωθεί</p>
+                    <img src="/images/exclamation.png">
+                    <p id="declaration_completed">Η δήλωση μαθημάτων έχει ήδη υποβληθεί</p>
                     <fieldset>
                         <label for="editDeclaration">Επεξεργασία δήλωσης</label>
                         <input type="checkbox" id="editDeclaration" name="editDeclaration" onchange="toggleCourses()">
                     </fieldset>
                 {{else}}
-                    <form id="courseForm" method="post" action="/submit_course_declaration">
-                        <fieldset>
-                            <label for="newDeclaration">Νέα δήλωση μαθημάτων</label>
-                            <input type="checkbox" id="newDeclaration" name="newDeclaration" onchange="toggleCourses()">
-                        </fieldset>
-
-                        <div id="courseDropdown" style="display: none;">
-                            <fieldset>
-                                <label for="courses">Επιλέξτε μαθήματα:</label>
-                                
-                                <div id="courseList">
-                                    {{#each courses}}
-                                        <div class="course-item">
-                                            <input type="checkbox" id="course_{{this.id}}" name="courses[]" value="{{this.id}}">
-                                            <label for="course_{{this.id}}">{{this.name}}</label>
-                                        </div>
-                                    {{/each}}
-                                </div>
-                            </fieldset>
-                        </div>
-
-                        <button class="edit-button" type="button" id="submitBtn" style="display: none;" onclick="openPopup()">Υποβολή</button>
-                    </form>
+                    <fieldset>
+                        <label for="newDeclaration">Νέα δήλωση μαθημάτων</label>
+                        <input type="checkbox" id="newDeclaration" name="newDeclaration" onchange="toggleCourses()">
+                    </fieldset>
                 {{/if}}
+
+                <form id="courseForm" method="post" action="/submit_course_declaration" style="display: none;">
+                    <div id="courseDropdown">
+                        <fieldset>
+                            <label for="courses">Επιλέξτε μαθήματα:</label>
+                            <div id="courseList">
+                                {{#each courses}}
+                                    <div class="course-item">
+                                        <input type="checkbox" id="course_{{this.id}}" name="courses[]" value="{{this.id}}">
+                                        <label for="course_{{this.id}}">{{this.name}}</label>
+                                    </div>
+                                {{/each}}
+                            </div>
+                        </fieldset>
+                    </div>
+                    <button class="edit-button" type="button" id="submitBtn" onclick="openPopup()">Υποβολή</button>
+                </form>
             </div>
         </div>
     </div>
@@ -61,14 +60,16 @@
 
     <script>
         function toggleCourses() {
-            const checkbox = document.getElementById("newDeclaration") || document.getElementById("editDeclaration");
-            const courseDropdown = document.getElementById("courseDropdown");
+            const courseForm = document.getElementById("courseForm");
             const submitBtn = document.getElementById("submitBtn");
-            if (checkbox.checked) {
-                courseDropdown.style.display = "block";
+            const newDeclarationCheckbox = document.getElementById("newDeclaration");
+            const editDeclarationCheckbox = document.getElementById("editDeclaration");
+
+            if ((newDeclarationCheckbox && newDeclarationCheckbox.checked) || (editDeclarationCheckbox && editDeclarationCheckbox.checked)) {
+                courseForm.style.display = "block";
                 submitBtn.style.display = "inline";
             } else {
-                courseDropdown.style.display = "none";
+                courseForm.style.display = "none";
                 submitBtn.style.display = "none";
             }
         }
