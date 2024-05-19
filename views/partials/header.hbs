@@ -6,38 +6,29 @@
         <button type="submit" class="search-button"><i class="fas fa-search"></i></button>
     </div>
     <div class="profile-container">
-        <button id="profile-button">
-            <img src="/images/profile.png" id="profile" alt="Profile">
+        <button id="profile-button" onclick=openDropdown()>
+            <img src="/images/profile.png" alt="Profile">
         </button>
-        <div id="profile-dropdown" class="dropdown-content">
-            <button id="logout-button">Αποσύνδεση</button>
-        </div>
+        <button class="dropdown-content" id="logout-button">Αποσύνδεση</button>
     </div>
 </header>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
-    const profileButton = document.getElementById("profile-button");
-    const profileDropdown = document.getElementById("profile-dropdown");
-    const logoutButton = document.getElementById("logout-button");
+    let profileDropdown = document.getElementById("logout-button");
 
-    profileButton.addEventListener("click", function() {
-        profileDropdown.classList.toggle("show");
-    });
+    function openDropdown(){
+            profileDropdown.classList.add("open-logout");
+    }
 
     logoutButton.addEventListener("click", function() {
-        // Redirect to login page
         window.location.href = "/login";
     });
 
     // Close the dropdown if the user clicks outside of it
     window.addEventListener("click", function(event) {
         if (!event.target.matches('#profile-button') && !event.target.matches('#profile-button img')) {
-            if (profileDropdown.classList.contains('show')) {
-                profileDropdown.classList.remove('show');
-            }
+            profileDropdown.classList.remove('open-logout');
         }
     });
-});
 
 </script>
