@@ -217,36 +217,40 @@ footer th {
     transform: scale(0.99); 
 }
 
-#profile-button{
-    width: 3em;
-    height: 3em;
-    margin-left: 5em;
-    cursor: pointer;
-}
-
+/* Profile container */
 #profile-button img{
     width: 2.5em;
     height: 2.5em;
 }
 
-/* Profile container */
-.profile-container {
-    position: relative;
-    display: inline-block;
-    margin-top: 0em;
+#profile-button {
+    margin-left: 5em;
+    margin-top:1em;
+    width: 4em;
+    height: 4em;
+    cursor: pointer;
+    background: transparent;
+    border: none;
 }
 
 /* Logout button styling */
+.dropdown-content img{
+    width: 1.5em;
+    height: 1.5em;
+    padding-top: 0.7em;
+    padding-left: 0.5em;
+}
+
 .dropdown-content {
+    line-height:3em;
     background-color: #759696;
     color: rgb(0, 0, 0);
     border: none;
-    padding: 1em 2em;
-    text-align: center;
     text-decoration: none;
     cursor: pointer;
     width: 100%;
     margin-top: 1em;
+    padding-right: 1.5em;
     border-radius: 0.6em;
     box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
     display: flex;
@@ -257,7 +261,7 @@ footer th {
     visibility: visible;
 }
 
-#logout-button:hover {
+.dropdown-content:hover {
     background-color: #902323;
 }
 
@@ -305,4 +309,6 @@ footer th {
     .dropdown-content {
         margin: 0em;
     }
+
+    
 }

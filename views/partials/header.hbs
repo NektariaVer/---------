@@ -9,25 +9,32 @@
         <button id="profile-button" onclick=openDropdown()>
             <img src="/images/profile.png" alt="Profile">
         </button>
-        <button class="dropdown-content" id="logout-button">Αποσύνδεση</button>
+        <button id="logout-button" class="dropdown-content">
+            <img src="/images/logout.png">Αποσύνδεση</button>
     </div>
 </header>
 
 <script>
-    let profileDropdown = document.getElementById("logout-button");
-
+    let logout = document.getElementById("logout-button");
     function openDropdown(){
-            profileDropdown.classList.add("open-logout");
+            logout.classList.add("open-logout");
+            let clicklogout = document.getElementsByClassName("open-logout");
     }
 
-    logoutButton.addEventListener("click", function() {
+    logout.addEventListener("click", function() {
         window.location.href = "/login";
     });
 
     // Close the dropdown if the user clicks outside of it
     window.addEventListener("click", function(event) {
         if (!event.target.matches('#profile-button') && !event.target.matches('#profile-button img')) {
-            profileDropdown.classList.remove('open-logout');
+            let dropdowns = document.getElementsByClassName("dropdown-content");
+            for (let i = 0; i < dropdowns.length; i++) {
+                let openDropdown = dropdowns[i];
+                if (openDropdown.classList.contains('open-logout')) {
+                    openDropdown.classList.remove('open-logout');
+                }
+            }
         }
     });
 
