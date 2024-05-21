@@ -36,7 +36,7 @@ export let doLogout = (req, res) => {
 
 export let checkAuthenticated = function (req, res, next) {
     if (req.session.loggedUserId) {
-        console.log("user is authenticated", req.originalUrl);
+        //console.log("user is authenticated", req.originalUrl);
         next();
     }
     else {

@@ -1,4 +1,5 @@
 import * as model from '../model/student_services_lite.mjs';
+import PDFDocument from "pdfkit";
 
 export async function homePage (req, res, next) {
    res.render('home_page.hbs', {
@@ -41,7 +42,6 @@ export async function getUserInfoPage (req, res, next) {
 };
 
 export async function editUserInfoPage (req, res, next) {
-    //let userID = "S10800";
     const userID = req.session.loggedUserId;
     try {
         const userInfo = await model.getUserInfo(userID);
@@ -75,7 +75,6 @@ export async function editUserInfoPage (req, res, next) {
 };
 
 export async function editUserInfo (req, res, next){
-    //let academic_id = "S10800";
     const academic_id = req.session.loggedUserId;
     const { street, number, postcode, city, phone, email } = req.body;
     let existingUserInfo;
@@ -117,7 +116,6 @@ export async function editUserInfo (req, res, next){
 };
 
 export async function getSemesterPage (req, res, next) {
-    //let userID = "S10800";
     const userID = req.session.loggedUserId;
     try {
         const studentInfo = await model.getStudentInfo(userID);
@@ -140,7 +138,6 @@ export async function getSemesterPage (req, res, next) {
 };
 
 export async function updateSemester (req, res, next) {
-    //let userID = "S10800";
     const userID = req.session.loggedUserId;
     try {
         await model.updateSemester(userID);
@@ -152,7 +149,6 @@ export async function updateSemester (req, res, next) {
 };
 
 export async function getCoursesPage (req, res, next) {
-    //let academic_id = "S10800";
     const academic_id = req.session.loggedUserId;
     try {
         const studentInfo = await model.getStudentInfo(academic_id);
@@ -174,7 +170,6 @@ export async function getCoursesPage (req, res, next) {
 };
 
 export async function submitCourseDeclaration (req, res, next) {
-    //let academic_id = "S10800";
     const academic_id = req.session.loggedUserId;
     const selectedCourses = req.body['courses[]'];
     const coursesArray = Array.isArray(selectedCourses) ? selectedCourses : [selectedCourses];
@@ -191,7 +186,6 @@ export async function submitCourseDeclaration (req, res, next) {
 };
 
 export async function getStudentProgressPage (req, res, next) {
-    //let academic_id = "S10800";
     const academic_id = req.session.loggedUserId;
     await model.getAndUpdateStudentSemester(academic_id);
     try {

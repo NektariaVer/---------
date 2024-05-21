@@ -58,7 +58,7 @@ app.use('/controller', express.static(`${__dirname}/controller/`));
 app.use((req, res, next) => {
    if (req.session) {
       res.locals.ID = req.session.loggedUserId;
-      console.log("res.locals.ID :",res.locals.ID);
+      //console.log("res.locals.ID :",res.locals.ID);
    } else {
       res.locals.ID = 'επισκέπτης';
    }
