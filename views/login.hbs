@@ -14,11 +14,11 @@
     </div>
     
     <div class="login-container">
-      <form id="login-form" action="/Login" method="post">
+      <form id="login-form" action="/login" method="post">
         <h1 class="bold-text">Είσοδος Χρήστη</h1>
-        <input class="italic-text" type="text" id="username" placeholder="Όνομα χρήστη" required>
+        <input class="italic-text" type="text" id="username" name="username" placeholder="Όνομα χρήστη" required>
         <div class="password-input-container">
-          <input class="italic-text" type="password" id="password" placeholder="Κωδικός χρήστη" required>
+          <input class="italic-text" type="password" id="password" name="password" placeholder="Κωδικός χρήστη" required>
           <span class="toggle-password-icon"><i class="fas fa-eye" id="toggle-password"></i></span>
         </div>
         <button id="login" type="submit">Σύνδεση</button>
@@ -26,9 +26,11 @@
       </form>
     </div>
 
-    <div class="footer">
-      <h2></h2>
-    </div>
+    {{#if message}}
+        <div class="alert alert-primary" role="alert">
+            {{message}}
+        </div>
+    {{/if}}
 
     <div id="forgot-password-popup" class="popup">
       <div class="popup-content">
@@ -41,7 +43,7 @@
         </form>
       </div>
     </div>
-
+    
     <script src="/js/script.js"></script>
     <script>
       document.getElementById('toggle-password').addEventListener('click', function() {

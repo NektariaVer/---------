@@ -1,3 +1,91 @@
+import express from 'express';
+import dotenv from 'dotenv';
+import exphbs from 'express-handlebars';
+import path from "path";
+import { fileURLToPath } from 'url';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+import userSession from './app-setup/session.mjs';
+import routes from './routes/routes.mjs';
+
+const app = express();
+
+if (process.env.NODE_ENV !== 'production') {
+   dotenv.config();
+}
+
+app.use(express.urlencoded({ extended: false }));
+
+const hbs = exphbs.create({
+    defaultLayout: 'main',
+    layoutsDir: path.join(__dirname, 'views/layouts'),
+    partialsDir: path.join(__dirname, 'views/partials'),
+    extname: '.hbs',
+    helpers: {
+        isOddSemester: (semester) => semester % 2 === 1,
+        status: (grade, courseSemester, studentsSemester) => {
+            if (grade >= 5) {
+                return 'Επιτυχία';
+            } else if (grade < 5 || grade === " ") {
+                if (studentsSemester !== courseSemester) {
+                    return 'Αποτυχία';
+                } else {
+                    return '';
+                }
+            }
+        },
+        displayGrade: (grade, courseSemester, studentsSemester) =>{
+            if (grade === "" && (courseSemester < studentsSemester)) {
+                return 'NS';
+            } else {
+                return grade;
+            }
+        },
+        isNS: (grade, courseSemester, studentsSemester) => {
+            return grade === '' && courseSemester < studentsSemester;
+        }
+    }
+});
+
+//Ενεργοποίηση συνεδρίας
+app.use(userSession)
+
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.json());
+app.use('/model', express.static(`${__dirname}/model/`));
+app.use('/controller', express.static(`${__dirname}/controller/`));
+
+app.use((req, res, next) => {
+   if (req.session) {
+      res.locals.ID = req.session.loggedUserId;
+      console.log("res.locals.ID :",res.locals.ID);
+   } else {
+      res.locals.ID = 'επισκέπτης';
+   }
+   next();
+});
+
+app.use('/', routes);
+
+
+app.use((err, req, res, next) => {
+   console.error(err.stack)
+   res.status(500).send('Try again!')
+ })
+
+ app.use((req, res, next) => {
+    console.log('Received request:', req.method, req.url);
+    console.log('Request body:', req.body);
+    next();
+});
+
+
+ app.engine('.hbs', hbs.engine);
+ app.set('view engine', '.hbs');
+
+export { app as user };
+
+/*
 import express from "express";
 import session from "express-session";
 import expbs from "express-handlebars";
@@ -81,7 +169,7 @@ app.engine('.hbs', hbs.engine);
 app.set('view engine', '.hbs');
 
 // Define a route to handle requests to the root URL and render the homepage view
-app.get('/', (req, res) => {
+app.get('/home_page', (req, res) => {
     res.render('home_page.hbs', {
         pageTitle: 'ECE students'
     });
@@ -101,7 +189,7 @@ app.post('/login', (req, res) => {
     } 
     else {
         req.session.user = user;
-        res.redirect('/');
+        res.redirect('/home_page');
     }
 });
 
@@ -349,3 +437,7 @@ app.post('/update-status', (req, res) => {
 app.listen(port, '0.0.0.0', () => {
     console.log('Server listening on port ' + port + ',  visit: ' + `http://127.0.0.1:${port}`);
 });
+*/
+
+
+

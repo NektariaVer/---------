@@ -99,11 +99,6 @@ body {
 	transform: scale(0.99); 
 }
 
-.footer {
-	background-color: #fff;
-	padding: 7em;
-	text-align: center;
-}
 
 /* Media query for smaller screens */
 @media screen and (max-width: 50em) {
@@ -121,6 +116,10 @@ body {
 
 	.login-container {
 		width: 80%;
+	}
+	
+	footer{
+		padding-bottom: 2em;
 	}
 }
 

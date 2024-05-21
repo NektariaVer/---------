@@ -2,11 +2,11 @@
   "name": "ece-students",
   "version": "1.0.0",
   "description": "student services application",
-  "main": "server.mjs",
+  "main": "start.mjs",
   "scripts": {
-    "start": "nodemon server.mjs",
-    "startWebsite": "node server.mjs",
-    "run": "node server.mjs"
+    "start": "nodemon start.mjs",
+    "startWebsite": "node start.mjs",
+    "run": "node start.mjs"
   },
   "keywords": [],
   "author": "verikokkou, papadopoulou",

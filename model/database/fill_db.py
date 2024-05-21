@@ -5,7 +5,7 @@ cur = conn.cursor()
 
 def upload_data():
     conn.execute('''INSERT INTO "user" VALUES
-                    ('Νίκος', 'Παπαδόπουλος', 'S10800', 'nikos.papadopoulos@gmail.com', '6931234567', '2005-04-23', 'Άνδρας', 'Γιάννης', 'Οδός Ερμού 45, Πάτρα', '26100', 'Α00001','$2b$10$uFLnL9jUJxHOCnsuJSdtPO1IQKFGY5z3QVfk6jUgEL82FbHIOKdpG'),
+                    ('Νίκος', 'Παπαδόπουλος', 'S10800', 'nikos.papadopoulos@gmail.com', '6931234567', '2005-04-23', 'Άνδρας', 'Γιάννης', 'Οδός Ερμού 45, Πάτρα', '26100', 'Α00001','$2b$10$Zxi8QWN05A8tHMBhh50EXumQqTd7yJn4Fd7m7nncHI1AkUDonKEgW'),
                     ('Ελένη', 'Καραγιάννη', 'S10801', 'eleni.karagianni@gmail.com', '6972345678', '2002-06-12', 'Γυναίκα', 'Νικόλαος', 'Λεωφόρος Κηφισίας 78, Πάτρα', '26100', 'Α00002','$2b$10$HdYsV/HSGvVXdNcdA1/5QOb9Ft/SQOghGGLdVoX2vFq1fDcoie4KK');
                  ''')
     
