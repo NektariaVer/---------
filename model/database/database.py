@@ -77,17 +77,7 @@ class StudentServicesDatabase:
                 PRIMARY KEY("student_id")
             );
             ''')
-
-            # Create professor table
-            self.execute_query('''
-            CREATE TABLE "professor" (
-                "specialization"	varchar(20) DEFAULT '',
-                "id"	varchar(7) NOT NULL DEFAULT '',
-                FOREIGN KEY("id") REFERENCES "user"("academic_id") ON DELETE CASCADE ON UPDATE CASCADE,
-                CONSTRAINT "proffID_PK" PRIMARY KEY("id")
-            );
-            ''')
-
+            
             # Create course table
             self.execute_query('''
             CREATE TABLE "course" (
@@ -102,6 +92,30 @@ class StudentServicesDatabase:
             );
             ''')
 
+            # Create student_takes_courses table
+            self.execute_query('''
+            CREATE TABLE "student_takes_courses" (
+                "stud_id"	varchar(7) NOT NULL DEFAULT '',
+                "course_ID"	varchar(7) NOT NULL DEFAULT '',
+                "grade" varchar(4) DEFAULT '',
+                "academic_year"	varchar(9) DEFAULT '',
+                FOREIGN KEY("course_ID") REFERENCES "course"("id") ON DELETE CASCADE ON UPDATE CASCADE,
+                FOREIGN KEY("stud_id") REFERENCES "student"("student_id") ON DELETE CASCADE ON UPDATE CASCADE
+            );
+            ''')
+
+            # Create certificate table
+            self.execute_query('''
+            CREATE TABLE "certificate" (
+                "id"	varchar(7) NOT NULL DEFAULT '',
+                "stud_ID"	varchar(7) NOT NULL DEFAULT '',
+                "date"	date DEFAULT '00-00-0000',
+                "type"	varchar(20) DEFAULT '',
+                FOREIGN KEY("stud_ID") REFERENCES "student"("student_id") ON DELETE CASCADE ON UPDATE CASCADE,
+                PRIMARY KEY("id")
+            );
+            ''')
+            ################################################################
             # Create course_cycle table
             self.execute_query('''
             CREATE TABLE "course_cycle" (
@@ -113,6 +127,17 @@ class StudentServicesDatabase:
                 CONSTRAINT "cycle_PK" PRIMARY KEY("id")
             );
             ''')
+
+            # Create professor table
+            self.execute_query('''
+            CREATE TABLE "professor" (
+                "specialization"	varchar(20) DEFAULT '',
+                "id"	varchar(7) NOT NULL DEFAULT '',
+                FOREIGN KEY("id") REFERENCES "user"("academic_id") ON DELETE CASCADE ON UPDATE CASCADE,
+                CONSTRAINT "proffID_PK" PRIMARY KEY("id")
+            );
+            ''')
+
             # Create professor_teaches table
             self.execute_query('''
             CREATE TABLE "professor_teaches" (
@@ -123,16 +148,6 @@ class StudentServicesDatabase:
             );
             ''')
 
-            # Create student_takes_courses table
-            self.execute_query('''
-            CREATE TABLE "student_takes_courses" (
-                "stud_id"	varchar(7) NOT NULL DEFAULT '',
-                "course_ID"	varchar(7) NOT NULL DEFAULT '',
-                "grade" varchar(4) DEFAULT '',
-                FOREIGN KEY("course_ID") REFERENCES "course"("id") ON DELETE CASCADE ON UPDATE CASCADE,
-                FOREIGN KEY("stud_id") REFERENCES "student"("student_id") ON DELETE CASCADE ON UPDATE CASCADE
-            );
-            ''')
 
             # Create grade table
             self.execute_query('''
@@ -147,18 +162,6 @@ class StudentServicesDatabase:
             );
             ''')
 
-
-            # Create certificate table
-            self.execute_query('''
-            CREATE TABLE "certificate" (
-                "id"	varchar(7) NOT NULL DEFAULT '',
-                "stud_ID"	varchar(7) NOT NULL DEFAULT '',
-                "date"	date DEFAULT '00-00-0000',
-                "type"	varchar(20) DEFAULT '',
-                FOREIGN KEY("stud_ID") REFERENCES "student"("student_id") ON DELETE CASCADE ON UPDATE CASCADE,
-                PRIMARY KEY("id")
-            );
-            ''')
 
             print("Tables created successfully")
         except sqlite3.Error as e:

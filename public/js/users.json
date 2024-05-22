@@ -1,10 +1,10 @@
 [
   {
     "username": "S10800",
-    "password": "$2b$10$Zxi8QWN05A8tHMBhh50EXumQqTd7yJn4Fd7m7nncHI1AkUDonKEgW"
+    "password": "password123"
   },
   {
-    "username": "user2",
-    "password": "$2b$10$aEqSDX75jGtl5yF9hMgeWupooSg28fOJHg9kOryS34GXoptyNU0qO"
+    "username": "S10801",
+    "password": "password456!"
   }
 ]

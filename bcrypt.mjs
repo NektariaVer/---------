@@ -1,16 +1,12 @@
 import bcrypt from 'bcrypt';
 
-const hash = '$2b$10$Zxi8QWN05A8tHMBhh50EXumQqTd7yJn4Fd7m7nncHI1AkUDonKEgW';
-const plainTextPassword = 'password123';  // Replace this with the password you want to check
+const password = 'password456!';
+const saltRounds = 10;
 
-bcrypt.compare(plainTextPassword, hash, (err, result) => {
+bcrypt.hash(password, saltRounds, (err, hash) => {
     if (err) {
-        console.error('Error comparing passwords:', err);
-    } else {
-        if (result) {
-            console.log('The password is correct.');
-        } else {
-            console.log('The password is incorrect.');
-        }
+        console.error(err);
+        return;
     }
+    console.log('Hashed password:', hash);
 });
