@@ -49,7 +49,7 @@ export async function editUserInfoPage (req, res, next) {
         if (userInfo.length > 0) {
             const address = userInfo[0].address;
             const addressParts = address.split(', ');
-            const streetAndNumber = addressParts[0].match(/Οδός\s+(\S+)\s+(\d+)$/);
+            const streetAndNumber = addressParts[0].match(/^([^\d,]+)\s+(\d+)$/i);
             const street = streetAndNumber[1].trim();
             const number = streetAndNumber[2].trim();
             const city = addressParts[1].trim();
@@ -90,7 +90,7 @@ export async function editUserInfo (req, res, next){
 
     const existingAddress = existingUserInfo[0].address;
     const addressParts = existingAddress.split(', ');
-    const streetAndNumberMatch = addressParts[0].match(/Οδός\s+(\S+)\s+(\d+)$/);
+    const streetAndNumberMatch = addressParts[0].match(/^([^\d,]+)\s+(\d+)$/i);
 
     let currentStreet = streetAndNumberMatch[1].trim();
     let currentNumber = streetAndNumberMatch[2].trim();
@@ -99,7 +99,7 @@ export async function editUserInfo (req, res, next){
     const newStreet = street || currentStreet;
     const newNumber = number || currentNumber;
     const newCity = city || currentCity;
-    const newAddress = `Οδός ${newStreet} ${newNumber}, ${newCity}`;
+    const newAddress = `${newStreet} ${newNumber}, ${newCity}`;
 
     const updates = {};
     if (newAddress) updates.address = newAddress;
@@ -150,6 +150,7 @@ export async function updateSemester (req, res, next) {
 
 export async function getCoursesPage (req, res, next) {
     const academic_id = req.session.loggedUserId;
+    await model.getAndUpdateStudentSemester(academic_id);
     try {
         const studentInfo = await model.getStudentInfo(academic_id);
         const currentSemester = studentInfo[0].semester;
@@ -205,9 +206,33 @@ export async function getStudentProgressPage (req, res, next) {
 };
 
 export async function getCertificatesPage (req, res, next) {
-    res.render('certificates.hbs', {
-        pageTitle: "Certificates"
-    });
+    const academic_id = req.session.loggedUserId;
+    try {
+        const studentCertificates = await model.getStudentCertificates(academic_id);
+        const certificates = await model.certificates();
+        res.render('certificates.hbs', {
+            pageTitle: "Certificates",
+            studentsCertificates: studentCertificates,
+            certificates: certificates,
+            hasCertificates:  studentCertificates.length > 0
+        });
+    } catch (err) {
+        console.error(`Failed to retrieve student progress: ${err.message}`);
+        res.status(500).send('Error retrieving certificates');
+    }
+};
+
+export async function submitCertificate (req, res, next) {
+    const academic_id = req.session.loggedUserId;
+    const cert_name = req.body['certificate-type'];
+    const cert_id = await model.findCertificate(cert_name[0]);
+    try {
+        await model.submitCertificate(academic_id, cert_id);
+        res.redirect('/certificates');
+    } catch (err) {
+        console.error(`Failed to submit certificate: ${err.message}`);
+        res.status(500).send('Error submitting certificate');
+    }
 };
 
 export async function generatePDF (req, res, next) {

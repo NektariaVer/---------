@@ -26,7 +26,7 @@ const hbs = exphbs.create({
         status: (grade, courseSemester, studentsSemester) => {
             if (grade >= 5) {
                 return 'Επιτυχία';
-            } else if (grade < 5 || grade === " ") {
+            } else if (grade < 5 || grade === "") {
                 if (studentsSemester !== courseSemester) {
                     return 'Αποτυχία';
                 } else {

@@ -385,6 +385,15 @@ img{
     padding-right: 0.5em;
 }
 
+.exclamation {
+    font-size: 0.8em !important;
+    font-weight: bold;
+    color: #645d5d;
+    padding-left: 5em;
+    margin-top: -1.5em; 
+    margin-bottom: 2em;
+}
+
 @media screen and (max-width: 1200px) {
     .announcement {
         flex-direction: column; 

@@ -173,8 +173,9 @@ const getCoursesBySemester = (semester) => {
     });
 };
 
+//όλα τα μαθηματα που θα εμφανίζονται στο student progress
 const getStudentCourses = (studentId) => {
-    const sql = `SELECT c.id, c.name, c.credits, c.weight, c.semester, sc.grade
+    const sql = `SELECT c.id, c.name, c.credits, c.weight, c.semester, sc.grade, sc.academic_year
     FROM student_takes_courses sc
     JOIN course c ON sc.course_ID = c.id
     WHERE sc.stud_id = ?
@@ -192,6 +193,7 @@ const getStudentCourses = (studentId) => {
     });
 };
 
+//προσθηκη σστο student progrss μετά την δηλωση μαθηματων
 const addStudentCourse = (stud_id, course_ID) => {
     const sql = "INSERT INTO student_takes_courses (stud_id, course_ID) VALUES (?, ?)";
     return new Promise((resolve, reject) => {
@@ -206,12 +208,12 @@ const addStudentCourse = (stud_id, course_ID) => {
     });
 };
 
+//τα μαθηματα που δηλωσε ο φοιτητης στο /courses
 const getDeclaredCourses = (academic_id, semester) => {
     const sql = `SELECT c.id, c.name 
         FROM student_takes_courses sc
         JOIN course c ON sc.course_ID = c.id
-        WHERE sc.stud_id = ? AND c.semester = ?
-    `;
+        WHERE sc.stud_id = ? AND c.semester = ?`;
     return new Promise((resolve, reject) => {
         const db = new sqlite3.Database(db_name);
         db.all(sql, [academic_id, semester], (err, rows) => {
@@ -224,4 +226,66 @@ const getDeclaredCourses = (academic_id, semester) => {
     });
 };
 
-export { getUserInfo, getStudentInfo , updateUserInfo, updateSemester, getAndUpdateStudentSemester, getCoursesBySemester, getStudentCourses, addStudentCourse, getDeclaredCourses};
+const getStudentCertificates = (academic_id) => {
+    const sql = `SELECT sc.date, sc.state, c.name
+        FROM student_certificate sc
+        JOIN certificate c ON sc.cert_id = c.id
+        WHERE sc.stud_ID = ?;`;
+    return new Promise((resolve, reject) => {
+        const db = new sqlite3.Database(db_name);
+        db.all(sql, [academic_id], (err, rows) => {
+            db.close();
+            if (err) {
+                return reject(err);
+            }
+            resolve(rows);
+        });
+    });
+}
+
+const certificates = (academic_id) => {
+    const sql = `SELECT * FROM certificate WHERE id BETWEEN 1 AND 4`;
+    return new Promise((resolve, reject) => {
+        const db = new sqlite3.Database(db_name);
+        db.all(sql, (err, rows) => {
+            db.close();
+            if (err) {
+                return reject(err);
+            }
+            resolve(rows);
+        });
+    });
+}
+
+const findCertificate = (cert_id) => {
+    const sql = `SELECT * FROM certificate WHERE name = ?`;
+    return new Promise((resolve, reject) => {
+        const db = new sqlite3.Database(db_name);
+        db.all(sql, [cert_id],(err, rows) => {
+            db.close();
+            if (err) {
+                return reject(err);
+            }
+            resolve(rows);
+        });
+    });
+}
+
+const submitCertificate = (academic_id, cert_id) => {
+    const sql = `INSERT INTO student_certificate (cert_id, stud_ID, date, state) VALUES (?, ?, date('now'), 'Σε αναμονή')`;
+    return new Promise((resolve, reject) => {
+        const db = new sqlite3.Database(db_name);
+        db.run(sql, [cert_id, academic_id], function(err) {
+            db.close();
+            if (err) {
+                return reject(err);
+            }
+            resolve({ cert_id, stud_ID: academic_id, date: new Date().toLocaleDateString('el-GR'), state: 'Σε αναμονή' });
+        });
+    });
+};
+
+export { getUserInfo, getStudentInfo , updateUserInfo,
+     updateSemester, getAndUpdateStudentSemester, getCoursesBySemester, 
+     getStudentCourses, addStudentCourse, getDeclaredCourses, 
+     getStudentCertificates, certificates, submitCertificate, findCertificate};

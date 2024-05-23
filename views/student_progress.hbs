@@ -40,7 +40,7 @@
                             <td class="sub_id">{{this.id}}</td>
                             <td class="subject">{{this.name}}</td>
                             <td class="grade">{{displayGrade this.grade this.semester ../studentsSemester}}</td>
-                            <td class="year">{{this.year}}</td>
+                            <td class="year">{{this.academic_year}}</td>
                             <td class="semester">{{#if (isOddSemester this.semester)}}Χειμερινό{{else}}Εαρινό{{/if}}</td>
                             <td class="status">{{status this.grade this.semester ../studentsSemester}}</td>
                             <td class="weight">{{this.weight}}</td>

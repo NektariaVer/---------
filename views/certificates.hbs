@@ -19,12 +19,13 @@
                 <hr>
 
                 <table class="certificates">
+                    <thead>
+                        <th>Ιστορικό Αιτήσεων:</th>
+                        <th></th>
+                        <th></th>
+                    </thead>
                     <tbody>
-                        <tr>
-                            <th>Ιστορικό Αιτήσεων:</th>
-                            <th></th>
-                            <th></th>
-                        </tr>
+                        <!--
                         <tr>
                             <td><a href="/generate-pdf/Student Status Certificate" download>Βεβαίωση Φοιτητικής Κατάστασης</a></td>
                             <td>24/4/2024</td>
@@ -35,9 +36,22 @@
                             <td>1/2/2024</td>
                             <td>Ολοκληρωμένο</td>
                         </tr>
+                        -->
+                        
+                        {{#each studentsCertificates}}
+                        <tr>
+                            <td class="certificate">{{this.name}}</td>
+                            <td class="date">{{this.date}}</td>
+                            <td class="state">{{this.state}}</td>
+                        </tr>
+                        {{/each}}
+
                     </tbody>
                 </table>
-
+                {{#unless hasCertificates}}
+                    <img src="/images/exclamation.png" alt="Exclamation">
+                    <p class="exclamation">Δεν υπάρχει ιστορικό αιτήσεων</p>
+                {{/unless}}
                 <hr>
                 
                 <form id="certificate-form" style="display: none;">
@@ -46,13 +60,14 @@
                     <br>
                     <label for="certificate-type">Τύπος Πιστοποιητικού:</label>
                     <select id="certificate-type" name="certificate-type">
-                        <option value="Βεβαίωση Ενεργού Φοιτητή">Βεβαίωση Ενεργού Φοιτητή</option>
-                        <option value="Βεβαίωση Φοιτητικής Κατάστασης">Βεβαίωση Φοιτητικής Κατάστασης</option>
-                        <option value="Βεβαίωση Ειδίκευσης/Κατεύθυνσης">Βεβαίωση Ειδίκευσης/Κατεύθυνσης</option>
-                        <option value="Βεβαίωση Πτυχιακής/Διπλωματικής Εργασίας">Βεβαίωση Πτυχιακής/Διπλωματικής Εργασίας</option>
+                        <option value="" disabled selected>--Επιλέξτε πιστοποιητικό--</option>
+                        {{#each certificates}}
+                            <option value="{{this.name}}"> {{this.name}} </option>
+                        {{/each}}
+                    </tbody>
                     </select><br><br>
 
-                    <input type="checkbox" id="detailed" name="detailed">
+                    <input type="checkbox" id="detailed" name="detailed" disabled>
                     <label for="detailed">Με Αναλυτική:</label><br><br>
 
                     <div id="detailed-options">
@@ -78,7 +93,7 @@
     </div>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
+        /*document.addEventListener("DOMContentLoaded", function() {
             const table = document.querySelector(".certificates");
             const rows = table.querySelectorAll("tbody tr");
     
@@ -90,7 +105,7 @@
                 noCertificatesRow.appendChild(cell);
                 table.querySelector("tbody").appendChild(noCertificatesRow);
             }
-        });
+        });*/
 
         function toggleForm() {
             const form = document.getElementById('certificate-form');
@@ -98,11 +113,13 @@
             if (form.style.display === 'none') {
                 form.style.display = 'block';
                 button.textContent = 'Υποβολή';
+                button.type = 'submit';
             } else {
                 saveCertificate();
                 openPopup();
                 form.style.display = 'none';
                 button.textContent = 'Νέα αίτηση';
+                button.type = 'button';
             }
         }
 
@@ -110,7 +127,25 @@
             const detailedCheckbox = document.getElementById('detailed');
             const detailedOptions = document.getElementById('detailed-options');
             const attemptSelect = document.getElementById('attempt');
-        
+            const certificateTypeSelect = document.getElementById('certificate-type');
+            const button = document.querySelector('.edit-button');
+
+            certificateTypeSelect.addEventListener('change', function() {
+                if (certificateTypeSelect.value !== '') {
+                    button.disabled = false;
+                    if (certificateTypeSelect.value === 'Βεβαίωση Φοιτητικής Κατάστασης') {
+                        detailedCheckbox.disabled = false;
+                    } else {
+                        detailedCheckbox.disabled = true;
+                        attemptSelect.disabled = true;
+                    } 
+                }else{
+                    button.disabled = true;
+                    attemptSelect.disabled = true;
+                    detailedCheckbox.disabled = true;
+                }
+            });
+
             detailedCheckbox.addEventListener('change', function() {
                 if (detailedCheckbox.checked) {
                     attemptSelect.disabled = false;

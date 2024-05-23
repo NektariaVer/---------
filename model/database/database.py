@@ -107,12 +107,21 @@ class StudentServicesDatabase:
             # Create certificate table
             self.execute_query('''
             CREATE TABLE "certificate" (
-                "id"	varchar(7) NOT NULL DEFAULT '',
+                "id"	INTEGER NOT NULL DEFAULT 0,
+                "name"	varchar(30) DEFAULT '',
+                PRIMARY KEY("id")
+            );
+            ''')
+
+            # Create student_certificate table
+            self.execute_query('''
+            CREATE TABLE "student_certificate" (
+                "cert_id"	varchar(7) NOT NULL DEFAULT '',
                 "stud_ID"	varchar(7) NOT NULL DEFAULT '',
                 "date"	date DEFAULT '00-00-0000',
-                "type"	varchar(20) DEFAULT '',
+                "state"  varchar(15) DEFAULT 'Σε αναμονή',
                 FOREIGN KEY("stud_ID") REFERENCES "student"("student_id") ON DELETE CASCADE ON UPDATE CASCADE,
-                PRIMARY KEY("id")
+                FOREIGN KEY("cert_ID") REFERENCES "certificate"("id") ON DELETE CASCADE ON UPDATE CASCADE
             );
             ''')
             ################################################################

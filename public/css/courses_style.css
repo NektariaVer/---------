@@ -1,12 +1,3 @@
-#declaration_completed {
-    font-size: 0.8em !important;
-    font-weight: bold;
-    color: #645d5d;
-    padding-left: 5em;
-    margin-top: -1.5em; 
-    margin-bottom: 2em;
-}
-
 fieldset{
     border: white;
     margin-bottom: 1em ;
