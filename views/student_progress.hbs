@@ -67,36 +67,36 @@
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const grades = document.querySelectorAll(".grade");
-            const studentsSemester = document.querySelector(".studentsSemester");
 
             grades.forEach(grade => {
-                if (parseFloat(grade.textContent) < 5 || grade.textContent == "NS") {
+                const gradeValue = parseFloat(grade.textContent);
+                if (gradeValue < 5 || grade.textContent === "NS") {
                     grade.parentElement.classList.add("fail");
                 }
             });
-        });
 
-
-        document.addEventListener("DOMContentLoaded", function() {
             const rows = document.querySelectorAll(".progress tbody tr");
             let totalWeightedGrades = 0;
             let totalWeight = 0;
-    
-            for (let i = 1; i < rows.length; i++) {
-                const row = rows[i];
+
+            rows.forEach(row => {
                 const gradeElement = row.querySelector(".grade");
+                if (!gradeElement) return;
+
                 const grade = parseFloat(gradeElement.textContent);
-                if (!row.classList.contains("fail") && grade!=='') {
-                    const weight = parseFloat(row.querySelector(".weight").textContent);
-                    totalWeightedGrades += grade * weight;
-                    totalWeight += weight;
-                }
-            }
-    
-            const averageGrade = totalWeightedGrades / totalWeight;
+                if (row.classList.contains("fail") || isNaN(grade)) return;
+
+                const weight = parseFloat(row.querySelector(".weight").textContent);
+                if (isNaN(weight)) return;
+
+                totalWeightedGrades += grade * weight;
+                totalWeight += weight;
+            });
+
+            const averageGrade = totalWeight > 0 ? (totalWeightedGrades / totalWeight) : 0;
             const averageCell = document.querySelector(".average_value");
             averageCell.textContent = averageGrade.toFixed(2); 
-        });
+    });
     </script>
 
 </body>

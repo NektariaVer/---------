@@ -175,9 +175,21 @@ export async function submitCourseDeclaration (req, res, next) {
     const selectedCourses = req.body['courses[]'];
     const coursesArray = Array.isArray(selectedCourses) ? selectedCourses : [selectedCourses];
 
+    const today = new Date();
+    const currentMonth = today.getMonth() + 1;
+    let academicYear;
+
+    if (currentMonth >= 9) {
+        // if autumn semester
+        academicYear = `${today.getFullYear()}-${today.getFullYear() + 1}`;
+    } else {
+        // else spring semester
+        academicYear = `${today.getFullYear() - 1}-${today.getFullYear()}`;
+    }
+
     try {
         for (const courseId of coursesArray) {
-            await model.addStudentCourse(academic_id, courseId);
+            await model.addStudentCourse(academic_id, courseId, '-', academicYear);
         }
         res.redirect('/courses');
     } catch (err) {
