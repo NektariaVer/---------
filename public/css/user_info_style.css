@@ -238,13 +238,18 @@ img{
     margin-top: 0;
     margin-left: 0.4em;
     align-self: left;
-    margin-bottom:1em0;
+    margin-bottom:1em;
 }
 
 /* Certificates page */
 .certificates th {
     text-align: left;
     font-size: 1.2em;
+}
+
+.certificates thead th{
+    padding-bottom: 2em ;
+    color: #423c3c;
 }
 
 .certificates td:first-child {
@@ -383,15 +388,6 @@ img{
 .announcement p {
     padding-left: 0.5em;
     padding-right: 0.5em;
-}
-
-.exclamation {
-    font-size: 0.8em !important;
-    font-weight: bold;
-    color: #645d5d;
-    padding-left: 5em;
-    margin-top: -1.5em; 
-    margin-bottom: 2em;
 }
 
 @media screen and (max-width: 1200px) {
