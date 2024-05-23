@@ -1,4 +1,8 @@
-<link rel="stylesheet" href="/css/user_info_style.css">
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <link rel="stylesheet" href="/css/user_info_style.css">
+</head>
 <body>
     {{> header}}
     <nav class="breadcrumbs">
@@ -37,7 +41,7 @@
                 <hr>
                 
                 <form id="update_semester" action="/update_semester" method="post">
-                    <button id="updateSemesterBtn" class="edit-button" type="submit" onclick="openPopup()">Αίτηση επανεγγραφής σε εξάμηνο</button>
+                    <button id="updateSemesterBtn" class="edit-button" type="button" onclick="openPopup()">Αίτηση επανεγγραφής σε εξάμηνο</button>
                 </form>    
             </div>
         </div>
@@ -74,12 +78,14 @@
         document.getElementById('current_date').textContent = semesterDate.toLocaleDateString('el-GR');
 
         let popup = document.getElementById("popup");
-        function openPopup(){
+
+        function openPopup() {
             popup.classList.add("open-popup");
-            setTimeout(function(){
+            setTimeout(function() {
                 popup.classList.remove("open-popup");
                 document.getElementById('update_semester').submit();
-                }, 3000);
+            }, 3000); 
         }
     </script>
 </body>
+</html>
