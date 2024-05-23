@@ -24,7 +24,9 @@ const hbs = exphbs.create({
     helpers: {
         isOddSemester: (semester) => semester % 2 === 1,
         status: (grade, courseSemester, studentsSemester) => {
-            if (grade >= 5) {
+            if (grade === "-") {
+                return '-';
+            } else if (grade >= 5) {
                 return 'Επιτυχία';
             } else if (grade < 5 || grade === "") {
                 if (studentsSemester !== courseSemester) {

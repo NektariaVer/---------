@@ -86,7 +86,7 @@
                 const row = rows[i];
                 const gradeElement = row.querySelector(".grade");
                 const grade = parseFloat(gradeElement.textContent);
-                if (!row.classList.contains("fail") && grade!=='') {
+                if (!row.classList.contains("fail") && grade!=='' && !isNaN(grade)) {
                     const weight = parseFloat(row.querySelector(".weight").textContent);
                     totalWeightedGrades += grade * weight;
                     totalWeight += weight;

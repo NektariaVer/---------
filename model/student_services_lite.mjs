@@ -194,11 +194,11 @@ const getStudentCourses = (studentId) => {
 };
 
 //προσθηκη σστο student progrss μετά την δηλωση μαθηματων
-const addStudentCourse = (stud_id, course_ID) => {
-    const sql = "INSERT INTO student_takes_courses (stud_id, course_ID) VALUES (?, ?)";
+const addStudentCourse = (stud_id, course_ID, grade, academic_year) => {
+    const sql = "INSERT INTO student_takes_courses (stud_id, course_ID, grade, academic_year) VALUES (?, ?, ?, ?)";
     return new Promise((resolve, reject) => {
         const db = new sqlite3.Database(db_name);
-        db.run(sql, [stud_id, course_ID], (err) => {
+        db.run(sql, [stud_id, course_ID, grade, academic_year], (err) => {
             db.close();
             if (err) {
                 return reject(err);
