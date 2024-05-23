@@ -54,35 +54,35 @@
                 {{/unless}}
                 <hr>
                 
-                <form id="certificate-form" style="display: none;">
+                <form id="certificate-form" method="post" action="/submit-certificate" style="display: none;">
                     <fieldset>
-                    <h2>Νέα αίτηση:</h2>
-                    <br>
-                    <label for="certificate-type">Τύπος Πιστοποιητικού:</label>
-                    <select id="certificate-type" name="certificate-type">
-                        <option value="" disabled selected>--Επιλέξτε πιστοποιητικό--</option>
-                        {{#each certificates}}
-                            <option value="{{this.name}}"> {{this.name}} </option>
-                        {{/each}}
-                    </tbody>
-                    </select><br><br>
-
-                    <input type="checkbox" id="detailed" name="detailed" disabled>
-                    <label for="detailed">Με Αναλυτική:</label><br><br>
-
-                    <div id="detailed-options">
-                        <label for="attempt">Προσπάθειες:</label>
-                        <select id="attempt" name="attempt" disabled>
-                            <option value="Όλες οι προσπάθειες">Ολες οι προσπαθειες</option>
-                            <option value="Τελευταία προσπάθεια">Τελευταία προσπάθεια</option>
-                            <option value="Επιτυχημένες προσπάθειες">Επιτυχημενες προσπαθειες</option>
+                        <h2>Νέα αίτηση:</h2>
+                        <br>
+                        <label for="certificate-type">Τύπος Πιστοποιητικού:</label>
+                        <select id="certificate-type" name="certificate-type">
+                            <option value="" disabled selected>--Επιλέξτε πιστοποιητικό--</option>
+                            {{#each certificates}}
+                                <option value="{{this.name}}"> {{this.name}} </option>
+                            {{/each}}
+                        </tbody>
                         </select><br><br>
-                    </div>
+
+                        <input type="checkbox" id="detailed" name="detailed" disabled>
+                        <label for="detailed">Με Αναλυτική:</label><br><br>
+
+                        <div id="detailed-options">
+                            <label for="attempt">Προσπάθειες:</label>
+                            <select id="attempt" name="attempt" disabled>
+                                <option value="Όλες οι προσπάθειες">Ολες οι προσπαθειες</option>
+                                <option value="Τελευταία προσπάθεια">Τελευταία προσπάθεια</option>
+                                <option value="Επιτυχημένες προσπάθειες">Επιτυχημενες προσπαθειες</option>
+                            </select><br><br>
+                        </div>
 
                     </fieldset>
+                    <button class="edit-button" id="submit_button" style="visibility: visible;">Υποβολή</button> 
                 </form>
-                
-                <button class="edit-button" onclick="toggleForm()">Νέα αίτηση</button>        
+                <button class="edit-button" id="new_declaration" onclick="toggleForm()" >Νέα αίτηση</button>        
             </div>
         </div>
     </div>
@@ -93,54 +93,40 @@
     </div>
 
     <script>
-        /*document.addEventListener("DOMContentLoaded", function() {
-            const table = document.querySelector(".certificates");
-            const rows = table.querySelectorAll("tbody tr");
-    
-            if (rows.length === 1) {
-                const noCertificatesRow = document.createElement("tr");
-                const cell = document.createElement("td");
-                cell.setAttribute("colspan", "3");
-                cell.textContent = "Δεν υπάρχει ιστορικό αιτήσεων";
-                noCertificatesRow.appendChild(cell);
-                table.querySelector("tbody").appendChild(noCertificatesRow);
-            }
-        });*/
-
         function toggleForm() {
             const form = document.getElementById('certificate-form');
-            const button = document.querySelector('.edit-button');
+            const newDeclarationButton = document.getElementById('new_declaration');
+            const submitButton = document.getElementById('submit_button');
+
             if (form.style.display === 'none') {
                 form.style.display = 'block';
-                button.textContent = 'Υποβολή';
-                button.type = 'submit';
+                newDeclarationButton.style.display = 'none';
             } else {
-                saveCertificate();
-                openPopup();
                 form.style.display = 'none';
-                button.textContent = 'Νέα αίτηση';
-                button.type = 'button';
+                newDeclarationButton.style.display = 'block';
+                submitButton.style.display = 'none';
+                newDeclarationButton.textContent = 'Νέα αίτηση';
+                newDeclarationButton.type = 'button';
             }
         }
 
         document.addEventListener("DOMContentLoaded", function() {
             const detailedCheckbox = document.getElementById('detailed');
-            const detailedOptions = document.getElementById('detailed-options');
             const attemptSelect = document.getElementById('attempt');
             const certificateTypeSelect = document.getElementById('certificate-type');
-            const button = document.querySelector('.edit-button');
+            const submitButton = document.getElementById('submit_button');
 
             certificateTypeSelect.addEventListener('change', function() {
                 if (certificateTypeSelect.value !== '') {
-                    button.disabled = false;
-                    if (certificateTypeSelect.value === 'Βεβαίωση Φοιτητικής Κατάστασης') {
+                    submitButton.style.display = 'block';
+                    if (certificateTypeSelect.value === '1') { // assuming ID 1 corresponds to 'Βεβαίωση Φοιτητικής Κατάστασης'
                         detailedCheckbox.disabled = false;
                     } else {
                         detailedCheckbox.disabled = true;
                         attemptSelect.disabled = true;
                     } 
-                }else{
-                    button.disabled = true;
+                } else {
+                    submitButton.style.display = 'none';
                     attemptSelect.disabled = true;
                     detailedCheckbox.disabled = true;
                 }
@@ -153,8 +139,18 @@
                     attemptSelect.disabled = true;
                 }
             });
-        });
 
+            const form = document.getElementById('certificate-form');
+            form.addEventListener('submit', function(event) {
+                event.preventDefault();
+                saveCertificate();
+                openPopup();
+                form.style.display = 'none';
+                document.getElementById('new_declaration').style.display = 'block';
+                submitButton.style.display = 'none';
+            });
+        });
+        
         const certificateTranslations = {
             "Βεβαίωση Ενεργού Φοιτητή": "Active Student Certificate",
             "Βεβαίωση Φοιτητικής Κατάστασης": "Student Status Certificate",
@@ -201,7 +197,6 @@
             };
             xhr.send(JSON.stringify({ certificateType: translatedType, status: 'Ολοκληρωμένο' }));
         }
-
 
 
 
