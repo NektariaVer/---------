@@ -238,13 +238,18 @@ img{
     margin-top: 0;
     margin-left: 0.4em;
     align-self: left;
-    margin-bottom:1em0;
+    margin-bottom:1em;
 }
 
 /* Certificates page */
 .certificates th {
     text-align: left;
     font-size: 1.2em;
+}
+
+.certificates thead th{
+    padding-bottom: 2em ;
+    color: #423c3c;
 }
 
 .certificates td:first-child {

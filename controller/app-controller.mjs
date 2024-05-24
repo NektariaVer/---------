@@ -273,12 +273,10 @@ export async function getCertificatesPage (req, res, next) {
 
 export async function submitCertificate (req, res, next) {
     const academic_id = req.session.loggedUserId;
-    const cert_name = req.body['certificate-type'];
-    const cert_id = await model.findCertificate(cert_name);
-    console.log(cert_name);
+    const cert_id = req.body['certificateType'];
     try {
         await model.submitCertificate(academic_id, cert_id);
-        res.redirect('/certificates');
+        res.sendStatus(200);
     } catch (err) {
         console.error(`Failed to submit certificate: ${err.message}`);
         res.status(500).send('Error submitting certificate');

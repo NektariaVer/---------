@@ -21,8 +21,6 @@
                 <table class="certificates">
                     <thead>
                         <th>Ιστορικό Αιτήσεων:</th>
-                        <th></th>
-                        <th></th>
                     </thead>
                     <tbody>
                         <!--
@@ -40,7 +38,7 @@
                         
                         {{#each studentsCertificates}}
                         <tr>
-                            <td class="certificate">{{this.name}}</td>
+                            <td class="certificate"><a href="/generate-pdf/{{this.name}}" download>{{ this.name }}</a></td>
                             <td class="date">{{this.date}}</td>
                             <td class="state">{{this.state}}</td>
                         </tr>
@@ -62,9 +60,8 @@
                         <select id="certificate-type" name="certificate-type">
                             <option value="" disabled selected>--Επιλέξτε πιστοποιητικό--</option>
                             {{#each certificates}}
-                                <option value="{{this.name}}"> {{this.name}} </option>
+                                <option value="{{this.id}}"> {{this.name}} </option>
                             {{/each}}
-                        </tbody>
                         </select><br><br>
 
                         <input type="checkbox" id="detailed" name="detailed" disabled>
@@ -73,14 +70,14 @@
                         <div id="detailed-options">
                             <label for="attempt">Προσπάθειες:</label>
                             <select id="attempt" name="attempt" disabled>
-                                <option value="Όλες οι προσπάθειες">Ολες οι προσπαθειες</option>
-                                <option value="Τελευταία προσπάθεια">Τελευταία προσπάθεια</option>
-                                <option value="Επιτυχημένες προσπάθειες">Επιτυχημενες προσπαθειες</option>
+                                <option value="5">Όλες οι προσπάθειες</option>
+                                <option value="6">Επιτυχημένες προσπάθειες</option>
+                                <option value="7">Τελευταία προσπάθεια</option>
                             </select><br><br>
                         </div>
 
                     </fieldset>
-                    <button class="edit-button" id="submit_button" style="visibility: visible;">Υποβολή</button> 
+                    <button class="edit-button" type="submit" id="submit_button" style="display: none;">Υποβολή</button> 
                 </form>
                 <button class="edit-button" id="new_declaration" onclick="toggleForm()" >Νέα αίτηση</button>        
             </div>
@@ -111,24 +108,23 @@
         }
 
         document.addEventListener("DOMContentLoaded", function() {
-            const detailedCheckbox = document.getElementById('detailed');
-            const attemptSelect = document.getElementById('attempt');
             const certificateTypeSelect = document.getElementById('certificate-type');
             const submitButton = document.getElementById('submit_button');
+            const detailedCheckbox = document.getElementById('detailed');
+            const detailedOptions = document.getElementById('detailed-options');
+            const attemptSelect = document.getElementById('attempt');
 
             certificateTypeSelect.addEventListener('change', function() {
                 if (certificateTypeSelect.value !== '') {
                     submitButton.style.display = 'block';
-                    if (certificateTypeSelect.value === '1') { // assuming ID 1 corresponds to 'Βεβαίωση Φοιτητικής Κατάστασης'
+                    if (certificateTypeSelect.options[certificateTypeSelect.selectedIndex].value === '2') {
                         detailedCheckbox.disabled = false;
                     } else {
                         detailedCheckbox.disabled = true;
                         attemptSelect.disabled = true;
-                    } 
+                    }
                 } else {
                     submitButton.style.display = 'none';
-                    attemptSelect.disabled = true;
-                    detailedCheckbox.disabled = true;
                 }
             });
 
@@ -143,19 +139,45 @@
             const form = document.getElementById('certificate-form');
             form.addEventListener('submit', function(event) {
                 event.preventDefault();
-                saveCertificate();
-                openPopup();
-                form.style.display = 'none';
-                document.getElementById('new_declaration').style.display = 'block';
-                submitButton.style.display = 'none';
+
+                const certificateType = certificateTypeSelect.value;
+                let finalCertificateType = certificateType;
+
+                if (certificateTypeSelect.options[certificateTypeSelect.selectedIndex].value === '2' && detailedCheckbox.checked) {
+                    finalCertificateType = attemptSelect.value;
+                }
+
+                const xhr = new XMLHttpRequest();
+                xhr.open('POST', '/submit-certificate', true);
+                xhr.setRequestHeader('Content-Type', 'application/json');
+                xhr.onload = function() {
+                    if (xhr.status === 200) {
+                        console.log('Certificate submitted successfully');
+                        openPopup();
+                        setTimeout(function() {
+                            window.location.reload();
+                        }, 3000);
+                    } else {
+                        console.error('Failed to submit certificate');
+                    }
+                };
+                xhr.onerror = function() {
+                    console.error('Failed to submit certificate');
+                };
+                xhr.send(JSON.stringify({ certificateType: finalCertificateType }));
+
+                return false; 
             });
         });
         
         const certificateTranslations = {
-            "Βεβαίωση Ενεργού Φοιτητή": "Active Student Certificate",
-            "Βεβαίωση Φοιτητικής Κατάστασης": "Student Status Certificate",
-            "Βεβαίωση Ειδίκευσης/Κατεύθυνσης": "Qualification-Field Certificate",
-            "Βεβαίωση Πτυχιακής/Διπλωματικής Εργασίας": "Thesis Certificate"
+            "1": "Active Student Certificate",
+            "2": "Student Status Certificate",
+            "3": "Qualification-Field Certificate",
+            "4": "Thesis Certificate",
+            "5": "Student Status Certificate - All tries",
+            "6": "Student Status Certificate - Successful tries",
+            "7": "Student Status Certificate - Last try"
         };
 
         function saveCertificate() {
@@ -200,12 +222,12 @@
 
 
 
-        let popup = document.getElementById("popup");
         function openPopup(){
+            const popup = document.getElementById("popup");
             popup.classList.add("open-popup");
             setTimeout(function(){
                 popup.classList.remove("open-popup");
-                }, 3000);
+            }, 3000);
         }
 
     </script>

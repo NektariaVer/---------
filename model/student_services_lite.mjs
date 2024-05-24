@@ -261,12 +261,12 @@ const findCertificate = (cert_name) => {
     const sql = `SELECT id FROM certificate WHERE name = ?`;
     return new Promise((resolve, reject) => {
         const db = new sqlite3.Database(db_name);
-        db.all(sql, [cert_name],(err, rows) => {
+        db.get(sql, [cert_name],(err, row) => {
             db.close();
             if (err) {
                 return reject(err);
             }
-            resolve(rows);
+            resolve(row ? [row] : []);
         });
     });
 }
