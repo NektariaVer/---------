@@ -172,9 +172,12 @@ export async function getCoursesPage(req, res, next) {
         const declaredCourses = await model.getDeclaredCourses(academic_id, currentSemester);
         const hasDeclaredCourses = declaredCourses.length > 0;
 
+        const declaredCourseIds = new Set(declaredCourses.map(course => course.id));
+        const filteredCurrentSemesterCourses = currentSemesterCourses.filter(course => !declaredCourseIds.has(course.id));
+
         res.render('courses.hbs', {
             pageTitle: 'Νέα Δήλωση Μαθημάτων',
-            currentSemesterCourses: currentSemesterCourses,
+            currentSemesterCourses: filteredCurrentSemesterCourses,
             notPassedCourses: notPassedCourses,
             hasDeclaredCourses: hasDeclaredCourses,
             currentSemester: currentSemester

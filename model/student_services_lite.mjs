@@ -160,7 +160,7 @@ const getAndUpdateStudentSemester = (academic_id) => {
 };
 
 const getCoursesBySemester = (semester) => {
-    const sql = "SELECT id, name FROM course WHERE semester = ?";
+    const sql = `SELECT id, name FROM course WHERE semester = ?`;
     return new Promise((resolve, reject) => {
         const db = new sqlite3.Database(db_name);
         db.all(sql, [semester], (err, rows) => {
