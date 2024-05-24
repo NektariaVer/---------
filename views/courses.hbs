@@ -38,14 +38,14 @@
                         <fieldset>
                             <label for="courses">Επιλέξτε μαθήματα:</label>
                             <div id="courseList">
-                                <h4>Μη Ολοκληρωμένα:</h4>
+                                <h4 id="notCompletedTitle">Μη Ολοκληρωμένα:</h4>
                                 {{#each notPassedCourses}}
                                     <div class="course-item">
                                         <input type="checkbox" id="course_{{this.id}}" name="courses[]" value="{{this.id}}">
                                         <label for="course_{{this.id}}">{{this.name}}</label>
                                     </div>
                                 {{/each}}
-                                
+
                                 <h4>Τρέχοντος Εξαμήνου:</h4>
                                 {{#each currentSemesterCourses}}
                                     <div class="course-item">
@@ -91,6 +91,22 @@
                 document.getElementById('courseForm').submit();
                 }, 3000);
         }
+
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const currentSemester = {{currentSemester}};
+            const notCompletedTitle = document.getElementById('notCompletedTitle');
+            const notPassedCourses = {{json notPassedCourses}};
+
+            if (currentSemester % 2 === 0) {
+                notCompletedTitle.textContent = "Μη Ολοκληρωμένα Εαρινού Εξαμήνου:";
+            } else {
+                notCompletedTitle.textContent = "Μη Ολοκληρωμένα Χειμερινού Εξαμήνου:";
+            }
+
+            if (notPassedCourses.length === 0) {
+                notCompletedTitle.style.display = "none";
+            }
+        });
     </script>
 </body>
 </html>
