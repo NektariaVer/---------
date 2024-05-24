@@ -237,7 +237,8 @@ export async function getCertificatesPage (req, res, next) {
 export async function submitCertificate (req, res, next) {
     const academic_id = req.session.loggedUserId;
     const cert_name = req.body['certificate-type'];
-    const cert_id = await model.findCertificate(cert_name[0]);
+    const cert_id = await model.findCertificate(cert_name);
+    console.log(cert_name);
     try {
         await model.submitCertificate(academic_id, cert_id);
         res.redirect('/certificates');

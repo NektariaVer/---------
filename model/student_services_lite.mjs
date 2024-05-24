@@ -243,7 +243,7 @@ const getStudentCertificates = (academic_id) => {
     });
 }
 
-const certificates = (academic_id) => {
+const certificates = () => {
     const sql = `SELECT * FROM certificate WHERE id BETWEEN 1 AND 4`;
     return new Promise((resolve, reject) => {
         const db = new sqlite3.Database(db_name);
@@ -257,11 +257,11 @@ const certificates = (academic_id) => {
     });
 }
 
-const findCertificate = (cert_id) => {
-    const sql = `SELECT * FROM certificate WHERE name = ?`;
+const findCertificate = (cert_name) => {
+    const sql = `SELECT id FROM certificate WHERE name = ?`;
     return new Promise((resolve, reject) => {
         const db = new sqlite3.Database(db_name);
-        db.all(sql, [cert_id],(err, rows) => {
+        db.all(sql, [cert_name],(err, rows) => {
             db.close();
             if (err) {
                 return reject(err);
