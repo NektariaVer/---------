@@ -285,7 +285,41 @@ const submitCertificate = (academic_id, cert_id) => {
     });
 };
 
+const getNotPassedCourses = (studentId, currentSemester, academicYear) => {
+    const isSpring = currentSemester % 2 === 0; 
+
+    const sql = `SELECT c.id, c.name
+                 FROM student_takes_courses sc
+                 JOIN course c ON sc.course_ID = c.id
+                 WHERE sc.stud_id = ? 
+                   AND sc.grade < 5 
+                   AND sc.grade != 10 
+                   AND sc.grade != '-'
+                   AND c.id NOT IN (
+                       SELECT c2.id
+                       FROM course c2
+                       JOIN student_takes_courses sc2 ON sc2.course_ID = c2.id
+                       WHERE sc2.stud_id = ? 
+                         AND NOT (c2.semester % 2 = ?) 
+                    )
+                   AND c.id NOT IN (
+                    SELECT course_ID
+                    FROM student_takes_courses
+                    WHERE academic_year = ?
+                    )`;
+    return new Promise((resolve, reject) => {
+        const db = new sqlite3.Database(db_name);
+        db.all(sql, [studentId, studentId, isSpring ? 0 : 1, academicYear], (err, rows) => {
+            db.close();
+            if (err) {
+                return reject(err);
+            }
+            resolve(rows);
+        });
+    });
+};
+
 export { getUserInfo, getStudentInfo , updateUserInfo,
      updateSemester, getAndUpdateStudentSemester, getCoursesBySemester, 
      getStudentCourses, addStudentCourse, getDeclaredCourses, 
-     getStudentCertificates, certificates, submitCertificate, findCertificate};
+     getStudentCertificates, certificates, submitCertificate, findCertificate, getNotPassedCourses};

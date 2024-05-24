@@ -148,19 +148,34 @@ export async function updateSemester (req, res, next) {
     }
 };
 
-export async function getCoursesPage (req, res, next) {
+export async function getCoursesPage(req, res, next) {
     const academic_id = req.session.loggedUserId;
     await model.getAndUpdateStudentSemester(academic_id);
+
+    const today = new Date();
+    const currentMonth = today.getMonth() + 1;
+    let academicYear;
+
+    if (currentMonth >= 9) {
+        // if autumn semester
+        academicYear = `${today.getFullYear()}-${today.getFullYear() + 1}`;
+    } else {
+        // else spring semester
+        academicYear = `${today.getFullYear() - 1}-${today.getFullYear()}`;
+    }
+
     try {
         const studentInfo = await model.getStudentInfo(academic_id);
         const currentSemester = studentInfo[0].semester;
-        const courses = await model.getCoursesBySemester(currentSemester);
+        const currentSemesterCourses = await model.getCoursesBySemester(currentSemester);
+        const notPassedCourses = await model.getNotPassedCourses(academic_id, currentSemester, academicYear);
         const declaredCourses = await model.getDeclaredCourses(academic_id, currentSemester);
         const hasDeclaredCourses = declaredCourses.length > 0;
 
         res.render('courses.hbs', {
             pageTitle: 'Νέα Δήλωση Μαθημάτων',
-            courses: courses,
+            currentSemesterCourses: currentSemesterCourses,
+            notPassedCourses: notPassedCourses,
             hasDeclaredCourses: hasDeclaredCourses,
             currentSemester: currentSemester
         });
@@ -170,7 +185,8 @@ export async function getCoursesPage (req, res, next) {
     }
 };
 
-export async function submitCourseDeclaration (req, res, next) {
+
+export async function submitCourseDeclaration(req, res, next) {
     const academic_id = req.session.loggedUserId;
     const selectedCourses = req.body['courses[]'];
     const coursesArray = Array.isArray(selectedCourses) ? selectedCourses : [selectedCourses];
@@ -188,8 +204,16 @@ export async function submitCourseDeclaration (req, res, next) {
     }
 
     try {
+        const studentCourses = await model.getStudentCourses(academic_id);
+        const previousSemesterCourses = studentCourses.filter(course => course.academic_year !== academicYear);
+        
         for (const courseId of coursesArray) {
-            await model.addStudentCourse(academic_id, courseId, '-', academicYear);
+            const courseExists = previousSemesterCourses.find(course => course.id === courseId);
+            if (courseExists) {
+                await model.addStudentCourse(academic_id, courseId, '-', academicYear);
+            } else {
+                await model.addStudentCourse(academic_id, courseId, '-', academicYear);
+            }
         }
         res.redirect('/courses');
     } catch (err) {
@@ -198,12 +222,24 @@ export async function submitCourseDeclaration (req, res, next) {
     }
 };
 
-export async function getStudentProgressPage (req, res, next) {
+export async function getStudentProgressPage(req, res, next) {
     const academic_id = req.session.loggedUserId;
     await model.getAndUpdateStudentSemester(academic_id);
+
     try {
         const studentCourses = await model.getStudentCourses(academic_id);
         const studentInfo = await model.getStudentInfo(academic_id);
+
+        // "-" grades first
+        studentCourses.sort((a, b) => {
+            if (a.grade === "-" && b.grade !== "-") {
+                return -1;
+            } else if (a.grade !== "-" && b.grade === "-") {
+                return 1;
+            } else {
+                return 0;
+            }
+        });
 
         res.render('student_progress.hbs', {
             pageTitle: 'Ακαδημαϊκή Πρόοδος',
@@ -216,6 +252,7 @@ export async function getStudentProgressPage (req, res, next) {
         res.status(500).send('Error retrieving student progress');
     }
 };
+
 
 export async function getCertificatesPage (req, res, next) {
     const academic_id = req.session.loggedUserId;
