@@ -39,7 +39,7 @@
                             <label for="courses">Επιλέξτε μαθήματα:</label>
                             <div id="courseList">
                                 <h5 id="noCoursesMessage" style="display:none;">Δεν υπάρχουν διαθέσιμα μαθήματα για δήλωση</h5>
-                                <h4 id="notCompletedTitle">Μη Ολοκληρωμένα:</h4>
+                                <h4 id="notCompletedTitle">Μη ολοκληρωμένα:</h4>
                                 {{#each notPassedCourses}}
                                     <div class="course-item">
                                         <input type="checkbox" id="course_{{this.id}}" name="courses[]" value="{{this.id}}">
@@ -47,7 +47,7 @@
                                     </div>
                                 {{/each}}
 
-                                <h4 id="currentTitle">Τρέχοντος Εξαμήνου:</h4>
+                                <h4 id="currentTitle">Μη δηλωμένα τρέχοντος εξαμήνου:</h4>
                                 {{#each currentSemesterCourses}}
                                     <div class="course-item">
                                         <input type="checkbox" id="course_{{this.id}}" name="courses[]" value="{{this.id}}">
@@ -97,14 +97,14 @@
             const currentSemester = {{currentSemester}};
             const notCompletedTitle = document.getElementById('notCompletedTitle');
             const currentTitle = document.getElementById('currentTitle');
-            const notPassedCourses = {{json notPassedCourses}};
-            const currentCourses = {{json currentSemesterCourses}};
+            const notPassedCourses = {{{json notPassedCourses}}};
+            const currentCourses = {{{json currentSemesterCourses}}};
             const noCoursesMessage = document.getElementById('noCoursesMessage');
 
             if (currentSemester % 2 === 0) {
-                notCompletedTitle.textContent = "Μη Ολοκληρωμένα Εαρινού Εξαμήνου:";
+                notCompletedTitle.textContent = "Μη ολοκληρωμένα προηγούμενων εαρινών εξαμήνων:";
             } else {
-                notCompletedTitle.textContent = "Μη Ολοκληρωμένα Χειμερινού Εξαμήνου:";
+                notCompletedTitle.textContent = "Μη ολοκληρωμένα προηγούμενων χειμερινών εξαμήνων:";
             }
 
             if (notPassedCourses.length === 0) {
