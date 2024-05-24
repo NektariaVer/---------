@@ -171,6 +171,7 @@ export async function getCoursesPage(req, res, next) {
         const notPassedCourses = await model.getNotPassedCourses(academic_id, currentSemester, academicYear);
         const declaredCourses = await model.getDeclaredCourses(academic_id, currentSemester);
         const hasDeclaredCourses = declaredCourses.length > 0;
+        const hasCoursesWithNoGrade = await model.hasCoursesWithNoGrade(academic_id);
 
         const declaredCourseIds = new Set(declaredCourses.map(course => course.id));
         const filteredCurrentSemesterCourses = currentSemesterCourses.filter(course => !declaredCourseIds.has(course.id));
@@ -180,6 +181,7 @@ export async function getCoursesPage(req, res, next) {
             currentSemesterCourses: filteredCurrentSemesterCourses,
             notPassedCourses: notPassedCourses,
             hasDeclaredCourses: hasDeclaredCourses,
+            hasCoursesWithNoGrade: hasCoursesWithNoGrade,
             currentSemester: currentSemester
         });
     } catch (err) {

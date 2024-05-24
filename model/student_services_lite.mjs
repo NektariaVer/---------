@@ -319,7 +319,22 @@ const getNotPassedCourses = (studentId, currentSemester, academicYear) => {
     });
 };
 
+const hasCoursesWithNoGrade = async (academic_id) => {
+    const sql = `SELECT * FROM student_takes_courses WHERE stud_id = ? AND grade = '-'`;
+    return new Promise((resolve, reject) => {
+        const db = new sqlite3.Database(db_name);
+        db.all(sql, [academic_id], (err, rows) => {
+            db.close();
+            if (err) {
+                return reject(err);
+            }
+            resolve(rows.length > 0);
+        });
+    });
+};
+
 export { getUserInfo, getStudentInfo , updateUserInfo,
      updateSemester, getAndUpdateStudentSemester, getCoursesBySemester, 
      getStudentCourses, addStudentCourse, getDeclaredCourses, 
-     getStudentCertificates, certificates, submitCertificate, findCertificate, getNotPassedCourses};
+     getStudentCertificates, certificates, submitCertificate, findCertificate, 
+     getNotPassedCourses, hasCoursesWithNoGrade};

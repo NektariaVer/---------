@@ -26,6 +26,13 @@
                         <label for="editDeclaration">Επεξεργασία δήλωσης</label>
                         <input type="checkbox" id="editDeclaration" name="editDeclaration" onchange="toggleCourses()">
                     </fieldset>
+                {{else if hasCoursesWithNoGrade}}
+                    <img src="/images/exclamation.png">
+                    <p class="exclamation">Η δήλωση μαθημάτων έχει ήδη υποβληθεί</p>
+                    <fieldset>
+                        <label for="editDeclaration">Επεξεργασία δήλωσης</label>
+                        <input type="checkbox" id="editDeclaration" name="editDeclaration" onchange="toggleCourses()">
+                    </fieldset>
                 {{else}}
                     <fieldset>
                         <label for="newDeclaration">Νέα δήλωση μαθημάτων</label>
@@ -74,6 +81,7 @@
             const submitBtn = document.getElementById("submitBtn");
             const newDeclarationCheckbox = document.getElementById("newDeclaration");
             const editDeclarationCheckbox = document.getElementById("editDeclaration");
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
 
             if ((newDeclarationCheckbox && newDeclarationCheckbox.checked) || (editDeclarationCheckbox && editDeclarationCheckbox.checked)) {
                 courseForm.style.display = "block";
