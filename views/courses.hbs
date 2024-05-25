@@ -81,14 +81,13 @@
             const submitBtn = document.getElementById("submitBtn");
             const newDeclarationCheckbox = document.getElementById("newDeclaration");
             const editDeclarationCheckbox = document.getElementById("editDeclaration");
-            const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+            const checkboxes = document.querySelectorAll('.course-item input[type="checkbox"]:checked');
 
             if ((newDeclarationCheckbox && newDeclarationCheckbox.checked) || (editDeclarationCheckbox && editDeclarationCheckbox.checked)) {
                 courseForm.style.display = "block";
-                if (checkboxes > 0) {
+                if (checkboxes.length > 0) {
                     submitBtn.style.display = "inline";
-                }
-                else {
+                } else {
                     submitBtn.style.display = "none";
                 }
             } else {
@@ -96,6 +95,14 @@
                 submitBtn.style.display = "none";
             }
         }
+
+        const checkboxes = document.querySelectorAll('.course-item input[type="checkbox"]');
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                toggleCourses();
+            });
+        });
+
 
         let popup = document.getElementById("popup");
         function openPopup(){

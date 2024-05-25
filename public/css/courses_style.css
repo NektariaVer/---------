@@ -15,11 +15,10 @@ fieldset label:first-child {
     padding: 1em;
     vertical-align: middle;
     text-align: left;
-    width: 50em;
+    width: 95%;
     box-shadow: 0 0 1em rgba(0, 0, 0, 0.1);
 }
 
-/* Multi-select dropdown styling */
 select[multiple] {
     width: 90%;
     height: 30em;
@@ -29,7 +28,6 @@ select[multiple] {
     box-sizing:content-box;
 }
 
-/* Button styling */
 .submit-button {
     margin-top: 20px;
     padding: 10px 20px;
@@ -43,4 +41,15 @@ select[multiple] {
 
 .submit-button:hover {
     background-color: #7b9c9c;;
+}
+
+@media screen and (max-width: 1200px) {
+    fieldset label:first-child {
+        display: block; 
+        margin-bottom: 0.5em; 
+    }
+
+    #courseList {
+        width: 95%; 
+    }
 }
