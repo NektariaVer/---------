@@ -85,7 +85,12 @@
 
             if ((newDeclarationCheckbox && newDeclarationCheckbox.checked) || (editDeclarationCheckbox && editDeclarationCheckbox.checked)) {
                 courseForm.style.display = "block";
-                submitBtn.style.display = "inline";
+                if (checkboxes > 0) {
+                    submitBtn.style.display = "inline";
+                }
+                else {
+                    submitBtn.style.display = "none";
+                }
             } else {
                 courseForm.style.display = "none";
                 submitBtn.style.display = "none";
