@@ -38,7 +38,7 @@
                         
                         {{#each studentsCertificates}}
                         <tr>
-                            <td class="certificate"><a href="/generate-pdf/{{this.name}}" download>{{ this.name }}</a></td>
+                            <td class="certificate"><a href="/generate-pdf/{{translateCertificate this.name}}" download>{{ this.name }}</a></td>
                             <td class="date">{{this.date}}</td>
                             <td class="state">{{this.state}}</td>
                         </tr>
@@ -220,8 +220,6 @@
             xhr.send(JSON.stringify({ certificateType: translatedType, status: 'Ολοκληρωμένο' }));
         }
 
-
-
         function openPopup(){
             const popup = document.getElementById("popup");
             popup.classList.add("open-popup");
@@ -229,7 +227,6 @@
                 popup.classList.remove("open-popup");
             }, 3000);
         }
-
     </script>
 
 </body>

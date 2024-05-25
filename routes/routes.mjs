@@ -24,7 +24,7 @@ router.post('/submit_course_declaration', isAuthenticated, controller.submitCour
 router.get('/student_progress', isAuthenticated, controller.getStudentProgressPage);
 router.get('/certificates', isAuthenticated, controller.getCertificatesPage);
 router.post('/submit-certificate',  isAuthenticated, controller.submitCertificate);
-router.get('/generate_pdf/:title', isAuthenticated, controller.generatePDF);
+router.get('/generate-pdf/:title', isAuthenticated, controller.generatePDF);
 router.post('/update_status', isAuthenticated, controller.updateStatus);
 
 

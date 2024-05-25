@@ -7,6 +7,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 import userSession from './app-setup/session.mjs';
 import routes from './routes/routes.mjs';
+import PDFDocument from 'pdfkit';
 
 const app = express();
 
@@ -48,6 +49,20 @@ const hbs = exphbs.create({
         },
         json: function (context) {
             return JSON.stringify(context);
+        },
+        translateCertificate: function (name) {
+            const certificateTranslations = {
+                "Βεβαίωση Ενεργού Φοιτητή": "Active Student Certificate",
+                "Βεβαίωση Φοιτητικής Κατάστασης": "Student Status Certificate",
+                "Βεβαίωση Ειδίκευσης/Κατεύθυνσης": "Qualification-Field Certificate",
+                "Βεβαίωση Πτυχιακής/Διπλωματικής Εργασίας": "Thesis Certificate",
+                "Βεβαίωση Φοιτητικής Κατάστασης - Όλες οι προσπάθειες": "Student Status Certificate - All tries",
+                "Βεβαίωση Φοιτητικής Κατάστασης - Επιτυχημένες προσπάθειες": "Student Status Certificate - Successful tries",
+                "Βεβαίωση Φοιτητικής Κατάστασης - Τελευταία προσπάθεια": "Student Status Certificate - Last try"
+            };
+
+            const translatedName = certificateTranslations[name] || name;
+            return `${translatedName}`; 
         }
     }
 });
@@ -84,9 +99,8 @@ app.use((err, req, res, next) => {
     next();
 });
 
-
- app.engine('.hbs', hbs.engine);
- app.set('view engine', '.hbs');
+app.engine('.hbs', hbs.engine);
+app.set('view engine', '.hbs');
 
 export { app as user };
 

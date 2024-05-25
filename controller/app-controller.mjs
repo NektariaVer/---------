@@ -1,5 +1,5 @@
 import * as model from '../model/student_services_lite.mjs';
-import PDFDocument from "pdfkit";
+import PDFDocument from 'pdfkit';
 
 export async function homePage (req, res, next) {
    res.render('home_page.hbs', {
@@ -271,7 +271,7 @@ export async function getCertificatesPage (req, res, next) {
             hasCertificates:  studentCertificates.length > 0
         });
     } catch (err) {
-        console.error(`Failed to retrieve student progress: ${err.message}`);
+        console.error(`Failed to retrieve student certificates: ${err.message}`);
         res.status(500).send('Error retrieving certificates');
     }
 };
@@ -289,7 +289,7 @@ export async function submitCertificate (req, res, next) {
 };
 
 export async function generatePDF (req, res, next) {
-    const title = req.params.title;
+    const title = decodeURIComponent(req.params.title);
     const doc = new PDFDocument();
 
     res.setHeader('Content-Type', 'application/pdf');
