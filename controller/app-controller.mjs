@@ -279,6 +279,7 @@ export async function getCertificatesPage (req, res, next) {
 export async function submitCertificate (req, res, next) {
     const academic_id = req.session.loggedUserId;
     const cert_id = req.body['certificateType'];
+    const state = req.body['state'];
     try {
         await model.submitCertificate(academic_id, cert_id);
         res.sendStatus(200);

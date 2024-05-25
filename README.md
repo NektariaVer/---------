@@ -1,4 +1,5 @@
-# ECE-Students - Εφαρμογή Υπηρεσιών Φοιτητή - Student Services Application 
+# ECE-Students - Εφαρμογή Υπηρεσιών Φοιτητή 
+# - Student Services Application 
 
 Project for the ECE course: "Προγραμματισμός Διαδικτύου - 2023-24"
 
