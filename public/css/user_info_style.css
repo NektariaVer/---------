@@ -159,10 +159,6 @@ img{
 }
 
 /* Academic Progress Page */
-.progress .table-container {
-    overflow-x: auto;
-}
-
 .progress .fail {
     color: red;
 }
@@ -211,24 +207,9 @@ img{
 .progress .subject {
     max-width: calc(100vw - 100em);
     white-space: nowrap;
-    /*overflow: hidden;
-    text-overflow: ellipsis; */
+    overflow: hidden;
+    text-overflow: ellipsis;
 } 
-
-@media screen and (min-width: 701px) {
-    .progress .subject {
-        overflow: hidden;
-        text-overflow: ellipsis; 
-    } 
-}
-
-@media screen and (max-width: 700px) {
-    .progress .subject {
-        overflow-x: auto;
-        scrollbar-width:none; 
-        scrollbar-color: #88a2a2 #EBE4E4;
-    } 
-}
 
 .progress .semester {
     max-width: calc(100vw - 100em);
@@ -314,9 +295,6 @@ img{
     width: calc(100% - 15em);
 }
 
-.comment {
-    font-size: 0.4em;
-}
 
 /*     */
 .button-container {
@@ -381,6 +359,7 @@ img{
     background-color: rgba(136, 162, 162, 0.1);
 }
 
+/* Image on the left, text on the right */
 .announcement .announcement-image {
     float: left;
     margin-right: 1em; 

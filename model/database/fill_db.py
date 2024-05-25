@@ -162,15 +162,6 @@ def upload_data():
                     ('ECE_ΑΚ902', 'ΡΑΔΙΟΣΥΧΝΟΤΗΤΕΣ ΚΑΙ ΦΩΤΟΝΙΚΕΣ ΤΕΧΝΟΛΟΓΙΕΣ', 5, 2.0, '001', 9);
                  ''')
 
- 
- 
-    conn.execute('''INSERT INTO "course_cycle" (semester, id, courseID, academic_year) VALUES
-                        (1, 'Y00_011', 'CS101', 2023),
-                        (2, 'Y00_012', 'ME102', 2023),
-                        (3, 'Y00_013', 'CS201', 2023),
-                        (2, 'Y00_014', 'ME202', 2023),
-                        (2, 'Y00_015', 'EE202', 2023)
-                    ''')
     
     conn.execute('''INSERT INTO "certificate" (id, name) VALUES
                         (1, 'Βεβαίωση Ενεργού Φοιτητή'),
