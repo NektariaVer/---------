@@ -416,3 +416,38 @@ img{
         width: 100%; 
     }
 }
+
+@media screen and (max-width: 1000px) {
+    .announcement-carousel {
+        flex-wrap: wrap;
+    }
+
+    .announcement {
+        width: 45%; 
+        margin: 0.5em;
+    }
+
+    .announcements-container {
+        max-height: 25em; 
+        overflow-y: auto; 
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .button-container {
+        flex-wrap: wrap;
+    }
+
+    .button-container a {
+        max-width: 30%;
+        margin-bottom: 1em;
+    }
+
+    .button-container:nth-child(2n) {
+        order: 1; 
+    }
+
+    .button-container:nth-child(2n+1) {
+        order: 2; 
+    }
+}

@@ -28,12 +28,7 @@ After installing Node.js, follow these steps:
 
 Instructions for setting up the Database:
 
-Create and fill the database by running:
-```bash
-.\generate_db.sh
-```
-
-Alternativelly, navigate to the model/database folder and:
+Navigate to the model/database folder and:
 
 1. Create the database by running:
     ```bash
