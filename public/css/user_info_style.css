@@ -359,7 +359,6 @@ img{
     background-color: rgba(136, 162, 162, 0.1);
 }
 
-/* Image on the left, text on the right */
 .announcement .announcement-image {
     float: left;
     margin-right: 1em; 
@@ -414,5 +413,38 @@ img{
     .announcement .announcement-text {
         flex: none; 
         width: 100%; 
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .button-container {
+        flex-wrap: wrap;
+    }
+
+    .button-container a {
+        max-width: 30%;
+        margin-bottom: 1em;
+    }
+
+    .button-container:nth-child(2n) {
+        order: 1; 
+    }
+
+    .button-container:nth-child(2n+1) {
+        order: 2; 
+    }
+
+    .announcement-carousel {
+        flex-wrap: wrap;
+    }
+
+    .announcement {
+        width: 45%; 
+        margin: 0.5em;
+    }
+
+    .announcements-container {
+        max-height: 25em; 
+        overflow-y: auto; 
     }
 }

@@ -38,14 +38,14 @@ const hbs = exphbs.create({
             }
         },
         displayGrade: (grade, courseSemester, studentsSemester) =>{
-            if (grade === "" && (courseSemester < studentsSemester)) {
+            if (grade === "") {
                 return 'NS';
             } else {
                 return grade;
             }
         },
         isNS: (grade, courseSemester, studentsSemester) => {
-            return grade === '' && courseSemester < studentsSemester;
+            return grade === '';
         },
         json: function (context) {
             return JSON.stringify(context);
