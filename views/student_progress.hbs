@@ -21,34 +21,34 @@
                 
                 <table class="progress">
                     <div class="prog_container">
-                    <thead>
-                        <tr>
-                            <th>ΕΞ.</th>
-                            <th>ΚΩΔ.</th>
-                            <th>ΤΙΤΛΟΣ</th>
-                            <th>ΒΑΘΜΟΣ</th>
-                            <th>ΕΤΟΣ</th>
-                            <th class="semester">ΑΚ. ΕΞΑΜΗΝΟ</th>
-                            <th class="status">ΚΑΤΑΣΤΑΣΗ</th>
-                            <th>ΒΑΡ.</th>
-                            <th>ECTS</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {{#each courses}}
-                        <tr>
-                            <td class="module">{{this.semester}}</td>
-                            <td class="sub_id">{{this.id}}</td>
-                            <td class="subject">{{this.name}}</td>
-                            <td class="grade">{{displayGrade this.grade this.semester ../studentsSemester}}</td>
-                            <td class="year">{{this.academic_year}}</td>
-                            <td class="semester">{{#if (isOddSemester this.semester)}}Χειμερινό{{else}}Εαρινό{{/if}}</td>
-                            <td class="status">{{status this.grade this.semester ../studentsSemester}}</td>
-                            <td class="weight">{{this.weight}}</td>
-                            <td class="credits">{{this.credits}}</td>
-                        </tr>
-                        {{/each}}
-                    </tbody>
+                        <thead>
+                            <tr>
+                                <th>ΕΞ.</th>
+                                <th>ΚΩΔ.</th>
+                                <th>ΤΙΤΛΟΣ</th>
+                                <th>ΒΑΘΜΟΣ</th>
+                                <th>ΕΤΟΣ</th>
+                                <th class="semester">ΑΚ. ΕΞΑΜΗΝΟ</th>
+                                <th class="status">ΚΑΤΑΣΤΑΣΗ</th>
+                                <th>ΒΑΡ.</th>
+                                <th>ECTS</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{#each courses}}
+                            <tr>
+                                <td class="module">{{this.semester}}</td>
+                                <td class="sub_id">{{this.id}}</td>
+                                <td class="subject">{{this.name}}</td>
+                                <td class="grade">{{displayGrade this.grade this.semester ../studentsSemester}}</td>
+                                <td class="year">{{this.academic_year}}</td>
+                                <td class="semester">{{#if (isOddSemester this.semester)}}Χειμερινό{{else}}Εαρινό{{/if}}</td>
+                                <td class="status">{{status this.grade this.semester ../studentsSemester}}</td>
+                                <td class="weight">{{this.weight}}</td>
+                                <td class="credits">{{this.credits}}</td>
+                            </tr>
+                            {{/each}}
+                        </tbody>
                     </div>
                 </table>
 

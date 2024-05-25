@@ -4,11 +4,11 @@ const fs = require('fs');
 // Sample user data with plain-text passwords
 const users = [
     {
-        username: 'user1',
+        username: 'S10800',
         password: 'password123'
     },
     {
-        username: 'user2',
+        username: 'S10801',
         password: 'abcdef123'
     }
 ];
