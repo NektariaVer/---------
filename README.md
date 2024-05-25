@@ -28,6 +28,13 @@ After installing Node.js, follow these steps:
 
 Instructions for setting up the Database:
 
+Create and fill the database by running:
+```bash
+.\generate_db.sh
+```
+
+Alternativelly, navigate to the model/database folder and:
+
 1. Create the database by running:
     ```bash
     python3 database.py
@@ -44,7 +51,7 @@ Finally, you can run the project:
 
 1. Start the server:
     ```bash
-    npm start
+    npm run start
     ```
 
 2. Visit `http://localhost:8000` in your web browser to access the application.
