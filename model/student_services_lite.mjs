@@ -35,6 +35,7 @@ const getStudentInfo = (academic_id) => {
     });
 };
 
+//αλλαγές στον πίνακα user της βάσης
 const updateUserInfo = (academic_id, updates) => {
     return new Promise((resolve, reject) => {
         let sql = 'UPDATE user SET ';
@@ -74,7 +75,7 @@ const updateUserInfo = (academic_id, updates) => {
     });
 };
 
-
+//ανανέωση ημέρας τελευταίας εγγραφής σε εξάμηνο
 const updateSemester = (academic_id) => {
     return new Promise((resolve, reject) => {
         const today = new Date();
@@ -101,17 +102,18 @@ const updateSemester = (academic_id) => {
 const parseDate = (dateString) => {
     const parts = dateString.split('-');
     const day = parseInt(parts[0], 10);
-    const month = parseInt(parts[1], 10) - 1; // Month is zero-indexed
+    const month = parseInt(parts[1], 10) - 1;
     const year = parseInt(parts[2], 10);
     return new Date(year, month, day);
 };
 
+//σε ποιο εξάμηνο βρίσκεται τωρα ο φοιτητής
 const calculateSemester = (registrationDate, semesterDate) => {
     const registration = parseDate(registrationDate);
     const semester = parseDate(semesterDate);
 
     const yearsDifference = semester.getFullYear() - registration.getFullYear();
-    const semesterMonth = semester.getMonth(); // 0-11
+    const semesterMonth = semester.getMonth();
 
     let semestersPassed = yearsDifference * 2 ;
 
@@ -122,6 +124,7 @@ const calculateSemester = (registrationDate, semesterDate) => {
     return semestersPassed;
 };
 
+//ανανέωση εξαμήνου φοιτητή
 const updateStudentSemester = (academic_id, semester) => {
     return new Promise((resolve, reject) => {
         const sql = 'UPDATE student SET semester = ? WHERE student_id = ?';
@@ -226,6 +229,7 @@ const getDeclaredCourses = (academic_id, semester) => {
     });
 };
 
+//ιστορικό αιτήσεων
 const getStudentCertificates = (academic_id) => {
     const sql = `SELECT sc.date, sc.state, c.name
         FROM student_certificate sc
@@ -243,6 +247,7 @@ const getStudentCertificates = (academic_id) => {
     });
 }
 
+//εμφάνιση όλων των πιθανών πιστοποιητικών
 const certificates = () => {
     const sql = `SELECT * FROM certificate WHERE id BETWEEN 1 AND 4`;
     return new Promise((resolve, reject) => {
@@ -271,6 +276,7 @@ const findCertificate = (cert_name) => {
     });
 }
 
+//εγγραφή αίτησης πιστοποιητικού
 const submitCertificate = (academic_id, cert_id) => {
     const sql = `INSERT INTO student_certificate (cert_id, stud_ID, date, state) VALUES (?, ?, date('now'), 'Σε αναμονή')`;
     return new Promise((resolve, reject) => {

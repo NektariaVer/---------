@@ -197,21 +197,7 @@ img{
 .progress .subject {
     width: 40em;
 } 
-/*
-.progress .semester {
-    max-width: calc(100vw - 100em);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-} 
 
-.progress .status {
-    max-width: calc(100vw - 100em);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-} 
-*/
 .progress .average th {
     text-align: left;
 }

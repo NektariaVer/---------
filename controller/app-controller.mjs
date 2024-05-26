@@ -7,6 +7,7 @@ export async function homePage (req, res, next) {
    });
 };
 
+//---USER INFO---
 export async function getUserInfoPage (req, res, next) {
     const userID = req.session.loggedUserId;
     try {
@@ -115,6 +116,7 @@ export async function editUserInfo (req, res, next){
     }
 };
 
+//---SEMESTER---
 export async function getSemesterPage (req, res, next) {
     const userID = req.session.loggedUserId;
     try {
@@ -148,6 +150,7 @@ export async function updateSemester (req, res, next) {
     }
 };
 
+//---COURSES---
 export async function getCoursesPage(req, res, next) {
     const academic_id = req.session.loggedUserId;
     await model.getAndUpdateStudentSemester(academic_id);
@@ -227,6 +230,7 @@ export async function submitCourseDeclaration(req, res, next) {
     }
 };
 
+//---STUDENT'S PROGRESS---
 export async function getStudentProgressPage(req, res, next) {
     const academic_id = req.session.loggedUserId;
     await model.getAndUpdateStudentSemester(academic_id);
@@ -258,7 +262,7 @@ export async function getStudentProgressPage(req, res, next) {
     }
 };
 
-
+//---CERTIFICATES---
 export async function getCertificatesPage (req, res, next) {
     const academic_id = req.session.loggedUserId;
     try {

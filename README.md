@@ -48,6 +48,5 @@ Finally, you can run the project:
     ```bash
     npm run start
     ```
-
 2. Visit `http://localhost:8000` in your web browser to access the application.
-
+3. The usernames and passwords are saved in /public/js/users.json

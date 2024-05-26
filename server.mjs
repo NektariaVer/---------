@@ -7,7 +7,6 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 import userSession from './app-setup/session.mjs';
 import routes from './routes/routes.mjs';
-import PDFDocument from 'pdfkit';
 
 const app = express();
 
@@ -22,6 +21,7 @@ const hbs = exphbs.create({
     layoutsDir: path.join(__dirname, 'views/layouts'),
     partialsDir: path.join(__dirname, 'views/partials'),
     extname: '.hbs',
+    //helpers που θα χρειαστούν στο students_progress.hbs και certificates.hbs
     helpers: {
         isOddSemester: (semester) => semester % 2 === 1,
         status: (grade, courseSemester, studentsSemester) => {
@@ -78,7 +78,6 @@ app.use('/controller', express.static(`${__dirname}/controller/`));
 app.use((req, res, next) => {
    if (req.session) {
       res.locals.ID = req.session.loggedUserId;
-      //console.log("res.locals.ID :",res.locals.ID);
    } else {
       res.locals.ID = 'επισκέπτης';
    }
