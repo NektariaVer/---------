@@ -41,8 +41,7 @@ Navigate to the model/database folder and:
     ```
 
 ## Application
-
-Finally, you can run the project:
+Finally, you can run the project to the initial folder:
 
 1. Start the server:
     ```bash
