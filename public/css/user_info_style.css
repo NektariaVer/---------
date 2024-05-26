@@ -130,35 +130,25 @@ img{
     transform: translate(-50%, -50%) scale(1);
 }
 
-@media screen and (max-width: 800px) {
-    .table-container {
-        padding: 1em;
-        position: relative;
-        margin: 0 auto; 
-        max-width: calc(100% - 4em);
-        width: 100%;
-        top: 0em;
-    }
 
-    img{
-        width: 2em;
-        height: 2em;
-        margin-left: 0.5em;
-        margin-right: 0.2em;
+/* Academic Progress Page */
+.table-scroll {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    max-width: 85vw; 
+    margin: 0 auto;
+}
+@media (min-width: 800px) {
+    .table-scroll {
+        max-width: 55vw;
     }
-
-    .popup {
-        position: relative;
-        margin: auto auto; 
-        max-width: calc(100% - 4em);
-        width: 100%;
-        left: 40%;
-        top: -8em;
-        padding-right: 0.5em;
+}
+@media (min-width: 1000px) {
+    .table-scroll {
+        max-width: 90vw;
     }
 }
 
-/* Academic Progress Page */
 .progress .fail {
     color: red;
 }
@@ -203,7 +193,7 @@ img{
 .progress .credits {
     width: 2em;
 }
-
+/*
 .progress .subject {
     max-width: calc(100vw - 100em);
     white-space: nowrap;
@@ -224,7 +214,7 @@ img{
     overflow: hidden;
     text-overflow: ellipsis;
 } 
-
+*/
 .progress .average th {
     text-align: left;
 }
@@ -418,6 +408,8 @@ img{
 }
 
 @media screen and (max-width: 1000px) {
+
+    
     .announcement-carousel {
         flex-wrap: wrap;
     }
@@ -433,7 +425,34 @@ img{
     }
 }
 
-@media screen and (max-width: 700px) {
+
+@media screen and (max-width: 800px) {
+    .table-container {
+        padding: 1em;
+        position: relative;
+        margin: 0 auto; 
+        max-width: calc(100% - 4em);
+        width: 100%;
+        top: 0em;
+    }
+
+    img{
+        width: 2em;
+        height: 2em;
+        margin-left: 0.5em;
+        margin-right: 0.2em;
+    }
+
+    .popup {
+        position: relative;
+        margin: auto auto; 
+        max-width: calc(100% - 5em);
+        width: 100%;
+        left: 40%;
+        top: -8em;
+        padding-right: 0.5em;
+    }
+
     .button-container {
         flex-wrap: wrap;
     }
