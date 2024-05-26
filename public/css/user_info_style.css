@@ -193,14 +193,11 @@ img{
 .progress .credits {
     width: 2em;
 }
-/*
-.progress .subject {
-    max-width: calc(100vw - 100em);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-} 
 
+.progress .subject {
+    width: 40em;
+} 
+/*
 .progress .semester {
     max-width: calc(100vw - 100em);
     white-space: nowrap;
