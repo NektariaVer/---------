@@ -12,7 +12,6 @@ body {
 /* Header - Tabs */
 header {
     background-color: #B99E9E;
-    /*background-color: #805c5c;*/
     color: black;
     padding: 1em;
     display: flex;
@@ -332,6 +331,4 @@ footer th {
     .dropdown-content {
         margin: 0em;
     }
-
-    
 }
